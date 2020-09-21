@@ -57,6 +57,11 @@ const Login = () => {
 
 	const onSubmit = data => {
 		clear();
+		data = {
+			username: data.username.toLowerCase(),
+			password: data.password.toLowerCase(),
+		};
+		console.log(data)
 		login({ variables: data }).then(res => {
 			localStorage.setItem('token', res.data.login.token);
 			history.push('/dashboard');

@@ -48,7 +48,13 @@ const useStyles = makeStyles(() => ({
 		textDecoration: 'none',
 		color: 'black',
 	},
-
+	submit: {
+		background: 'black',
+		color: 'white',
+		fontSize: '1rem',
+		// width: '40%',
+		marginTop: '5%',
+	},
 	
 	edit: {
 		textDecoration: 'none',
@@ -120,7 +126,7 @@ const Vacations = () => {
 					<TextField
 						required
 						type='text'
-						label='title'
+						label='destination'
 						name='title'
 						// variant='outlined'
 						inputRef={register({ required: true })}

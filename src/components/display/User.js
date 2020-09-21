@@ -10,11 +10,15 @@ const Display = () => {
 	if (loading) return <h4>Loading...</h4>;
 	if (error) return <p>ERROR</p>;
 
+	// uppercase Name
+	var lowName = data.currentUser.username.toLowerCase()
+	var name = lowName.charAt(0).toUpperCase() + lowName.slice(1)
+	
 
 	return (
 		<div>
 			<Typography key={data.currentUser.id} variant='h3'>
-				{data.currentUser && data.currentUser.username}
+				{data.currentUser && name}
 			</Typography>
 		</div>
 	);
