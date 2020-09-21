@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
-import { SIGN_UP } from '../../graphQl/Index';
+import { SIGN_UP, LOGIN } from '../../graphQl/Index';
 
 // Styling imports
 import { TextField, Typography, makeStyles, Button } from '@material-ui/core';
@@ -33,12 +33,24 @@ export default function App() {
 	const classes = useStyles();
 	const history = useHistory();
 	const [signUp] = useMutation(SIGN_UP);
+	const [login] = useMutation(LOGIN);
 	const { register, handleSubmit } = useForm();
 
-	const onSubmit = data => {
-		console.log(data);
-		signUp({ variables: data });
-		history.push('/');
+	const onSubmit = async data => {
+		data = {
+			...data,
+			username: data.username.toLowerCase(),
+			password: data.password.toLowerCase(),
+		};
+		await signUp({ variables: data });
+		var credentials = {
+			username: data.username,
+			password: data.password,
+		};
+		await login({ variables: credentials }).then(res => {
+			localStorage.setItem('token', res.data.login.token);
+			history.push('/dashboard');
+		});
 	};
 
 	const goBack = () => {
@@ -47,11 +59,10 @@ export default function App() {
 
 	return (
 		<div className={classes.register}>
-			
 			<form className={classes.regForm} onSubmit={handleSubmit(onSubmit)}>
 				<Typography variant='h2'>Register</Typography>
 				<TextField
-				required
+					required
 					type='text'
 					label='username'
 					// placeholder='username'
@@ -60,15 +71,14 @@ export default function App() {
 					inputRef={register({ required: true })}
 				/>
 				<TextField
-				required
 					type='text'
 					label='email'
 					className={classes.regInput}
 					name='email'
-					inputRef={register({ required: true })}
+					inputRef={register()}
 				/>
 				<TextField
-				required
+					required
 					type='password'
 					label='password'
 					className={classes.regInput}
@@ -76,7 +86,9 @@ export default function App() {
 					inputRef={register({ required: true })}
 				/>
 
-				<Button type='submit' className={classes.submit}>Register</Button>
+				<Button type='submit' className={classes.submit}>
+					Register
+				</Button>
 			</form>
 			<footer className={classes.footer2}>
 				<Button className={classes.backButton} onClick={goBack}>
