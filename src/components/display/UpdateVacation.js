@@ -7,7 +7,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { GET_ONE_TRIP, EDIT_VACATION } from '../../graphQl/Index';
 import NavBar from './NavBar'
 // import { useStyles } from '../../Style/Styles';
-import { Typography, Button, TextField, makeStyles } from '@material-ui/core';
+import { Button, TextField, makeStyles } from '@material-ui/core';
 import Airy from '../../assets/Airy.jpg';
 
 const useStyles = makeStyles(() => ({
