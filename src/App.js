@@ -10,7 +10,7 @@ import UpdateVacation from './components/Display/UpdateVacation';
 import OneDay from './components/Display/OneDay';
 import OneEvent from './components/Display/OneEvent';
 
-import PrivateRoute from './Utils/PrivateRoute';
+import PrivateRoute from './utils/PrivateRoute';
 import './App.css';
 
 function App() {
