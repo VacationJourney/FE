@@ -13,7 +13,6 @@ import { setContext } from 'apollo-link-context';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 
-
 const httpLink = new createHttpLink({
 	uri: process.env.REACT_APP_ENDPOINT || 'http://localhost:4000/'
 });
