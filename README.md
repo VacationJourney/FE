@@ -1,4 +1,43 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Repo Built by:
+
+|  [Jeremy J McWilliams](https://jeremyjmcwilliams.com)|
+| :---------------------------------------------------: |
+| [<img src="./profile/jeremy-mcwilliams.jpg" width = "200" />](https://github.com/J2Macwilliams)   |
+|Full Stack Developer |
+| [<img src="https://github.com/favicon.ico" width="30"> ](https://github.com/J2Macwilliams)   [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="30"> ](https://www.linkedin.com/in/jeremyjmcwilliams/) | 
+
+---
+# Journey 2 FrontEnd
+
+## Pitch
+
+As a Traveler, I find that travel decisions are based upon finances.<br />
+I need an application to plan, organize, budget, and guide me on my trips. <br />
+
+
+### Goal 
+To create a responsive application that delivers quickly, securely, and efficiently to the client. 
+
+### Tech Stack
+- React
+- React-Router
+- Apollo client
+- Apollo/react hooks
+- Apollo cache
+- GraphQL
+- Dayjs
+- React-hook-form
+- Material-UI
+
+---
+### Status:
+*development*
+
+---
+
+This project was bootstrapped with:
+
+## [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
@@ -33,7 +72,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
