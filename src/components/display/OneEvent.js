@@ -116,9 +116,9 @@ console.log(data)
 	var to = dayjs(endTime).format('h:mm a')
 
 	// logic for open ended events
-	if(to === 'Invalid Date') {
-		var to = ''
-	}
+	// if(to === 'Invalid Date') {
+	// 	var to = ''
+	// }
 
 
 	return (
