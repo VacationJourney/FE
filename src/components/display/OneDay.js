@@ -39,6 +39,13 @@ const useStyles = makeStyles(() => ({
 		display: 'flex',
 		justifyContent: 'space-between',
 	},
+	submit: {
+		background: 'black',
+		color: 'white',
+		fontSize: '1rem',
+		// width: '40%',
+		marginTop: '5%',
+	},
 	events: {
 		width: '100%',
 		padding: '2%',
