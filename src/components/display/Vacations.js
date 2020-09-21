@@ -126,7 +126,7 @@ const Vacations = () => {
 					<TextField
 						required
 						type='text'
-						label='title'
+						label='destination'
 						name='title'
 						// variant='outlined'
 						inputRef={register({ required: true })}
