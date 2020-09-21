@@ -105,7 +105,7 @@ const OneVacation = () => {
 	
 	var from = dayjs(data.vacation.dates[0].date).format('YYYY');
 	var end = dayjs(data.vacation.dates[lastDate].date).format('YYYY')
-	console.log(end)
+	
 	return (
 		<div className={classes.oneVacay}>
 			<NavBar />
