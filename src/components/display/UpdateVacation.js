@@ -23,6 +23,34 @@ const useStyles = makeStyles(() => ({
 		paddingTop: '10%',
 		color: 'black',
 	},
+	editForm: {
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+		width: '100%',
+		height: '70vh',
+	},
+	submit: {
+		background: 'black',
+		color: 'white',
+		fontSize: '1rem',
+		// width: '40%',
+		marginTop: '5%',
+	},
+	footer2: {
+		position: 'fixed',
+		width: '100%',
+		display: 'flex',
+		justifyContent: 'flex-end',
+		bottom: 0,
+	},
+	backButton: {
+		background: 'black',
+		color: 'white',
+		fontSize: '1rem',
+		width: '30%',
+	},
 }))
 
 const UpdateVacation = () => {
@@ -65,7 +93,7 @@ const UpdateVacation = () => {
 	return (
 		<div className={classes.updateVacation}>
 			<NavBar />
-			<Typography variant="h3" className={classes.title2}>Edit</Typography>
+			{/* <Typography variant="h3" className={classes.title2}>Edit</Typography> */}
 			<form className={classes.editForm} onSubmit={handleSubmit(onSubmit)}>
 				<TextField
 					className={classes.input}
