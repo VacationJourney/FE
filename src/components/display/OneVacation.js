@@ -5,7 +5,7 @@ import NavBar from './NavBar';
 import {
 	GET_ONE_TRIP,
 	DELETE_VACATION,
-	DELETE_DAY,
+	// DELETE_DAY,
 	GET_VACATIONS,
 } from '../../graphQl/Index';
 import { Card, Typography, Grid, Button, makeStyles } from '@material-ui/core';
@@ -16,7 +16,7 @@ import dayjs from 'dayjs';
 import Blue from '../../assets/Blue.jpg';
 
 const useStyles = makeStyles(() => ({
-    oneVacay: {
+	oneVacay: {
 		maxWidth: '100%',
 		minHeight: '100vh',
 		background: '#45a7bcba',
@@ -36,6 +36,10 @@ const useStyles = makeStyles(() => ({
 		color: 'black',
 		textDecoration: 'none',
 	},
+	eventConnect: {
+		textDecoration: 'none',
+		color: 'black',
+	},
 	grid: {
 		marginBottom: '15%',
 	},
@@ -45,6 +49,10 @@ const useStyles = makeStyles(() => ({
 		display: 'flex',
 		justifyContent: 'space-between',
 		bottom: 0,
+	},
+	xButton: {
+		color: 'red',
+		fontSize: '1rem',
 	},
 	deleteButton: {
 		background: 'red',
@@ -58,7 +66,7 @@ const useStyles = makeStyles(() => ({
 		fontSize: '1rem',
 		width: '30%',
 	},
-}))
+}));
 
 const OneVacation = () => {
 	const classes = useStyles();
@@ -75,11 +83,11 @@ const OneVacation = () => {
 		refetchQueries: mutationResult => [{ query: GET_VACATIONS }],
 	});
 
-	const [deleteDay] = useMutation(DELETE_DAY, {
-		refetchQueries: mutationResult => [
-			{ query: GET_ONE_TRIP, variables: { id: vacay } },
-		],
-	});
+	// const [deleteDay] = useMutation(DELETE_DAY, {
+	// 	refetchQueries: mutationResult => [
+	// 		{ query: GET_ONE_TRIP, variables: { id: vacay } },
+	// 	],
+	// });
 
 	const deleteTrip = () => {
 		deleteVacation({ variables: { id: vacay } });
@@ -93,6 +101,11 @@ const OneVacation = () => {
 	if (loading) return <span>Loading...</span>;
 	if (error) return <p>ERROR</p>;
 
+	var lastDate = (data.vacation.dates.length) - 1;
+	
+	var from = dayjs(data.vacation.dates[0].date).format('YYYY');
+	var end = dayjs(data.vacation.dates[lastDate].date).format('YYYY')
+	console.log(end)
 	return (
 		<div className={classes.oneVacay}>
 			<NavBar />
@@ -100,24 +113,16 @@ const OneVacation = () => {
 				<Link className={classes.titleLink} to={`/vacationUpdate/${vacay}`}>
 					<Typography variant='h2'>{data.vacation.title}</Typography>
 				</Link>
-
+				<Typography variant='h4'>{from === end  ? from: from + ' - ' + end}</Typography>
 				<Grid container spacing={2} className={classes.grid}>
 					{data.vacation.dates.map(e => (
 						<Grid item xs={6} sm={3} md={2}>
 							<Card className={classes.card} key={e.id}>
 								<Link className={classes.eventConnect} to={`/day/${e.id}`}>
 									<Typography variant='h6'>
-										{dayjs(e.date).format('MMM DD YYYY')}
+										{dayjs(e.date).format('MMM DD ')}
 									</Typography>
 								</Link>
-								<DeleteIcon
-									className={classes.xButton}
-									onClick={() =>
-										deleteDay({
-											variables: { id: e.id },
-										})
-									}
-								/>
 							</Card>
 						</Grid>
 					))}
@@ -126,7 +131,7 @@ const OneVacation = () => {
 			<footer className={classes.footer}>
 				<Button className={classes.deleteButton} onClick={deleteTrip}>
 					<DeleteIcon />
-					<ListItemText primary="Trip" />
+					<ListItemText primary='Trip' />
 				</Button>
 				<Button className={classes.backButton} onClick={goBack}>
 					Back
