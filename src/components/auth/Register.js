@@ -28,6 +28,26 @@ const useStyles = makeStyles(() => ({
 		margin: '1%',
 		fontSize: '1.5rem',
 	},
+	submit: {
+		background: 'black',
+		color: 'white',
+		fontSize: '1rem',
+		// width: '40%',
+		marginTop: '5%',
+	},
+	footer2: {
+		position: 'fixed',
+		width: '100%',
+		display: 'flex',
+		justifyContent: 'flex-end',
+		bottom: 0,
+	},
+	backButton: {
+		background: 'black',
+		color: 'white',
+		fontSize: '1rem',
+		width: '30%',
+	},
 }));
 export default function App() {
 	const classes = useStyles();
