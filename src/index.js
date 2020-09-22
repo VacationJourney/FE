@@ -29,14 +29,8 @@ const authLink = setContext((_, { headers }) => {
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
 	if (graphQLErrors) {
-		console.log(
-			`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-		);
-		if (message.includes('not authenticated')) {
-			Router.replace('/');
-		}
+		console.log(`[GraphQL error]: ${graphQLErrors}`);
 	}
-
 	if (networkError) {
 		console.log(`[Network error]: ${networkError}`);
 	}
