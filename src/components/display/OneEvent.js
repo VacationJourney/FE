@@ -82,18 +82,13 @@ const OneEvent = () => {
 		variables: { id: event },
 	});
 
-	// Query a single Date with all the events
-	const {} = useQuery(GET_ONE_DATE, {
-		variables: { id: date },
-	});
-
 	// Delete an event
 	const [deleteEvent] = useMutation(DELETE_EVENT, {
 		refetchQueries: mutationResult => [
 			{ query: GET_ONE_DATE, variables: { id: date } },
 		],
 	});
-	console.log(data);
+
 	if (loading) return <span>Loading...</span>;
 	if (error) return <p>ERROR</p>;
 
