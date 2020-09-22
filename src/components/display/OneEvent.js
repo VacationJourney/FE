@@ -82,8 +82,6 @@ const OneEvent = () => {
 		variables: { id: event },
 	});
 
-	
-
 	// Delete an event
 	const [deleteEvent] = useMutation(DELETE_EVENT, {
 		refetchQueries: mutationResult => [
