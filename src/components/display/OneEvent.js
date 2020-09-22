@@ -89,7 +89,6 @@ const OneEvent = () => {
 			{ query: GET_ONE_DATE, variables: { id: date } },
 		],
 	});
-	console.log(data);
 	if (loading) return <span>Loading...</span>;
 	if (error) return <p>ERROR</p>;
 
