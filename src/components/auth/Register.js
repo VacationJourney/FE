@@ -95,8 +95,10 @@ export default function App() {
 		};
 
 		await signUp({ variables: data }).then(response => {
-			if (response.data.signUp.message) {
-				var phrase = response.data.signUp.message;
+			
+			var phrase = response.data.signUp.message;
+			if (phrase) {
+				
 				var message = phrase.charAt(0).toUpperCase() + phrase.slice(1);
 				// alert(message);
 				setError(message);
