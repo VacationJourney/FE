@@ -3,7 +3,12 @@ import gql from 'graphql-tag';
 export const SIGN_UP = gql`
 	mutation signUp($username: String!, $email: String, $password: String!) {
 		signUp(username: $username, email: $email, password: $password) {
-			username
+			... on User{
+        username
+      }
+    ... on UserFoundError {
+      message
+    }
 		}
 	}
 `;

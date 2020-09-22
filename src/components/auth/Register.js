@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { SIGN_UP, LOGIN } from '../../graphQl/Index';
 
 // Styling imports
-import { TextField, Typography, makeStyles, Button } from '@material-ui/core';
+import {
+	TextField,
+	Typography,
+	makeStyles,
+	Button,
+	Snackbar,
+} from '@material-ui/core';
+import {Alert} from '@material-ui/lab';
 import LightBlue from '../../assets/lightBlue.jpg';
 
-const useStyles = makeStyles(() => ({
+function Alerts(props) {
+	return <Alert elevation={6} variant='filled' {...props} />;
+}
+
+const useStyles = makeStyles(theme => ({
+	root: {
+		width: '100%',
+		'& > * + *': {
+			marginTop: theme.spacing(2),
+		},
+	},
 	register: {
 		backgroundImage: `url(${LightBlue})`,
 		backgroundSize: 'cover',
@@ -49,12 +66,22 @@ const useStyles = makeStyles(() => ({
 		width: '30%',
 	},
 }));
+
 export default function App() {
 	const classes = useStyles();
 	const history = useHistory();
 	const [signUp] = useMutation(SIGN_UP);
 	const [login] = useMutation(LOGIN);
-	const { register, handleSubmit } = useForm();
+	const { register, handleSubmit, reset } = useForm();
+	const [error, setError] = useState(null);
+	const [open, setOpen] = useState(false);
+
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+			return;
+		}
+		setOpen(false);
+	};
 
 	const onSubmit = async data => {
 		data = {
@@ -62,14 +89,29 @@ export default function App() {
 			username: data.username.toLowerCase(),
 			password: data.password.toLowerCase(),
 		};
-		await signUp({ variables: data });
 		var credentials = {
 			username: data.username,
 			password: data.password,
 		};
-		await login({ variables: credentials }).then(res => {
-			localStorage.setItem('token', res.data.login.token);
-			history.push('/dashboard');
+
+		await signUp({ variables: data }).then(response => {
+			
+			var phrase = response.data.signUp.message;
+			if (phrase) {
+				
+				var message = phrase.charAt(0).toUpperCase() + phrase.slice(1);
+				// alert(message);
+				setError(message);
+				setOpen(true);
+				reset();
+
+				return;
+			} else {
+				login({ variables: credentials }).then(res => {
+					localStorage.setItem('token', res.data.login.token);
+					history.push('/dashboard');
+				});
+			}
 		});
 	};
 
@@ -110,6 +152,11 @@ export default function App() {
 					Register
 				</Button>
 			</form>
+			<Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+				<Alerts severity="error" onClose={handleClose} >
+					{error}
+				</Alerts>
+			</Snackbar>
 			<footer className={classes.footer2}>
 				<Button className={classes.backButton} onClick={goBack}>
 					Back

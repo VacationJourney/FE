@@ -7,14 +7,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { ApolloClient } from 'apollo-client';
+import { onError } from 'apollo-link-error';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { ApolloProvider } from '@apollo/react-hooks';
 
-
 const httpLink = new createHttpLink({
-	uri: process.env.REACT_APP_ENDPOINT || 'http://localhost:4000/'
+	uri: process.env.REACT_APP_ENDPOINT || 'http://localhost:4000/',
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -27,18 +27,23 @@ const authLink = setContext((_, { headers }) => {
 	};
 });
 
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+	if (graphQLErrors) {
+		console.log(`[GraphQL error]: ${graphQLErrors}`);
+	}
+	if (networkError) {
+		console.log(`[Network error]: ${networkError}`);
+	}
+});
+
 const client = new ApolloClient({
-	link: authLink.concat(httpLink),
+	link: errorLink.concat(authLink.concat(httpLink)),
 	cache: new InMemoryCache(),
-	onError: ({ networkError, graphQLErrors }) => {
-		console.log('graphQLErrors', graphQLErrors)
-		console.log('networkError', networkError)
-	  }
 });
 
 export const clear = () => {
-    client.cache.reset();
-}
+	client.cache.reset();
+};
 
 const ApolloApp = () => (
 	<ApolloProvider client={client}>

@@ -30,6 +30,25 @@ const useStyles = makeStyles(() => ({
 		padding: '3%',
 		fontSize: '1.2rem',
 	},
+	footer: {
+		position: 'fixed',
+		width: '100%',
+		display: 'flex',
+		justifyContent: 'space-between',
+		bottom: 0,
+	},
+	backButton: {
+		background: 'black',
+		color: 'white',
+		fontSize: '1rem',
+		width: '30%',
+	},
+	editButton: {
+		background: 'white',
+		color: '#013771',
+		fontSize: '1rem',
+		width: '30%',
+	},
 }))
 
 const Settings = () => {
