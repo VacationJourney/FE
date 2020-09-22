@@ -26,7 +26,7 @@ const useStyles = makeStyles(() => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		justifyContent: 'flex-start'
+		justifyContent: 'flex-start',
 	},
 	title: {
 		paddingTop: '10%',
@@ -37,7 +37,7 @@ const useStyles = makeStyles(() => ({
 		color: 'white',
 		// marginTop: '20%',
 		// width: '80%',
-		padding:'2%',
+		padding: '2%',
 		opacity: '.4',
 	},
 	footer: {
@@ -66,13 +66,11 @@ const useStyles = makeStyles(() => ({
 		fontSize: '1rem',
 		width: '30%',
 	},
-}))
+}));
 
 const OneEvent = () => {
 	const classes = useStyles();
 	const history = useHistory();
-
-
 
 	let params = useParams();
 	let event = params.id;
@@ -85,7 +83,7 @@ const OneEvent = () => {
 	});
 
 	// Query a single Date with all the events
-	const {  } = useQuery(GET_ONE_DATE, {
+	const {} = useQuery(GET_ONE_DATE, {
 		variables: { id: date },
 	});
 
@@ -95,7 +93,7 @@ const OneEvent = () => {
 			{ query: GET_ONE_DATE, variables: { id: date } },
 		],
 	});
-console.log(data)
+	console.log(data);
 	if (loading) return <span>Loading...</span>;
 	if (error) return <p>ERROR</p>;
 
@@ -107,19 +105,17 @@ console.log(data)
 		history.push(`/day/${date}`);
 	};
 
-	
-	var {startTime} = data.event
-	var {endTime} = data.event
-	var day = dayjs(startTime).format('MMM D')
-	
-	var from = dayjs(startTime).format('h:mm a')
-	var to = dayjs(endTime).format('h:mm a')
+	var { startTime } = data.event;
+	var { endTime } = data.event;
+	var day = dayjs(startTime).format('MMM D');
+
+	var from = dayjs(startTime).format('h:mm a');
+	var to = dayjs(endTime).format('h:mm a');
 
 	// logic for open ended events
-	if(to === 'Invalid Date') {
-		var to = ''
+	if (to === 'Invalid Date') {
+		to = '';
 	}
-
 
 	return (
 		<div className={classes.activity}>
