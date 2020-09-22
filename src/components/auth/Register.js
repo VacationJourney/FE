@@ -70,7 +70,7 @@ const useStyles = makeStyles(theme => ({
 export default function App() {
 	const classes = useStyles();
 	const history = useHistory();
-	const [signUp] = useMutation(SIGN_UP);
+	const [signUp] = useMutation(SIGN_UP, {errorPolicy: 'all'});
 	const [login] = useMutation(LOGIN);
 	const { register, handleSubmit, reset } = useForm();
 	const [error, setError] = useState(null);
