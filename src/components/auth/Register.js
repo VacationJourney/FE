@@ -12,11 +12,11 @@ import {
 	Button,
 	Snackbar,
 } from '@material-ui/core';
-import MuiAlert from '@material-ui/lab/Alert';
+import {Alert} from '@material-ui/lab';
 import LightBlue from '../../assets/lightBlue.jpg';
 
-function Alert(props) {
-	return <MuiAlert elevation={6} variant='filled' {...props} />;
+function Alerts(props) {
+	return <Alert elevation={6} variant='filled' {...props} />;
 }
 
 const useStyles = makeStyles(theme => ({
@@ -153,9 +153,9 @@ export default function App() {
 				</Button>
 			</form>
 			<Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-				<Alert severity="error" onClose={handleClose} >
+				<Alerts severity="error" onClose={handleClose} >
 					{error}
-				</Alert>
+				</Alerts>
 			</Snackbar>
 			<footer className={classes.footer2}>
 				<Button className={classes.backButton} onClick={goBack}>
