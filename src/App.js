@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import Splash from './components/display/Splash';
 import Register from './components/auth/Register';
-import Settings from './components/display/Settings'
+import Profile from './components/display/Profile'
 import Dashboard from './components/display/Dashboard';
 import OneVacation from './components/display/OneVacation';
 import UpdateVacation from './components/display/UpdateVacation';
@@ -26,8 +26,8 @@ function App() {
 				<PrivateRoute path='/dashboard'>
 					<Dashboard />
 				</PrivateRoute>
-				<PrivateRoute path='/settings'>
-					<Settings />
+				<PrivateRoute path='/profile'>
+					<Profile />
 				</PrivateRoute>
 				<PrivateRoute path='/vacationUpdate/:id'>
 					<UpdateVacation />

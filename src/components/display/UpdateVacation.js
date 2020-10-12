@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useParams, useHistory } from 'react-router-dom';
+import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+import dayjs from 'dayjs';
+// graphql 
 import { useQuery, useMutation } from '@apollo/react-hooks';
-
-import { GET_ONE_TRIP, EDIT_VACATION } from '../../graphQl/Index';
+import { UPDATE_VACATION } from '../../graphQl/mutations/vacationM';
+import {GET_ONE_TRIP} from '../../graphQl/queries'
 import NavBar from './NavBar'
-// import { useStyles } from '../../Style/Styles';
-import { Button, TextField, makeStyles } from '@material-ui/core';
+// styles
+import { Container, Button, TextField, makeStyles, Typography } from '@material-ui/core';
 import Airy from '../../assets/Airy.jpg';
 
 const useStyles = makeStyles(() => ({
@@ -23,19 +26,23 @@ const useStyles = makeStyles(() => ({
 		paddingTop: '10%',
 		color: 'black',
 	},
-	editForm: {
+	edit: {
 		display: 'flex',
 		flexDirection: 'column',
-		justifyContent: 'center',
+		marginTop: '15%',
 		alignItems: 'center',
 		width: '100%',
 		height: '70vh',
 	},
+	form: {
+		display: 'flex',
+		flexDirection: 'column',
+	},
+
 	submit: {
 		background: 'black',
 		color: 'white',
 		fontSize: '1rem',
-		// width: '40%',
 		marginTop: '5%',
 	},
 	footer2: {
@@ -56,31 +63,48 @@ const useStyles = makeStyles(() => ({
 const UpdateVacation = () => {
 	const history = useHistory();
 	const classes = useStyles();
-	let params = useParams();
 
+	const { register, handleSubmit } = useForm();
+	const [value, onChange] = useState([new Date(), new Date()]);
+	const range = [];
+
+	// establish Date variables
+	var from = new Date(value[0]);
+	var to = new Date(value[1]);
+
+	// loop for every day
+	for (from; from <= to; from.setDate(from.getDate() + 1)) {
+		var date = dayjs(from).format('YYYY-MM-DD');
+		// var date = from.toISOString();
+		range.push({ date });
+	}
+
+	let params = useParams();
 	let trip = params.id;
 
 	const { data, loading, error } = useQuery(GET_ONE_TRIP, {
 		variables: { id: trip },
 	});
-	const [updateVacation] = useMutation(EDIT_VACATION);
-	const { register, handleSubmit } = useForm();
+	const [updateVacation] = useMutation(UPDATE_VACATION, {
+		refetchQueries: mutationResult => [{query: GET_ONE_TRIP, variables: {id: trip}}]
+	});
+	
 
 	if (loading) return <span>Loading...</span>;
 	if (error) return <p>ERROR</p>;
 
-	// Grab User from token
-	let token = localStorage.getItem('token');
-	let tokenData = JSON.parse(atob(token.split('.')[1]));
-	let user = tokenData.id;
+	var lastDate = (data.vacation.dates.length) - 1;
+	
+	var from = dayjs(data.vacation.dates[0].date).format('MMM DD');
+	var end = dayjs(data.vacation.dates[lastDate].date).format('MMM DD')
 
 	const onSubmit = data => {
 		data = {
 			...data,
 			id: trip,
-			traveler: user,
+			dates: range,
 		};
-		console.log(data);
+		// console.log('updateInfo',data);
 		updateVacation({ variables: data });
 		history.push(`/vacation/${trip}`);
 	};
@@ -93,10 +117,17 @@ const UpdateVacation = () => {
 	return (
 		<div className={classes.updateVacation}>
 			<NavBar />
-			{/* <Typography variant="h3" className={classes.title2}>Edit</Typography> */}
-			<form className={classes.editForm} onSubmit={handleSubmit(onSubmit)}>
+			<Typography variant='h3'>{data.vacation.title}</Typography>
+	<Typography variant='h6'>{from+ ' - ' + end}</Typography>
+			<Container className={classes.edit} spacing={2}>
+			<DateRangePicker
+					onChange={onChange}
+					value={value}
+					className={classes.picker}
+				/>
+			<form  className={classes.form} onSubmit={handleSubmit(onSubmit)}>
 				<TextField
-					className={classes.input}
+					
 					type='text'
 					label='title'
 					defaultValue={data.vacation.title}
@@ -106,7 +137,7 @@ const UpdateVacation = () => {
 
 				<Button className={classes.submit} type='submit' >Edit</Button>
 			</form>
-
+			</Container>
 			<footer className={classes.footer2}>
 				<Button className={classes.backButton} onClick={goBack}>
 					Back

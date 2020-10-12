@@ -4,17 +4,15 @@ import { useForm } from 'react-hook-form';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import dayjs from 'dayjs';
-// graphql queries
+// graphql 
 import {
-	CREATE_VACATION,
-	GET_VACATIONS,
-	// DELETE_VACATION,
-} from '../../graphQl/Index';
+	CREATE_VACATION
+} from '../../graphQl/mutations/vacationM';
+import { GET_VACATIONS} from '../../graphQl/queries'
 // imported component
 import VCard from './VacationCard';
 // styles
 import { Container, TextField, Button, makeStyles } from '@material-ui/core';
-// import { useStyles } from '../../Style/Styles';
 import LightFlight from '../../assets/flight1.png';
 
 const useStyles = makeStyles(() => ({
@@ -88,22 +86,11 @@ const Vacations = () => {
 	});
 	// Read Vacation
 	const { data, loading, error } = useQuery(GET_VACATIONS);
-	// Delete Vacation
-	// const [deleteVacation] = useMutation(DELETE_VACATION, {
-	// 	refetchQueries: mutationResult => [{ query: GET_VACATIONS }],
-	// });
-
-	// Grab User from token
-	let token = localStorage.getItem('token');
-	let tokenData = JSON.parse(atob(token.split('.')[1]));
-	// console.log('tokenData', tokenData)
-	let user = tokenData.id;
 
 	const onSubmit = data => {
 		data = {
 			...data,
-			traveler: user,
-			dates: { create: range },
+			dates: range,
 		};
 		console.log('data', data);
 		createVacation({ variables: data });
@@ -128,7 +115,6 @@ const Vacations = () => {
 						type='text'
 						label='destination'
 						name='title'
-						// variant='outlined'
 						inputRef={register({ required: true })}
 					/>
 
