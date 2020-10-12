@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
-import { SIGN_UP, LOGIN } from '../../graphQl/Index';
+import { SIGN_UP} from '../../graphQl/mutations/userM';
 
 // Styling imports
 import {
@@ -71,7 +71,6 @@ export default function App() {
 	const classes = useStyles();
 	const history = useHistory();
 	const [signUp] = useMutation(SIGN_UP, {errorPolicy: 'all'});
-	const [login] = useMutation(LOGIN);
 	const { register, handleSubmit, reset } = useForm();
 	const [error, setError] = useState(null);
 	const [open, setOpen] = useState(false);
@@ -89,28 +88,19 @@ export default function App() {
 			username: data.username.toLowerCase(),
 			password: data.password.toLowerCase(),
 		};
-		// var credentials = {
-		// 	username: data.username,
-		// 	password: data.password,
-		// };
 
 		await signUp({ variables: data }).then(response => {
 			console.log('signup', response.data)
 			var phrase = response.data.signUp.message;
 			if (phrase) {
-				
 				var message = phrase.charAt(0).toUpperCase() + phrase.slice(1);
-				// alert(message);
 				setError(message);
 				setOpen(true);
 				reset();
-
 				return;
 			} else {
-				// login({ variables: credentials }).then(res => {
 					localStorage.setItem('token', response.data.signUp.token);
 					history.push('/dashboard');
-				// });
 			}
 		});
 	};
@@ -127,7 +117,6 @@ export default function App() {
 					required
 					type='text'
 					label='username'
-					// placeholder='username'
 					className={classes.regInput}
 					name='username'
 					inputRef={register({ required: true })}
