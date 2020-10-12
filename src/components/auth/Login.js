@@ -4,9 +4,8 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { clear } from '../../index';
-import { LOGIN } from '../../graphQl/Index';
+import { LOGIN } from '../../graphQl/mutations/userM';
 
-// import { useStyles } from '../../Style/Styles';
 import { TextField, Button, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
@@ -25,7 +24,6 @@ const useStyles = makeStyles(() => ({
 		fontSize: '1.2rem'
 	},
 	loginForm: {
-		// color: 'black',
 		margin: 10,
 	},
 	submit: {
