@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 
-import { USER} from '../../graphQl/Index';
+import { USER} from '../../graphQl/queries';
 import { Typography } from '@material-ui/core';
 
 const Display = () => {

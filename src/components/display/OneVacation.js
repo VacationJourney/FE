@@ -4,15 +4,15 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import NavBar from './NavBar';
 import {
 	GET_ONE_TRIP,
-	DELETE_VACATION,
-	// DELETE_DAY,
-	GET_VACATIONS,
-} from '../../graphQl/Index';
+	GET_VACATIONS
+} from '../../graphQl/queries';
+import { DELETE_VACATION} from '../../graphQl/mutations/vacationM'
+import dayjs from 'dayjs';
+
 import { Card, Typography, Grid, Button, makeStyles } from '@material-ui/core';
 import ListItemText from '@material-ui/core/ListItemText';
 import DeleteIcon from '@material-ui/icons/Delete';
-// import { useStyles } from '../../Style/Styles';
-import dayjs from 'dayjs';
+
 import Blue from '../../assets/Blue.jpg';
 
 const useStyles = makeStyles(() => ({
@@ -83,12 +83,6 @@ const OneVacation = () => {
 		refetchQueries: mutationResult => [{ query: GET_VACATIONS }],
 	});
 
-	// const [deleteDay] = useMutation(DELETE_DAY, {
-	// 	refetchQueries: mutationResult => [
-	// 		{ query: GET_ONE_TRIP, variables: { id: vacay } },
-	// 	],
-	// });
-
 	const deleteTrip = () => {
 		deleteVacation({ variables: { id: vacay } });
 		history.push(`/dashboard`);
@@ -100,7 +94,7 @@ const OneVacation = () => {
 
 	if (loading) return <span>Loading...</span>;
 	if (error) return <p>ERROR</p>;
-
+	
 	var lastDate = (data.vacation.dates.length) - 1;
 	
 	var from = dayjs(data.vacation.dates[0].date).format('YYYY');

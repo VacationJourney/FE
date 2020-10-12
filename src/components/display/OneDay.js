@@ -4,7 +4,8 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import dayjs from 'dayjs';
 
 import NavBar from './NavBar';
-import { GET_ONE_DATE, CREATE_EVENT, DELETE_EVENT } from '../../graphQl/Index';
+import { CREATE_EVENT, DELETE_EVENT } from '../../graphQl/mutations/eventM';
+import { GET_ONE_DATE} from '../../graphQl/queries'
 
 import {TextField, Typography, Grid, Button, Card, makeStyles} from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -43,7 +44,6 @@ const useStyles = makeStyles(() => ({
 		background: 'black',
 		color: 'white',
 		fontSize: '1rem',
-		// width: '40%',
 		marginTop: '5%',
 	},
 	events: {
