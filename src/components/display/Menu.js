@@ -81,7 +81,7 @@ const CustomizedMenus = () => {
 				</StyledMenuItem>
 				<StyledMenuItem>
 					<ListItemIcon>
-						<PersonIcon onClick={() => history.push('/settings')}fontSize='large'></PersonIcon>
+						<PersonIcon onClick={() => history.push('/profile')}fontSize='large'></PersonIcon>
 					</ListItemIcon>
 				</StyledMenuItem>
 				<StyledMenuItem>
