@@ -4,8 +4,11 @@ export const SIGN_UP = gql`
 	mutation signUp($username: String!, $email: String, $password: String!) {
 		signUp(username: $username, email: $email, password: $password) {
 			
-			... on User {
-				username
+			... on SignUpResponse {
+				token 
+				user{
+					username
+				}
 			}
 			... on UserFoundError {
 				message

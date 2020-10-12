@@ -89,13 +89,13 @@ export default function App() {
 			username: data.username.toLowerCase(),
 			password: data.password.toLowerCase(),
 		};
-		var credentials = {
-			username: data.username,
-			password: data.password,
-		};
+		// var credentials = {
+		// 	username: data.username,
+		// 	password: data.password,
+		// };
 
 		await signUp({ variables: data }).then(response => {
-			
+			console.log('signup', response.data)
 			var phrase = response.data.signUp.message;
 			if (phrase) {
 				
@@ -107,10 +107,10 @@ export default function App() {
 
 				return;
 			} else {
-				login({ variables: credentials }).then(res => {
-					localStorage.setItem('token', res.data.login.token);
+				// login({ variables: credentials }).then(res => {
+					localStorage.setItem('token', response.data.signUp.token);
 					history.push('/dashboard');
-				});
+				// });
 			}
 		});
 	};
