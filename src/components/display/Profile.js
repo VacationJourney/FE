@@ -44,10 +44,8 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%',
 	},
 	editInput: {
-		width: '60%',
-		lineHeight: '2',
-		margin: '2%',
-		padding: '3%',
+		width: '50%',
+		margin: '1%',
 		fontSize: '1.2rem',
 	},
 	footer: {
