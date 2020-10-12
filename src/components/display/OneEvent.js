@@ -2,7 +2,8 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { GET_ONE_EVENT, DELETE_EVENT, GET_ONE_DATE } from '../../graphQl/Index';
+import { GET_ONE_EVENT, GET_ONE_DATE } from '../../graphQl/queries';
+import { DELETE_EVENT} from '../../graphQl/mutations/eventM'
 import NavBar from './NavBar';
 // Styling imports
 import { Card, Typography, makeStyles, Button } from '@material-ui/core';
@@ -82,18 +83,12 @@ const OneEvent = () => {
 		variables: { id: event },
 	});
 
-	// Query a single Date with all the events
-	// const {  } = useQuery(GET_ONE_DATE, {
-	// 	variables: { id: date },
-	// });
-
 	// Delete an event
 	const [deleteEvent] = useMutation(DELETE_EVENT, {
 		refetchQueries: mutationResult => [
 			{ query: GET_ONE_DATE, variables: { id: date } },
 		],
 	});
-
 	if (loading) return <span>Loading...</span>;
 	if (error) return <p>ERROR</p>;
 

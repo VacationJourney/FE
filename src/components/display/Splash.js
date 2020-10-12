@@ -16,8 +16,6 @@ const useStyles = makeStyles(() => ({
 		minHeight: '100vh',
 		display: 'flex',
 		flexDirection: 'column',
-
-		// alignItems: 'center',
 	},
 	appName: {
 		marginTop: 100,
@@ -31,9 +29,6 @@ const Splash = () => {
 	return (
 		<div className={classes.splash}>
 			<Login />
-			{/* <Link className={classes.regLink} to='/register'>
-				Register
-			</Link> */}
 			<Typography className={classes.appName} variant='h2'>Journey 2</Typography>
 		</div>
 	);
