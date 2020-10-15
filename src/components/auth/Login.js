@@ -15,21 +15,39 @@ const useStyles = makeStyles(() => ({
 	login: {
 		display: 'flex',
 		alignItems: 'center',
-		justifyContent: 'flex-end',
+		justifyContent: 'space-between',
 		margin: '1%',
 	},
-	regLink: {
-		textDecoration: 'none',
-		color: 'white',
-		fontSize: '1.2rem'
+	form: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	loginForm: {
 		margin: 10,
 	},
+	auth: {
+		display: 'flex',
+		justifyContent: 'flex-end',
+		alignItems: 'center',
+	},
+	regLink: {
+		textDecoration: 'none',
+		color: 'black',
+		fontSize: '1.2rem',
+		marginRight: '2%'
+	},
 	submit: {
 		background: 'black',
+
 		color: 'white',
 		fontSize: '1rem',
+	},
+	list: {
+		width: 250,
+	},
+	fullList: {
+		width: 'auto',
 	},
 }));
 
@@ -67,35 +85,38 @@ const Login = () => {
 	};
 
 	return (
-		<div className={classes.login}>
-			<div className={classes.loginBox}>
-			<form onSubmit={handleSubmit(onSubmit)} xs={12} lg={3}>
-				<TextField
-					required
-					label='username'
-					className={classes.loginForm}
-					type='text'
-					name='username'
-					inputRef={register({ required: true })}
-				/>
-				<TextField
-					required
-					label='password'
-					className={classes.loginForm}
-					type='password'
-					name='password'
-					inputRef={register({ required: true })}
-				/>
-				<Button type='submit' className={classes.submit}>
-					Login
-				</Button>
-				
-			</form>
-			<Link  className={classes.regLink} to='/register'>
-				Register
-			</Link>
-			</div >
-		</div>
+		<>
+
+			<div className={ classes.login }>
+				<Link className={ classes.regLink } to='/register'>
+					Register
+					</Link>
+				<form className={ classes.form } onSubmit={ handleSubmit(onSubmit) } xs={ 12 } lg={ 3 }>
+
+					<TextField
+						required
+						label='username'
+						className={ classes.loginForm }
+						type='text'
+						name='username'
+						inputRef={ register({ required: true }) }
+					/>
+					<TextField
+						required
+						label='password'
+						className={ classes.loginForm }
+						type='password'
+						name='password'
+						inputRef={ register({ required: true }) }
+					/>
+					<div className={ classes.auth }>
+						<Button type='submit' className={ classes.submit }>
+							Login
+						</Button>
+					</div>
+				</form>
+			</div>
+		</>
 	);
 };
 
