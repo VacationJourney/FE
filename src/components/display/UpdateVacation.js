@@ -95,7 +95,7 @@ const UpdateVacation = () => {
 
 	var lastDate = (data.vacation.dates.length) - 1;
 	
-	var from = dayjs(data.vacation.dates[0].date).format('MMM DD');
+	var begins = dayjs(data.vacation.dates[0].date).format('MMM DD');
 	var end = dayjs(data.vacation.dates[lastDate].date).format('MMM DD')
 
 	const onSubmit = data => {
@@ -118,7 +118,7 @@ const UpdateVacation = () => {
 		<div className={classes.updateVacation}>
 			<NavBar />
 			<Typography variant='h3'>{data.vacation.title}</Typography>
-	<Typography variant='h6'>{from+ ' - ' + end}</Typography>
+	<Typography variant='h6'>{begins+ ' - ' + end}</Typography>
 			<Container className={classes.edit} spacing={2}>
 			<DateRangePicker
 					onChange={onChange}
