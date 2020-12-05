@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Splash from './components/display/Splash';
+import Splash from './components/display/Splash/Index';
 import Register from './components/auth/Register';
 import Profile from './components/display/Profile'
 import Dashboard from './components/display/Dashboard';
