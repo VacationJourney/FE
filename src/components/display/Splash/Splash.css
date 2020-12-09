@@ -127,6 +127,7 @@
 
 .tag h3{
   margin: 1%;
+  text-shadow: 1px 3px 3px pink;
 }
 
 #excuses{
@@ -138,13 +139,17 @@
   justify-content: center;
 }
 
-#excuses h1{
+#excuses .small h1{
   line-height: 1;
   color: #f5d5c8;
 }
 #excuses p {
   color:white;
   font-size: 1.5rem;
+}
+#excuses .big h1 {
+  color: #f5d5c8;
+  font-size: 0rem;
 }
 .description{
   color: white;
@@ -171,13 +176,14 @@
   top: 40%;
   left: 50%;
   transform: translate(-50%, -40%);
+  width: 90%;
+  color:  #f5d5c8;
+  font-size: 3rem;
+  /* border: 1px solid pink; */
 }
-#adventure .tagline p {
-  font-size: 2.4rem;
-  padding: 0;
-  margin:0;
-  color: #f5d5c8;
-}
+
+
+
 
 .register{
   position: absolute;
@@ -205,18 +211,47 @@
 @media only screen and (min-width: 600px){
   #AppName{
     width: 90%;
-   
   }
   .tag h3{
     font-size: 2rem;
   }
-  #excuses h1{
+  #excuses .small h1{
     font-size: 3.5rem;
   }
 }
 
 @media only screen and (min-width: 800px){
-  #excuses h1{
+  #AppName{
+    width: 60%;
+  }
+  .tag h3{
+    font-size: 3rem;
+  }
+  #excuses .small h1{
     font-size: 3.8rem;
+  }
+  #adventure h2{
+    font-size: 5.5rem;
+  }
+  #adventure p{
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (min-width: 1000px){
+  
+  #excuses .small h1{
+    font-size: 0rem;
+  }
+  #excuses .big h1{
+    font-size: 5rem;
+  }
+  .tagline {
+    font-size: 5rem;
+  }
+}
+@media only screen and (min-width: 1400px){
+  .tag{
+    color:black;
   }
 }
