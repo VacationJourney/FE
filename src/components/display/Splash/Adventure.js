@@ -4,8 +4,15 @@ import { Link } from 'react-router-dom'
 const Adventure = () => {
   return (
     <div id="adventure">
-      <h2>Adventurous Escape</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, unde eum vel pariatur omnis totam, autem deserunt nam numquam ex beatae quibusdam voluptas labore fuga. Quibusdam commodi maxime vel ducimus?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laudantium deleniti quidem soluta qui molestiae delectus, commodi nulla neque eum at saepe voluptatibus amet. Mollitia, minima? Exercitationem perspiciatis libero omnis dolores?</p>
+      <h2>Journey Co$t</h2>
+      <p>Creating Vacation Possibilities</p>
+      <div className="tagline">
+        <p>A</p>
+        <p>Vacation</p>
+        <p>Budget</p>
+        <p>Planner</p>
+      </div>
+      
       <div className="register">
         <Link className="link" to='/register'>
           Register
