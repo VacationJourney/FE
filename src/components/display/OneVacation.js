@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import NavBar from './NavBar';
@@ -82,29 +82,28 @@ const useStyles = makeStyles(() => ({
 		bottom: '0%',
 		left: '50%',
 		transform: 'translateX(-50%)',
-		width: '60%',
+		width: '100%',
 
 		display: 'flex',
 		justifyContent: 'center',
-		justifyContent: 'space-around',
+		background: 'white',
 		fontSize: '1rem',
-		border: '1px solid orange'
+
 	},
 	balance: {
 		display: 'flex',
 		flexDirection: 'column',
 		padding: '1%',
-		background: 'rgb(0,0,0, 0.7)',
-		color: 'white',
-		borderRadius: '4px'
+		width: '25%',
+
 	},
 	cost: {
 		display: 'flex',
 		flexDirection: 'column',
+		width: '25%',
 		padding: '1%',
-		background: 'red',
-		color: 'white',
-		borderRadius: '4px'
+		color: 'red',
+
 	},
 	footer: {
 		position: 'fixed',
@@ -121,19 +120,23 @@ const useStyles = makeStyles(() => ({
 		background: 'red',
 		color: 'white',
 		fontSize: '1rem',
-		// width: '20%',
+		width: '20%',
+		borderRadius: 0
 	},
 	backButton: {
 		background: 'black',
 		color: 'white',
 		fontSize: '1rem',
-		// width: '20%',
+		width: '20%',
+		borderRadius: 0
 	},
 }));
 
 const OneVacation = () => {
 	const classes = useStyles();
-
+	const [cost, setCost] = useState(0)
+	const [balance, setBalance] = useState(0)
+	
 	const history = useHistory();
 	let params = useParams();
 	let vacay = params.id;
@@ -144,6 +147,11 @@ const OneVacation = () => {
 	});
 
 	console.log('OneVacation -> data', data)
+	useEffect(() => {
+		if (data && data.vacation) {
+			setBalance(data.vacation.budget - cost)
+		}
+	}, [data])
 
 	const [deleteVacation] = useMutation(DELETE_VACATION, {
 		refetchQueries: mutationResult => [{ query: GET_VACATIONS }],
@@ -197,9 +205,9 @@ const OneVacation = () => {
 			</div>
 			<div className={ classes.calculations }>
 				<div className={ classes.cost }><span>Cost</span>
-					<span>${ data.vacation && data.vacation.budget }</span></div>
+					<span>${ cost }</span></div>
 				<div className={ classes.balance }><span>Balance</span>
-					<span>${ data.vacation && data.vacation.budget }</span></div>
+					<span>${ balance}</span></div>
 			</div>
 			<footer className={ classes.footer }>
 				<Button className={ classes.deleteButton } onClick={ deleteTrip }>
