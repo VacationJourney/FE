@@ -16,8 +16,11 @@ export const GET_VACATIONS = gql`
 		vacations {
 			id
 			title
+			budget
+			cost
 			dates {
 				date
+				cost
 			}
 		}
 	}
@@ -28,12 +31,16 @@ export const GET_ONE_TRIP = gql`
 		vacation(where: { id: $id }) {
 			id
 			title
+			budget
+			cost
+			dreams
 			dates {
 				id
 				date
 				events {
 					id
 					title
+					cost
 				}
 			}
 		}
@@ -45,12 +52,14 @@ query Day($id: ID) {
   day(where: { id: $id }) {
     id
     date
+		cost
     events {
       id
       title
       startTime
       endTime
       description
+			cost
     }
   }
 }
