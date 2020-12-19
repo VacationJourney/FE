@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import dayjs from 'dayjs'
-import useDate from '../../hooks/useDate'
+import useDate from '../../../../hooks/useDate'
 import { Paper, Grid, Box, Typography } from '@material-ui/core'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-import { useStyles } from '../Style/CalStyle'
+import { useStyles } from '../../../Style/CalendarStyle'
 
 
 const Index = ({ dates }) => {
@@ -13,7 +13,7 @@ const Index = ({ dates }) => {
   const tripStart = dates[0].date
   // const tripEnd = dates[datesLength- 1].date
   // console.log('trip', tripStart, tripEnd)
-  console.log('dates', dates)
+  // console.log('dates', dates)
   const [date, setDate] = useState(dayjs(tripStart))
   const [selected, setSelected] = useState(dayjs(date).format('YYYY-MM-DD'))
   // console.log('date', selected)
@@ -67,7 +67,7 @@ const Index = ({ dates }) => {
     })
     
   })
-  console.log('tripCal', tripCal, dates)
+  // console.log('tripCal', tripCal, dates)
   // fns to navigate months
   const lastMonth = () => {
     setDate(date.subtract(1, 'Month'))

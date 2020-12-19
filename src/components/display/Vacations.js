@@ -10,58 +10,10 @@ import {
 } from '../../graphQl/mutations/vacationM';
 import { GET_VACATIONS } from '../../graphQl/queries'
 // imported component
-import VCard from './VacationCard';
+import VacationCard from './VacationCard';
 // styles
-import { Container, TextField, Button, makeStyles } from '@material-ui/core';
-import LightFlight from '../../assets/flight1.png';
-
-
-const useStyles = makeStyles(() => ({
-	root: {
-		flexGrow: 1,
-	},
-	vacations: {
-		backgroundImage: `url(${LightFlight})`,
-		backgroundSize: 'cover',
-		backgroundRepeat: 'no-repeat',
-		backgroundPosition: 'center',
-		minHeight: '100vh',
-	},
-
-	page: {
-		width: '100%',
-	},
-	picker: {
-		background: 'white',
-		marginTop: '2%',
-	},
-	form: {
-		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'center',
-		alignItems: 'center',
-		margin: '1%',
-	},
-
-	vLink: {
-		textDecoration: 'none',
-		color: 'black',
-	},
-	submit: {
-		background: 'black',
-		color: 'white',
-		fontSize: '1rem',
-		// width: '40%',
-		marginTop: '5%',
-	},
-
-	edit: {
-		textDecoration: 'none',
-		color: 'orange',
-		fontSize: '1.5rem',
-	},
-}))
-
+import { Container, TextField, Button } from '@material-ui/core';
+import {useStyles} from '../Style/VacationsStyle'
 
 const Vacations = () => {
 	const classes = useStyles();
@@ -89,8 +41,6 @@ const Vacations = () => {
 	const { data, loading, error } = useQuery(GET_VACATIONS);
 
 	const onSubmit = data => {
-	
-
 		data = {
 			...data,
 			budget: parseInt(data.budget),
@@ -112,7 +62,6 @@ const Vacations = () => {
 					value={ value }
 					className={ classes.picker }
 				/>
-
 				<form className={ classes.form } onSubmit={ handleSubmit(onSubmit) }>
 					<TextField
 						required
@@ -121,7 +70,6 @@ const Vacations = () => {
 						name='title'
 						inputRef={ register({ required: true }) }
 					/>
-				
 					<TextField
 						id="standard-number"
 						label="Budget"
@@ -132,12 +80,11 @@ const Vacations = () => {
 						} }
 						inputRef={ register({ required: true }) }
 					/>
-
 					<Button type='submit' className={ classes.submit }>
 						Create
 					</Button>
 				</form>
-				<VCard data={ data } />
+				<VacationCard data={ data } />
 			</Container>
 		</div>
 	);

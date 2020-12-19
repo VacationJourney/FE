@@ -3,7 +3,7 @@ import { useParams, Link, useHistory } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import dayjs from 'dayjs';
 
-import NavBar from './NavBar';
+import NavBar from './Nav/Index';
 import { CREATE_EVENT, DELETE_EVENT } from '../../graphQl/mutations/eventM';
 import { GET_ONE_DATE} from '../../graphQl/queries'
 

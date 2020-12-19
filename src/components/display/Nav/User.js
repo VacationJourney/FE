@@ -1,8 +1,8 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 
-import { USER} from '../../graphQl/queries';
-import { Typography } from '@material-ui/core';
+import { USER} from '../../../graphQl/queries';
+
 
 const Display = () => {
 	const { data, loading, error } = useQuery(USER);
@@ -12,14 +12,13 @@ const Display = () => {
 
 	// uppercase Name
 	var lowName = data.currentUser.username.toLowerCase()
-	var name = lowName.charAt(0).toUpperCase() + lowName.slice(1)
+	// var name = lowName.charAt(0).toUpperCase() + lowName.slice(1)
+	var name = lowName.charAt(0).toUpperCase() 
 	
 
 	return (
-		<div>
-			<Typography key={data.currentUser.id} variant='h3'>
-				{data.currentUser && name}
-			</Typography>
+		<div className='user'>
+			{data.currentUser && name}
 		</div>
 	);
 };
