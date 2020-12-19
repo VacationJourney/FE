@@ -1,0 +1,16 @@
+.navbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.user{
+  width: 15px;
+  height: 15px;
+ font-size: 1rem;
+ border: 1px solid;
+ padding: 1%;
+ border-radius: 100%;
+ background: black;
+ color: white;
+text-align: center;
+}

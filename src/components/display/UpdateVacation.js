@@ -8,57 +8,10 @@ import dayjs from 'dayjs';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { UPDATE_VACATION } from '../../graphQl/mutations/vacationM';
 import {GET_ONE_TRIP} from '../../graphQl/queries'
-import NavBar from './NavBar'
+import NavBar from './Nav/Index'
 // styles
-import { Container, Button, TextField, makeStyles, Typography } from '@material-ui/core';
-import Airy from '../../assets/Airy.jpg';
-
-const useStyles = makeStyles(() => ({
-	updateVacation: {
-		maxWidth: '100%',
-		minHeight: '100vh',
-		backgroundImage: `url(${Airy})`,
-		backgroundSize: 'cover',
-		backgroundRepeat: 'no-repeat',
-		backgroundAttachment: 'fixed',
-	},
-	title2: {
-		paddingTop: '10%',
-		color: 'black',
-	},
-	edit: {
-		display: 'flex',
-		flexDirection: 'column',
-		marginTop: '15%',
-		alignItems: 'center',
-		width: '100%',
-		height: '70vh',
-	},
-	form: {
-		display: 'flex',
-		flexDirection: 'column',
-	},
-
-	submit: {
-		background: 'black',
-		color: 'white',
-		fontSize: '1rem',
-		marginTop: '5%',
-	},
-	footer2: {
-		position: 'fixed',
-		width: '100%',
-		display: 'flex',
-		justifyContent: 'flex-end',
-		bottom: 0,
-	},
-	backButton: {
-		background: 'black',
-		color: 'white',
-		fontSize: '1rem',
-		width: '30%',
-	},
-}))
+import { Container, Button, TextField, Typography } from '@material-ui/core';
+import {useStyles} from '../Style/UpdateStyle'
 
 const UpdateVacation = () => {
 	const history = useHistory();

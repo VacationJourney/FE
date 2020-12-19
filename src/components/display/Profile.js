@@ -5,11 +5,11 @@ import { useHistory } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import {  UPDATE_USER, DELETE_USER } from '../../graphQl/mutations/userM';
 import { USER} from '../../graphQl/queries'
-import NavBar from './NavBar';
 
-import { Typography, Modal, TextField, Button, makeStyles } from '@material-ui/core';
+import NavBar from './Nav/Index';
 
-import Above from '../../assets/Above.jpg';
+import { Typography, Modal, TextField, Button } from '@material-ui/core';
+import {useStyles} from '../Style/ProfileStyle'
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -25,64 +25,6 @@ function getModalStyle() {
     transform: `translate(-${top}%, -${left}%)`,
   };
 }
-
-const useStyles = makeStyles((theme) => ({
-	profile: {
-		backgroundImage: `url(${Above})`,
-		backgroundSize: 'cover',
-		backgroundRepeat: 'no-repeat',
-		backgroundPosition: 'center',
-		minHeight: '100vh',
-		width: '100%',
-		textAlign: 'center',
-	},
-	editUser: {
-		marginTop:'10%',
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-		width: '100%',
-	},
-	editInput: {
-		width: '50%',
-		margin: '1%',
-		fontSize: '1.2rem',
-	},
-	footer: {
-		position: 'fixed',
-		width: '100%',
-		display: 'flex',
-		justifyContent: 'space-between',
-		bottom: 0,
-	},
-	backButton: {
-		background: 'black',
-		color: 'white',
-		fontSize: '1rem',
-		width: '30%',
-	},
-	paper: {
-    position: 'absolute',
-		width: '60%',
-		textAlign: 'center',
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-	deleteButton: {
-		background: 'red',
-		color: 'white',
-		fontSize: '1rem',
-		width: '30%',
-	},
-	submit: {
-		background: 'black',
-		color: 'white',
-		fontSize: '1rem',
-		marginTop: '5%',
-	},
-}))
 
 const Profile = () => {
 	const classes = useStyles();
@@ -105,8 +47,6 @@ const Profile = () => {
 	let tokenData = JSON.parse(atob(token.split('.')[1]));
 	let user = tokenData.id;
 
-	
-
 	const onSubmit = data => {
 		data = {
 			...data,
@@ -118,6 +58,7 @@ const Profile = () => {
 		history.push(`/dashboard`)
 	};
 
+	// Note Create unique Modal function
 	// For Deleting User Modal
 	const handleOpen = () => {
     setOpen(true);
