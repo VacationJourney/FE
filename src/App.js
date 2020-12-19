@@ -5,7 +5,7 @@ import Splash from './components/display/Splash/Index';
 import Register from './components/auth/Register';
 import Profile from './components/display/Profile'
 import Dashboard from './components/display/Dashboard';
-import OneVacation from './components/display/OneVacation';
+import OneVacation from './components/display/OneVacation/Index.js';
 import UpdateVacation from './components/display/UpdateVacation';
 import OneDay from './components/display/OneDay';
 import OneEvent from './components/display/OneEvent';

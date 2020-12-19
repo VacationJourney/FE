@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import NavBar from './NavBar';
+import NavBar from '../Nav/Index';
 import {
 	GET_ONE_TRIP,
 	GET_VACATIONS
-} from '../../graphQl/queries';
-import { DELETE_VACATION } from '../../graphQl/mutations/vacationM'
+} from '../../../graphQl/queries';
+import { DELETE_VACATION } from '../../../graphQl/mutations/vacationM'
 // import dayjs from 'dayjs';
 
 import {  Typography,  Button } from '@material-ui/core';
-import {useStyles} from '../Style/OneVacayStyle'
+import {useStyles} from '../../Style/OneVacayStyle'
 import ListItemText from '@material-ui/core/ListItemText';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Calendar from '../Calendar/Index'
+import Calendar from './Calendar/Index'
 
 
-const OneVacation = () => {
+const Index = () => {
 	const classes = useStyles();
 	const history = useHistory();
 	let params = useParams();
@@ -54,11 +54,6 @@ const OneVacation = () => {
 	if (loading) return <span>Loading...</span>;
 	if (error) return <p>ERROR</p>;
 
-	// format date range
-	// var lastDate = (data.vacation.dates.length) - 1;
-	// var from = dayjs(data.vacation.dates[0].date).format('YYYY');
-	// var end = dayjs(data.vacation.dates[lastDate].date).format('YYYY')
-
 	return (
 		<div className={ classes.oneVacay }>
 			<NavBar />
@@ -70,12 +65,9 @@ const OneVacation = () => {
 					</div>
 					<Link className={ classes.titleLink } to={ `/vacationUpdate/${vacay}` }>
 						<Typography className={ classes.title }>{ data.vacation.title } 
-						{/* { from === end ? from : from + ' - ' + end } */}
 						</Typography>
 					</Link>
 				</div>
-
-				
 					<Calendar dates={data.vacation.dates} />
 					
 			</div>
@@ -98,4 +90,4 @@ const OneVacation = () => {
 	);
 };
 
-export default OneVacation;
+export default Index;

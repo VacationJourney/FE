@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { clear } from '../../index';
+import { clear } from '../../../index';
 import { useHistory } from 'react-router-dom';
 
 import { withStyles, Menu, MenuItem, ListItemIcon } from '@material-ui/core';
@@ -64,7 +64,7 @@ const CustomizedMenus = () => {
 				aria-haspopup='true'
 				variant='contained'
 				fontSize='large'
-				color='black'
+				color='inherit'
 				onClick={handleClick}
 			></MenuIcon>
 			<StyledMenu

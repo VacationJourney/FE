@@ -1,8 +1,8 @@
 import React from 'react';
 
-import User from './User';
+// import User from './User';
 import Vacations from './Vacations';
-import NavBar from './NavBar'
+import NavBar from './Nav/Index'
 
 import {  makeStyles } from '@material-ui/core';
 import LightFlight from '../../assets/flight1.png';
@@ -23,7 +23,7 @@ const Dashboard = () => {
 		<>
 			<div className={classes.vacations}>
 				<NavBar />
-				<User />
+				{/* <User /> */}
 				<Vacations />
 			</div>
 		</>
