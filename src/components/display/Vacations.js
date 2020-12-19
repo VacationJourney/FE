@@ -75,7 +75,7 @@ const Vacations = () => {
 
 	// // loop for every day
 	for (from; from <= to; from.setDate(from.getDate() + 1)) {
-		var date = dayjs(from).format('YYYY-MM-DD');
+		var date = dayjs(from).format('YYYY-M-D');
 		// var date = from.toISOString();
 		range.push({ date });
 	}
