@@ -13,24 +13,13 @@ import { GET_VACATIONS } from '../../graphQl/queries'
 import VacationCard from './VacationCard';
 // styles
 import { Container, TextField, Button } from '@material-ui/core';
-import {useStyles} from '../Style/VacationsStyle'
+import { useStyles } from '../Style/VacationsStyle'
 
 const Vacations = () => {
 	const classes = useStyles();
 	const { register, handleSubmit, reset } = useForm();
 	const [value, onChange] = useState([new Date(), new Date()]);
-	const range = [];
-
-	// establish Date variables
-	var from = new Date(value[0]);
-	var to = new Date(value[1]);
-
-	// // loop for every day
-	for (from; from <= to; from.setDate(from.getDate() + 1)) {
-		var date = dayjs(from).format('YYYY-M-D');
-		// var date = from.toISOString();
-		range.push({ date });
-	}
+	
 
 	// Queries & Mutations
 	// Create Vacation
@@ -41,6 +30,17 @@ const Vacations = () => {
 	const { data, loading, error } = useQuery(GET_VACATIONS);
 
 	const onSubmit = data => {
+		const range = [];
+		// establish Date variables
+		var from = new Date(value[0]);
+		var to = new Date(value[1]);
+
+		// // loop for every day
+		for (from; from <= to; from.setDate(from.getDate() + 1)) {
+			var date = dayjs(from).format('YYYY-M-D');
+			// var date = from.toISOString();
+			range.push({ date });
+		}
 		data = {
 			...data,
 			budget: parseInt(data.budget),
