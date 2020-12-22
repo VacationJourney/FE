@@ -9,8 +9,8 @@ import {
 import { DELETE_VACATION } from '../../../graphQl/mutations/vacationM'
 // import dayjs from 'dayjs';
 
-import {  Typography,  Button } from '@material-ui/core';
-import {useStyles} from '../../Style/OneVacayStyle'
+import { Typography, Button } from '@material-ui/core';
+import { useStyles } from '../../Style/OneVacayStyle'
 import ListItemText from '@material-ui/core/ListItemText';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Calendar from './Calendar/Index'
@@ -25,7 +25,7 @@ const Index = () => {
 
 	const [cost, setCost] = useState(0)
 	const [balance, setBalance] = useState(0)
-	
+
 	// GraphQL Hooks
 	const { data, loading, error } = useQuery(GET_ONE_TRIP, {
 		variables: { id: vacay },
@@ -59,32 +59,31 @@ const Index = () => {
 			<NavBar />
 			<div className={ classes.OneVacation }>
 				<div className={ classes.top }>
-					<div className={ classes.budget }>
-						<span>Budget</span>
-						<span>$ { data.vacation && data.vacation.budget }</span>
-					</div>
 					<Link className={ classes.titleLink } to={ `/vacationUpdate/${vacay}` }>
-						<Typography className={ classes.title }>{ data.vacation.title } 
+						<Typography className={ classes.title }>{ data.vacation.title }
 						</Typography>
 					</Link>
 				</div>
-					<Calendar dates={data.vacation.dates} />
-					
+				<Calendar dates={ data.vacation.dates } />
+
 			</div>
-			<div className={ classes.calculations }>
-				<div className={ classes.cost }><span>Cost</span>
-					<span>${ cost }</span></div>
-				<div className={ classes.balance }><span>Balance</span>
-					<span>${ balance}</span></div>
-			</div>
+			
 			<footer className={ classes.footer }>
 				<Button className={ classes.deleteButton } onClick={ deleteTrip }>
 					<DeleteIcon />
 					<ListItemText primary='Trip' />
 				</Button>
-				<Button className={ classes.backButton } onClick={ goBack }>
+				<div className={ classes.calculations }>
+				<div className={ classes.money }><span>Budget</span>
+					<span>${ data.vacation && data.vacation.budget }</span></div>
+				<div className={ classes.cost }><span>Cost</span>
+					<span>${ cost }</span></div>
+				<div className={ classes.money }><span>Balance</span>
+					<span>${ balance }</span></div>
+			</div>
+				{/* <Button className={ classes.backButton } onClick={ goBack }>
 					Back
-				</Button>
+				</Button> */}
 			</footer>
 		</div>
 	);
