@@ -20,15 +20,14 @@ const Index = () => {
 	const classes = useStyles();
 	const history = useHistory();
 	let params = useParams();
-	let vacay = params.id;
-	localStorage.setItem('vacay', vacay);
+	let vacationId = params.id;
+	localStorage.setItem('vacationId', vacationId);
 
-	const [cost, setCost] = useState(0)
 	const [balance, setBalance] = useState(0)
 
 	// GraphQL Hooks
 	const { data, loading, error } = useQuery(GET_ONE_TRIP, {
-		variables: { id: vacay },
+		variables: { id: vacationId },
 	});
 
 	const [deleteVacation] = useMutation(DELETE_VACATION, {
@@ -37,17 +36,18 @@ const Index = () => {
 
 	useEffect(() => {
 		if (data && data.vacation) {
-			setBalance(data.vacation.budget - cost)
+			console.log('OneVacation -> data.vacation', data.vacation)
+			setBalance(data.vacation.budget + data.vacation.cost)
 		}
 	}, [data])
 
 	// component functions
 	const deleteTrip = () => {
-		deleteVacation({ variables: { id: vacay } });
+		deleteVacation({ variables: { id: vacationId } });
 		history.push(`/dashboard`);
 	};
 	const goBack = () => {
-		localStorage.removeItem('vacay');
+		localStorage.removeItem('vacationId');
 		history.push(`/dashboard`);
 	};
 
@@ -59,12 +59,12 @@ const Index = () => {
 			<NavBar />
 			<div className={ classes.OneVacation }>
 				<div className={ classes.top }>
-					<Link className={ classes.titleLink } to={ `/vacationUpdate/${vacay}` }>
+					<Link className={ classes.titleLink } to={ `/vacationUpdate/${vacationId}` }>
 						<Typography className={ classes.title }>{ data.vacation.title }
 						</Typography>
 					</Link>
 				</div>
-				<Calendar dates={ data.vacation.dates } />
+				<Calendar trip={ data.vacation } />
 
 			</div>
 			
@@ -77,7 +77,7 @@ const Index = () => {
 				<div className={ classes.money }><span>Budget</span>
 					<span>${ data.vacation && data.vacation.budget }</span></div>
 				<div className={ classes.cost }><span>Cost</span>
-					<span>${ cost }</span></div>
+					<span>${ data.vacation && data.vacation.cost }</span></div>
 				<div className={ classes.money }><span>Balance</span>
 					<span>${ balance }</span></div>
 			</div>
