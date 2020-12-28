@@ -36,21 +36,47 @@ export const useStyles = makeStyles((theme) => ({
   datesGrid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(7, 1fr)',
-    gridRowGap: '2%',
-    height: '28vh',
     background: 'rgb(255,255,255, 0.6)',
   },
   monthDates: {
     fontSize: '1.2rem',
     color: '#056099',
+    padding: '3px 0',
   },
   otherDates: {
     fontSize: '1.2rem',
-    color: 'grey'
+    color: 'grey',
+    padding: '2px',
   },
   trip: {
-    background: 'rgb(5,100,155,0.8)',
+    background: 'rgb(5,100,155,0.6)',
     fontSize: '1.2rem',
-    color: 'white'
-  }
+    color: 'white',
+    padding: '2px',
+    // border: '0px solid'
+  },
+  tripDate: {
+    background: 'white',
+    color: '#056099',
+    border: '2px solid #056099'
+  },
+  beyondDate: {
+    background: 'rgb(5,100,155,0.6)',
+    // color: 'fuchsia',
+    padding: '2px',
+    fontSize: '1.2rem',
+  },
+  date: {
+    width: '100%',
+    marginTop: '3%',
+    background: 'rgb(255,255,255,0.6)'
+  },
+  dateTop: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    background: 'rgb(255,255,255,0.6)'
+  },
+
 }))

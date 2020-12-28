@@ -1,11 +1,23 @@
+
 .navbar {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid; */
+}
+.logoAnchor{
+  width: 10%;
+}
+.journeyCostLogo{
+  width: 100%;
+}
+.menu{
+  display: flex;
   align-items: center;
 }
 .user{
-  width: 15px;
-  height: 15px;
+  width: 20px;
+  height: 20px;
  font-size: 1rem;
  border: 1px solid;
  padding: 1%;
@@ -14,3 +26,12 @@
  color: white;
 text-align: center;
 }
+/* .trip {
+  background: rgb(5,100,155,0.8);
+  font-size: 1.2rem;
+  color: white;
+  padding: 2px;
+}
+.trip.selected{
+  border: 1px solid white,
+} */

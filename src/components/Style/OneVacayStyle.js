@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core'
 import Blue from '../../assets/Blue.jpg'
 
 export const useStyles = makeStyles(() => ({
@@ -22,25 +22,11 @@ export const useStyles = makeStyles(() => ({
 		// border: '1px solid red'
 	},
 	top: {
-	
 		display: 'flex',
 		justifyContent: 'center',
-		padding: '1%',
-		marginBottom: '4%',
+		// padding: '1%',
+		// marginBottom: '2%',
 	},
-	budget: {
-		position: 'absolute',
-		top: '0%',
-		left: ' 0%',
-		display: 'flex',
-		flexDirection: 'column',
-		padding: '1%',
-		background: 'black',
-		color: 'white',
-		fontSize: '1.4rem',
-		borderRadius: '0 0 4px 0'
-	},
-
 	titleLink: {
 		color: 'black',
 		textDecoration: 'none',
@@ -54,32 +40,12 @@ export const useStyles = makeStyles(() => ({
 	// },
 
 	calculations: {
-		position: 'absolute',
-		bottom: '0%',
-		left: '50%',
-		transform: 'translateX(-50%)',
-		width: '100%',
+		width: '80%',
 		display: 'flex',
-		justifyContent: 'center',
 		background: 'white',
 		fontSize: '1rem',
-
 	},
-	balance: {
-		display: 'flex',
-		flexDirection: 'column',
-		padding: '1%',
-		width: '25%',
-
-	},
-	cost: {
-		display: 'flex',
-		flexDirection: 'column',
-		width: '25%',
-		padding: '1%',
-		color: 'red',
-
-	},
+	
 	footer: {
 		position: 'fixed',
 		width: '100%',
@@ -98,6 +64,24 @@ export const useStyles = makeStyles(() => ({
 		width: '20%',
 		borderRadius: 0
 	},
+	money: {
+		display: 'flex',
+		background: 'black',
+		color: 'white',
+		flexDirection: 'column',
+		padding: '1%',
+		width: '33%',
+
+	},
+	cost: {
+		display: 'flex',
+		flexDirection: 'column',
+		width: '33%',
+		padding: '1%',
+		color: 'red',
+		
+	},
+
 	backButton: {
 		background: 'black',
 		color: 'white',
@@ -105,5 +89,6 @@ export const useStyles = makeStyles(() => ({
 		width: '20%',
 		borderRadius: 0
 	},
+
 }));
 

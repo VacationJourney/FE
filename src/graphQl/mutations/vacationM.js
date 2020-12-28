@@ -55,6 +55,35 @@ export const DELETE_VACATION = gql`
 	}
 `;
 
+export const UPDATE_DAY_COST = gql`
+	mutation updateDayCost( $id: ID!) {
+		updateDayCost( where: { id: $id }) {
+			id
+			date
+			cost
+			events {
+				id
+				title
+				cost
+			}
+		}
+	}
+`;
+
+export const UPDATE_VACATION_COST = gql`
+	mutation updateVacationCost( $id: ID!){
+		updateVacationCost( where: {id: $id}){
+			id
+			title
+			cost
+			dates{
+				date
+				cost
+			}
+		}
+	}
+`
+
 export const DELETE_DAY = gql`
 	mutation deleteDay($id: ID!) {
   deleteDay(id: $id) {
