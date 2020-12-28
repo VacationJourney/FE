@@ -20,4 +20,23 @@ export const useStyles = makeStyles((theme) => ({
   arrows: {
     fontSize: '3rem'
   },
+  eventBox: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    background: 'white',
+  },
+  dayCost: {
+    display: 'flex',
+    flexDirection: 'column',
+    background: 'red',
+    padding: '.5% 2%',
+  },
+  event: {
+    display: 'flex',
+    justifyContent: 'space-evenly',
+    background: 'rgb(5,100,155,0.6)',
+    color: 'white'
+  },
+
 }))
