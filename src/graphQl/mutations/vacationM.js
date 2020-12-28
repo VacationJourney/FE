@@ -85,10 +85,10 @@ export const UPDATE_VACATION_COST = gql`
 `
 
 export const DELETE_DAY = gql`
-	mutation deleteDay($id: ID!) {
-  deleteDay(id: $id) {
-    id
-    date
-  }
-}
+	mutation deleteDay($id: ID! $tripId: ID!) {
+		deleteDay(id: $id, tripId: $tripId) {
+			id
+			date
+		}
+	}
 `;
