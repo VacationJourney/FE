@@ -20,7 +20,6 @@ const Index = ({ trip }) => {
 // console.log('tripStart', date)
   // de-Structure from useDateHook
   const {
-    currentDay,
     tripMonth,
     tripYear,
     daysInMonth,

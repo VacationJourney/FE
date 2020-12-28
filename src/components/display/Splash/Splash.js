@@ -56,7 +56,7 @@ const Index = () => {
     var master = gsap.timeline()
     master.add(tag(), '+=1.3')
     .add(openMe(), "-=2")
-  }, [openMe])
+  })
 
 
 
