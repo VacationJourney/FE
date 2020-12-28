@@ -9,12 +9,12 @@ import { useStyles } from '../../../Style/CalendarStyle';
 import OneDay from './OneDay'
 
 
-const Index = ({ dates }) => {
+const Index = ({ trip }) => {
   const classes = useStyles()
-  const datesLength = dates.length
-  const tripStart = dates[0].date
+  const datesLength = trip.dates.length
+  const tripStart = trip.dates[0].date
   const start = dayjs(tripStart).format('YYYY-M-D')
-  const end = dayjs(dates[datesLength - 1].date).format('YYYY-M-D')
+  const end = dayjs(trip.dates[datesLength - 1].date).format('YYYY-M-D')
   const [date, setDate] = useState(dayjs(tripStart))
   const [selected, setSelected] = useState(start)
 // console.log('tripStart', date)
@@ -61,7 +61,7 @@ const Index = ({ dates }) => {
 
   totalDays.map(day => {
     tripCal[day] = null
-    dates.map(trip => {
+    trip.dates.map(trip => {
 
       if (trip.date === day) {
         tripCal[day] = trip
@@ -94,6 +94,7 @@ const Index = ({ dates }) => {
         </Grid>
         <Grid className={ classes.datesGrid }>
           { totalDays.map(d => {
+            // console.log('d', tripCal[d])
             let month = dayjs(d).format('M')
             let trpMth = (tripMonth + 1).toString()
             let date = dayjs(d).format('D')
@@ -138,7 +139,7 @@ const Index = ({ dates }) => {
       <OneDay
         selected={ selected }
         setSelected={ setSelected }
-        dates={ dates }
+        trip={ trip }
         date={date}
         lastMonth={lastMonth}
         nextMonth={nextMonth}
