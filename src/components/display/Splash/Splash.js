@@ -3,7 +3,7 @@ import gsap from 'gsap'
 import clsx from 'clsx';
 import Login from '../../auth/Login';
 
-import { Button, SwipeableDrawer, makeStyles } from '@material-ui/core';
+import {  SwipeableDrawer, makeStyles } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 
@@ -56,7 +56,7 @@ const Index = () => {
     var master = gsap.timeline()
     master.add(tag(), '+=1.3')
     .add(openMe(), "-=2")
-  }, [])
+  }, [openMe])
 
 
 
