@@ -37,42 +37,47 @@ export const CREATE_EVENT = gql`
 
 export const UPDATE_EVENT = gql`
   mutation updateEvent(
-    $id: ID
-    $title: String
-    $startTime: String
-    $endTime: String
-    $location: String
-    $contact: String
-    $cost: Int
-    $description: String
-    ) {
-    updateEvent(
-      data: {
-        title: $title
-        startTime: $startTime
-        endTime: $endTime
-        location: $location
-        contact: $contact
-        cost: $cost
-        description: $description
-      }
-      where: { id: $id }
-    ) {
-      id
-      title
-      startTime
-      endTime
-      location
-      contact
-      cost
-      description
-    }
-  }
+		$id: ID
+		$title: String
+		$startTime: String
+		$endTime: String
+		$location: String
+		$contact: String
+		$cost: Int
+		$description: String
+		$tripId: ID
+		$dateId: ID
+	) {
+		updateEvent(
+			data: {
+				title: $title
+				startTime: $startTime
+				endTime: $endTime
+				location: $location
+				contact: $contact
+				cost: $cost
+				description: $description
+				dateId: $dateId
+				tripId: $tripId
+			}
+			where: { id: $id }
+		) {
+			id
+			title
+			startTime
+			endTime
+			location
+			contact
+			cost
+			description
+		}
+	}
+
 `;
 
 export const DELETE_EVENT = gql`
-	mutation DeleteEvent($id: ID!) {
-		deleteEvent( id: $id ) {
+	mutation DeleteEvent($id: ID!, $dayId: ID!, $tripId: ID!) {
+		deleteEvent(id: $id, dayId: $dayId, tripId: $tripId) {
 			id
 			title
 		}
