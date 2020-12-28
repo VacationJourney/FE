@@ -46,10 +46,10 @@ const Index = () => {
 		deleteVacation({ variables: { id: vacationId } });
 		history.push(`/dashboard`);
 	};
-	const goBack = () => {
-		localStorage.removeItem('vacationId');
-		history.push(`/dashboard`);
-	};
+	// const goBack = () => {
+	// 	localStorage.removeItem('vacationId');
+	// 	history.push(`/dashboard`);
+	// };
 
 	if (loading) return <span>Loading...</span>;
 	if (error) return <p>ERROR</p>;
