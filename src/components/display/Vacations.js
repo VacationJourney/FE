@@ -19,7 +19,7 @@ const Vacations = () => {
 	const classes = useStyles();
 	const { register, handleSubmit, reset } = useForm();
 	const [value, onChange] = useState([new Date(), new Date()]);
-	
+	// const [cost, setCost] = useState(0)
 
 	// Queries & Mutations
 	// Create Vacation
@@ -41,16 +41,18 @@ const Vacations = () => {
 			// var date = from.toISOString();
 			range.push({ date });
 		}
+		range.forEach(d => d.cost = 0)
+		
 		data = {
 			...data,
 			budget: parseInt(data.budget),
 			dates: range,
 		};
-		console.log('data', data);
+		// console.log('submit data', data);
 		createVacation({ variables: data });
 		reset();
 	};
-
+	// console.log('Get Vacations', data);
 	if (loading) return <span>Loading...</span>;
 	if (error) return <p>ERROR</p>;
 
