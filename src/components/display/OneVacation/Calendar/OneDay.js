@@ -22,6 +22,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
   const classes = useStyles()
   const modal = useRef(null)
   const editModal = useRef(null)
+  const deleteDateModal = useRef(null)
   const { register, handleSubmit } = useForm();
 
 
@@ -122,6 +123,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
     } else {
       setSelected(futureDate)
     }
+    deleteDateModal.current.close()
   }
 
   return (
@@ -302,10 +304,21 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
           </>
         )
       }) }
-      <Button className={ classes.deleteButton } onClick={ deleteDate }>
+      <Button style={ selected === start || selected === end ? { display: 'flex' } : { display: 'none' } }
+        className={ classes.deleteButton } onClick={ () => deleteDateModal.current.open() }>
         <DeleteIcon />
         <ListItemText primary='Date' />
       </Button>
+      <Modal ref={ deleteDateModal }>
+        <Typography variant='h6'>
+          Confirm deleting date?
+      </Typography>
+        <Button
+          className={ classes.deleteButtonRed } onClick={ deleteDate }>
+          <DeleteIcon />
+          <ListItemText primary={ dayjs(selected).format('MMM D') } />
+        </Button>
+      </Modal>
     </Paper>
   )
 
