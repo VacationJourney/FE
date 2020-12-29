@@ -64,6 +64,14 @@ export const useStyles = makeStyles(() => ({
 		width: '20%',
 		borderRadius: 0
 	},
+	deleteButtonModal: {
+		background: 'red',
+		color: 'white',
+    fontSize: '1rem',
+    padding: '2%',
+		// width: '20%',
+		borderRadius: 4
+	},
 	money: {
 		display: 'flex',
 		background: 'black',
