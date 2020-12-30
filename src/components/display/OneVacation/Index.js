@@ -66,7 +66,9 @@ const Index = () => {
 						</Typography>
 					</Link>
 				</div>
-				<Calendar trip={ data.vacation } />
+				<Calendar 
+				trip={ data.vacation }
+				deleteTrip={deleteTrip} />
 
 			</div>
 			
