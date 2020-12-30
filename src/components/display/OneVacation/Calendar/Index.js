@@ -9,7 +9,7 @@ import { useStyles } from '../../../Style/CalendarStyle';
 import OneDay from './OneDay'
 
 
-const Index = ({ trip }) => {
+const Index = ({ trip, deleteTrip }) => {
   const classes = useStyles()
   const datesLength = trip.dates.length
   const tripStart = trip.dates[0].date
@@ -136,6 +136,7 @@ const Index = ({ trip }) => {
         </Grid>
       </Paper>
       <OneDay
+      deleteTrip={deleteTrip}
         selected={ selected }
         setSelected={ setSelected }
         trip={ trip }

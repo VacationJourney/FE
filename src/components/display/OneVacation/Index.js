@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import NavBar from '../Nav/Index';
@@ -8,7 +8,7 @@ import {
 } from '../../../graphQl/queries';
 import { DELETE_VACATION } from '../../../graphQl/mutations/vacationM'
 // import dayjs from 'dayjs';
-
+import Modal from '../modal/Modal'
 import { Typography, Button } from '@material-ui/core';
 import { useStyles } from '../../Style/OneVacayStyle'
 import ListItemText from '@material-ui/core/ListItemText';
@@ -18,6 +18,7 @@ import Calendar from './Calendar/Index'
 
 const Index = () => {
 	const classes = useStyles();
+	const deleteTripModal = useRef(null)
 	const history = useHistory();
 	let params = useParams();
 	let vacationId = params.id;
@@ -55,6 +56,7 @@ const Index = () => {
 	if (error) return <p>ERROR</p>;
 
 	return (
+		<>
 		<div className={ classes.oneVacay }>
 			<NavBar />
 			<div className={ classes.OneVacation }>
@@ -64,15 +66,18 @@ const Index = () => {
 						</Typography>
 					</Link>
 				</div>
-				<Calendar trip={ data.vacation } />
+				<Calendar 
+				trip={ data.vacation }
+				deleteTrip={deleteTrip} />
 
 			</div>
 			
 			<footer className={ classes.footer }>
-				<Button className={ classes.deleteButton } onClick={ deleteTrip }>
+				<Button className={ classes.deleteButton } onClick={ () => deleteTripModal.current.open() }>
 					<DeleteIcon />
 					<ListItemText primary='Trip' />
 				</Button>
+				
 				<div className={ classes.calculations }>
 				<div className={ classes.money }><span>Budget</span>
 					<span>${ data.vacation && data.vacation.budget }</span></div>
@@ -86,7 +91,19 @@ const Index = () => {
 				</Button> */}
 			</footer>
 		</div>
+		<Modal ref={ deleteTripModal }>
+        <Typography variant='h6'>
+          Confirm deleting trip?
+      </Typography>
+        <Button
+          className={ classes.deleteButtonModal } onClick={ deleteTrip }>
+          <DeleteIcon />
+          <ListItemText primary={data.vacation.title} />
+        </Button>
+      </Modal>
+		</>
 	);
 };
 
 export default Index;
+

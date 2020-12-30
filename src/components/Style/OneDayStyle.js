@@ -6,8 +6,11 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     width: '100%',
     height: '50vh',
+    overflow: 'hidden',
     marginTop: '3%',
-    background: 'rgb(255,255,255,0.6)'
+    background: 'rgb(255,255,255,0.6)',
+    boxSizing: 'border-box',
+    objectFit: 'contain'
   },
   dateTop: {
     width: '100%',
@@ -21,53 +24,75 @@ export const useStyles = makeStyles((theme) => ({
   arrows: {
     fontSize: '3rem'
   },
-  eventBox: {
+  eventsTopBox: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    background: 'white',
+    background: 'rgb(5,100,155,0.3)',
   },
   // Create Event Form
   createEvent: {
-		display: 'flex',
-		flexDirection: 'column',
-		width: '70%',
-		boxSizing: 'border-box',
-	},
-	eventInput: {
-		width: '100%',
-	},
-	time: {
-		display: 'flex',
-		justifyContent: 'space-between',
-	},
-	submit: {
-		background: 'black',
-		color: 'white',
-		fontSize: '1rem',
-		marginTop: '5%',
-	},
+    display: 'flex',
+    flexDirection: 'column',
+    width: '70%',
+    boxSizing: 'border-box',
+    zIndex: 6
+  },
   dayCost: {
     display: 'flex',
     flexDirection: 'column',
     background: 'red',
     padding: '.5% 2%',
   },
-  event: {
+  eventInput: {
+    width: '100%',
+  },
+  oneLine: {
     display: 'flex',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between'
+  },
+  submit: {
+    background: 'black',
+    color: 'white',
+    fontSize: '1rem',
+    marginTop: '5%',
+  },
+  eventsBox: {
+    position: 'relative',
+    paddingLeft: '25%',
+    height: '100%',
+    overflow: 'hidden',
+    boxSizing: 'border-box'
+    // zIndex: 3
+  },
+  event: {
+    padding: '1%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     background: 'rgb(5,100,155,0.6)',
-    color: 'white'
+    color: 'white',
+    zIndex: 2
+  },
+  drawerButton: {
+    fontSize: '2rem'
   },
   deleteButton: {
     position: 'absolute',
     bottom: 0,
     left: 0,
-		background: 'black',
-		color: 'red',
-		fontSize: '1rem',
-		width: '20%',
-		borderRadius: '0 4px 0 4px'
-	},
+    background: 'black',
+    color: 'red',
+    fontSize: '1rem',
+    padding: '1%',
+    borderRadius: '0 4px 0 4px'
+  },
+  deleteButtonRed: {
+    background: 'red',
+    color: 'white',
+    fontSize: '1rem',
+    padding: '2%',
+    borderRadius: 4
+  },
 
 }))
