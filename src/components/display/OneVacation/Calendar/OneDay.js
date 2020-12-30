@@ -136,6 +136,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
           <div>
 
             <TextField
+            required
               className={ classes.eventInput }
               label='Title'
               type='text'
@@ -145,9 +146,10 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
           </div>
           <div className={ classes.oneLine }>
             <TextField
+            required
               type='time'
               name='startTime'
-              inputRef={ register() }
+              inputRef={ register({ required: true }) }
             />
 						to
 						<TextField
@@ -166,11 +168,12 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
             />
             <sp />
             <TextField
+            required
               className={ classes.eventInput }
               type='number'
               label='$'
               name='cost'
-              inputRef={ register() }
+              inputRef={ register({ required: true }) }
             />
           </div>
           <div>
@@ -206,13 +209,14 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
                 <div>{ e.title } ${ e.cost }</div>
                 <ArrowLeftIcon className={ classes.drawerButton } onClick={ toggleDrawer } />
               </Card>
-              { isOpen ? <EventDrawer
+              <EventDrawer
+                isOpen={ isOpen }
                 toggleDrawer={ toggleDrawer }
                 event={ e }
                 tripCal={ tripCal }
                 vacationId={ vacationId }
                 selected={ selected }
-              /> : '' }
+              />
             </>
           )
         }) }
@@ -224,11 +228,11 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
       </Button>
       <Modal ref={ deleteDateModal }>
         <Typography variant='h6'>
-          {tripDates.length > 1 ? 'Confirm deleting date?' : 'Confirm deleting trip?'}
-          
-      </Typography>
+          { tripDates.length > 1 ? 'Confirm deleting date?' : 'Confirm deleting trip?' }
+
+        </Typography>
         <Button
-          className={ classes.deleteButtonRed } onClick={ tripDates.length > 1 ?deleteDate : deleteTrip}>
+          className={ classes.deleteButtonRed } onClick={ tripDates.length > 1 ? deleteDate : deleteTrip }>
           <DeleteIcon />
           <ListItemText primary={ tripDates.length > 1 ? dayjs(selected).format('MMM D') : trip.title } />
         </Button>
