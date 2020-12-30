@@ -35,3 +35,17 @@ text-align: center;
 .trip.selected{
   border: 1px solid white,
 } */
+
+/* .eventDrawer {
+  position: absolute;
+  top: 0%;
+  right: 100%;
+  height: 76%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.3s;
+  background: white;
+  z-Index: 5;
+} */

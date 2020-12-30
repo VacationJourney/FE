@@ -5,7 +5,7 @@ export const useStyles = makeStyles(() => ({
 	oneVacay: {
 		maxWidth: '100%',
 		minHeight: '100vh',
-		background: '#45a7bcba',
+		// background: '#45a7bcba',
 		backgroundImage: `url(${Blue})`,
 		backgroundSize: 'cover',
 		backgroundRepeat: 'no-repeat',
@@ -69,7 +69,6 @@ export const useStyles = makeStyles(() => ({
 		color: 'white',
     fontSize: '1rem',
     padding: '2%',
-		// width: '20%',
 		borderRadius: 4
 	},
 	money: {

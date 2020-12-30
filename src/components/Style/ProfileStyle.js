@@ -50,6 +50,13 @@ export const useStyles = makeStyles((theme) => ({
 		fontSize: '1rem',
 		width: '30%',
 	},
+	deleteButtonModal: {
+		background: 'red',
+		color: 'white',
+    fontSize: '1rem',
+    padding: '2%',
+		borderRadius: 4
+	},
 	submit: {
 		background: 'black',
 		color: 'white',
