@@ -1,37 +1,22 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { clear } from '../../index';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import {  UPDATE_USER, DELETE_USER } from '../../graphQl/mutations/userM';
-import { USER} from '../../graphQl/queries'
+import { UPDATE_USER, DELETE_USER } from '../../graphQl/mutations/userM';
+import { USER } from '../../graphQl/queries'
 
 import NavBar from './Nav/Index';
-
-import { Typography, Modal, TextField, Button } from '@material-ui/core';
-import {useStyles} from '../Style/ProfileStyle'
-
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
+import Modal from '../display/modal/Modal'
+import { Typography, TextField, Button, ListItemText } from '@material-ui/core';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import PersonIcon from '@material-ui/icons/Person';
+import { useStyles } from '../Style/ProfileStyle'
 
 const Profile = () => {
 	const classes = useStyles();
+	const deleteProfileModal = useRef(null)
 	const history = useHistory();
-	// const [editForm, setEditForm] = useState(false);
-	const [modalStyle] = useState(getModalStyle);
-  const [open, setOpen] = useState(false);
 	const { register, handleSubmit } = useForm();
 
 	const { data, loading, error } = useQuery(USER);
@@ -40,7 +25,7 @@ const Profile = () => {
 		refetchQueries: mutationResult => [{ query: USER }],
 	});
 
-	const [ deleteUser] = useMutation(DELETE_USER)
+	const [deleteUser] = useMutation(DELETE_USER)
 
 	// Grab User from token
 	let token = localStorage.getItem('token');
@@ -58,28 +43,11 @@ const Profile = () => {
 		history.push(`/dashboard`)
 	};
 
-	// Note Create unique Modal function
-	// For Deleting User Modal
-	const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-	};
-	
 	const goBack = () => {
 		history.push(`/dashboard`);
 	};
 
-	const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Confirm Delete User</h2>
-      <Button className={classes.deleteButton} onClick={() => deleteMe()}>Delete</Button>
-    </div>
-	);
-
-	const deleteMe = () => {
+	const deleteProfile = () => {
 		deleteUser({ variables: { id: user } });
 		localStorage.removeItem('token');
 		clear();
@@ -88,64 +56,68 @@ const Profile = () => {
 
 	if (loading) return <h4>Loading...</h4>;
 	if (error) return <p>ERROR</p>;
-	
+
 	// Uppercase the username
 	var lowName = data.currentUser.username.toLowerCase()
 	var name = lowName.charAt(0).toUpperCase() + lowName.slice(1)
 
 	return (
-		<div className={classes.profile}>
+		<>
+		<div className={ classes.profile }>
 			<NavBar />
-			
-			<Typography key={data.currentUser.id} variant='h3'>
-				{data.currentUser && name}
+
+			<Typography key={ data.currentUser.id } variant='h3'>
+				{ data.currentUser && name }
 			</Typography>
-			<Typography>{data.currentUser.email}</Typography>
-				<form className={classes.editUser} xs={12} onSubmit={handleSubmit(onSubmit)}>
-					<TextField
-						type='text'
-						label='username'
-						defaultValue={name}
-						className={classes.editInput}
-						name='username'
-						inputRef={register}
-					/>
-					<TextField
-						type='email'
-						label='email'
-						defaultValue={data.currentUser.email}
-						className={classes.editInput}
-						name='email'
-						inputRef={register}
-					/>
-					<TextField
-						type='password'
-						label='password'
-						className={classes.editInput}
-						defaultValue={data.currentUser.password}
-						name='password'
-						inputRef={register}
-					/>
-					<Button className={classes.submit} type='submit' >Edit</Button>
-				</form>
-				<Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {body}
-      </Modal>
-		
-			<footer className={classes.footer}>
-				<Button className={classes.deleteButton} onClick={handleOpen}>
-					Delete
+			<Typography>{ data.currentUser.email }</Typography>
+			<form className={ classes.editUser } xs={ 12 } onSubmit={ handleSubmit(onSubmit) }>
+				<TextField
+					type='text'
+					label='username'
+					defaultValue={ name }
+					className={ classes.editInput }
+					name='username'
+					inputRef={ register }
+				/>
+				<TextField
+					type='email'
+					label='email'
+					defaultValue={ data.currentUser.email }
+					className={ classes.editInput }
+					name='email'
+					inputRef={ register }
+				/>
+				<TextField
+					type='password'
+					label='password'
+					className={ classes.editInput }
+					defaultValue={ data.currentUser.password }
+					name='password'
+					inputRef={ register }
+				/>
+				<Button className={ classes.submit } type='submit' >Edit</Button>
+			</form>
+			<footer className={ classes.footer }>
+				<Button className={ classes.deleteButton } onClick={ () => deleteProfileModal.current.open() }>
+					<DeleteForeverIcon />
+					<PersonIcon />
 				</Button>
-				<Button className={classes.backButton} onClick={goBack}>
+				<Button className={ classes.backButton } onClick={ goBack }>
 					Back
 				</Button>
 			</footer>
 		</div>
+		<Modal ref={ deleteProfileModal }>
+        <Typography variant='h6'>
+          Confirm deleting profile?
+      </Typography>
+        <Button
+          className={ classes.deleteButtonModal } onClick={ deleteProfile }>
+          <DeleteForeverIcon />
+          <ListItemText primary={ data.currentUser.username } />
+        </Button>
+      </Modal>
+		</>
 	);
 };
 
