@@ -7,8 +7,6 @@ import Profile from './components/display/Profile'
 import Dashboard from './components/display/Dashboard';
 import OneVacation from './components/display/OneVacation/Index.js';
 import UpdateVacation from './components/display/UpdateVacation';
-import OneDay from './components/display/OneDay';
-import OneEvent from './components/display/OneEvent';
 
 import PrivateRoute from './utils/PrivateRoute';
 import './App.css';
@@ -35,12 +33,7 @@ function App() {
 				<PrivateRoute path='/vacation/:id'>
 					<OneVacation />
 				</PrivateRoute>
-				<PrivateRoute path='/day/:id'>
-					<OneDay />
-				</PrivateRoute>
-				<PrivateRoute path='/event/:id'>
-					<OneEvent />
-				</PrivateRoute>
+				
 			</Switch>
 		</div>
 	);
