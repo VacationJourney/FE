@@ -61,9 +61,8 @@ const Index = ({ trip, deleteTrip }) => {
   totalDays.map(day => {
     tripCal[day] = null
     trip.dates.map(trip => {
-
       if (trip.date === day) {
-        tripCal[day] = trip
+        return tripCal[day] = trip
       }
     })
   })
@@ -93,7 +92,6 @@ const Index = ({ trip, deleteTrip }) => {
         </Grid>
         <Grid className={ classes.datesGrid }>
           { totalDays.map(d => {
-            // console.log('d', tripCal[d])
             let month = dayjs(d).format('M')
             let trpMth = (tripMonth + 1).toString()
             let date = dayjs(d).format('D')
