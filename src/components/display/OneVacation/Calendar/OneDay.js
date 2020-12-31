@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react'
 import dayjs from 'dayjs'
-// import clsx from 'clsx';
 import useDate from '../../../../hooks/useDate'
 import Modal from '../../modal/Modal'
 import { useMutation } from '@apollo/react-hooks'
@@ -8,8 +7,8 @@ import { useMutation } from '@apollo/react-hooks'
 import { CREATE_EVENT } from '../../../../graphQl/mutations/eventM'
 import { DELETE_DAY } from '../../../../graphQl/mutations/vacationM'
 import { GET_ONE_TRIP } from '../../../../graphQl/queries'
-import { useForm } from 'react-hook-form';
-import { Paper, Typography, Card, TextField, Button, ListItemText } from '@material-ui/core'
+import CreateEventForm from './CreateEventForm'
+import { Paper, Typography, Card, Button, ListItemText } from '@material-ui/core'
 import { useStyles } from '../../../Style/OneDayStyle'
 import EventDrawer from './EventDrawer'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
@@ -22,12 +21,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, nextMonth, tripCal, deleteTrip }) => {
   const classes = useStyles()
   const modal = useRef(null)
-
   const deleteDateModal = useRef(null)
-  // const [state, setState] = useState(false);
   const [isOpen, setIsOpen] = useState(false)
-  const { register, handleSubmit } = useForm();
-
 
   // de-Structure from useDateHook
   const { firstDateOfMonth, lastDateOfMonth } = useDate(date)
@@ -88,30 +83,37 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
       cost: parseInt(data.cost),
       date: tripCal[selected].id
     }
-    console.log('data', data)
     createEvent({ variables: data });
     modal.current.close()
   }
 
-
   // Delete day function
   const deleteDate = () => {
-
     deleteDay({ variables: { id: tripCal[selected].id, tripId: vacationId } })
     if (selected === start) {
       setSelected(futureDate)
     } else if (selected === end) {
       setSelected(pastDate)
-    } else {
-      setSelected(futureDate)
     }
     deleteDateModal.current.close()
   }
 
   const toggleDrawer = () => {
     setIsOpen(!isOpen)
-    console.log('isOpen', isOpen)
   }
+  // const day = []
+  // const dayHours = [...Array(24).keys()]
+  // const minutes = [...Array(60).keys()]
+  // dayHours.forEach(hour => {
+  //   minutes.forEach(min => {
+  //     let minute = min
+  //     if(min < 10) {
+  //       minute = '0' + min
+  //     }
+  //     day.push(hour + ':' + minute)
+  //   })
+  // })
+  
 
 
   return (
@@ -132,80 +134,18 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
         <AddBoxIcon fontSize="large" onClick={ () => modal.current.open() } />
       </div>
       <Modal ref={ modal }>
-        <form className={ classes.createEvent } onSubmit={ handleSubmit(onSubmit) }>
-          <div>
-
-            <TextField
-            required
-              className={ classes.eventInput }
-              label='Title'
-              type='text'
-              name='title'
-              inputRef={ register({ required: true }) }
-            />
-          </div>
-          <div className={ classes.oneLine }>
-            <TextField
-            required
-              type='time'
-              name='startTime'
-              inputRef={ register({ required: true }) }
-            />
-						to
-						<TextField
-              type='time'
-              name='endTime'
-              inputRef={ register() }
-            />
-          </div>
-          <div className={ classes.oneLine }>
-            <TextField
-              className={ classes.eventInput }
-              type='text'
-              label='location'
-              name='location'
-              inputRef={ register() }
-            />
-            <sp />
-            <TextField
-            required
-              className={ classes.eventInput }
-              type='number'
-              label='$'
-              name='cost'
-              inputRef={ register({ required: true }) }
-            />
-          </div>
-          <div>
-            <TextField
-              className={ classes.eventInput }
-              type='text'
-              label='contact'
-              name='contact'
-              inputRef={ register() }
-            />
-          </div>
-
-          <div>
-            <TextField
-              className={ classes.eventInput }
-              type='text'
-              label='description'
-              name='description'
-              inputRef={ register() }
-            />
-          </div>
-          <Button type='submit' className={ classes.submit }>
-            Create Event
-					</Button>
-        </form>
+        <CreateEventForm
+          onSubmit={ onSubmit }
+        />
       </Modal>
       <div className={ classes.eventsBox }>
-        { tripCal[selected] && tripCal[selected].events.map((e) => {
+        {day.map((minute) => {
 
+        
+        { tripCal[selected] && tripCal[selected].events.map((e) => {
           return (
-            <>
-              <Card className={ classes.event } key={ e.id }>
+            <div key={ e.id }>
+              <Card className={ classes.event } >
                 <div>{ e.title } ${ e.cost }</div>
                 <ArrowLeftIcon className={ classes.drawerButton } onClick={ toggleDrawer } />
               </Card>
@@ -217,9 +157,10 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
                 vacationId={ vacationId }
                 selected={ selected }
               />
-            </>
+            </div >
           )
         }) }
+      })}
       </div>
       <Button style={ selected === start || selected === end ? { display: 'flex' } : { display: 'none' } }
         className={ classes.deleteButton } onClick={ () => deleteDateModal.current.open() }>
