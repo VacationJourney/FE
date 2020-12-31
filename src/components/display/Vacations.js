@@ -19,7 +19,6 @@ const Vacations = () => {
 	const classes = useStyles();
 	const { register, handleSubmit, reset } = useForm();
 	const [value, onChange] = useState([new Date(), new Date()]);
-	// const [cost, setCost] = useState(0)
 
 	// Queries & Mutations
 	// Create Vacation
