@@ -1,6 +1,5 @@
 import React from 'react';
 
-// import User from './User';
 import Vacations from './Vacations';
 import NavBar from './Nav/Index'
 
@@ -23,7 +22,6 @@ const Dashboard = () => {
 		<>
 			<div className={classes.vacations}>
 				<NavBar />
-				{/* <User /> */}
 				<Vacations />
 			</div>
 		</>

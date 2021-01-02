@@ -30,6 +30,39 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     background: 'rgb(5,100,155,0.3)',
   },
+  eventsTopBoxLeft: {
+    display: 'flex',
+    width: '40%',
+
+  },
+  eventsTopBoxRight: {
+    display: 'flex'
+  },
+  dayCost: {
+    display: 'flex',
+    flexDirection: 'column',
+    background: 'red',
+    padding: ' 2%',
+    whiteSpace: 'nowrap'
+  },
+  deleteButton: {
+    // position: 'absolute',
+    // bottom: 0,
+    // left: 0,
+    background: 'black',
+    color: 'red',
+    fontSize: '1rem',
+    // padding: '0 2%',
+    width: '50%',
+    borderRadius: '0 '
+  },
+  deleteButtonRed: {
+    background: 'red',
+    color: 'white',
+    fontSize: '1rem',
+    padding: '2%',
+    borderRadius: 4
+  },
   // Create Event Form
   createEvent: {
     display: 'flex',
@@ -38,12 +71,7 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     zIndex: 6
   },
-  dayCost: {
-    display: 'flex',
-    flexDirection: 'column',
-    background: 'red',
-    padding: '.5% 2%',
-  },
+
   eventInput: {
     width: '100%',
   },
@@ -59,11 +87,15 @@ export const useStyles = makeStyles((theme) => ({
   },
   eventsBox: {
     position: 'relative',
-    paddingLeft: '25%',
+    paddingBottom: '30%',
     height: '100%',
-    overflow: 'hidden',
-    boxSizing: 'border-box'
+    overflow: 'auto',
+    boxSizing: 'border-box',
+    textAlign: 'left'
     // zIndex: 3
+  },
+  hour: {
+    padding: '1%'
   },
   event: {
     padding: '1%',
@@ -74,25 +106,9 @@ export const useStyles = makeStyles((theme) => ({
     color: 'white',
     zIndex: 2
   },
-  drawerButton: {
-    fontSize: '2rem'
+  eventTime: {
+    width: '45%'
   },
-  deleteButton: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    background: 'black',
-    color: 'red',
-    fontSize: '1rem',
-    padding: '1%',
-    borderRadius: '0 4px 0 4px'
-  },
-  deleteButtonRed: {
-    background: 'red',
-    color: 'white',
-    fontSize: '1rem',
-    padding: '2%',
-    borderRadius: 4
-  },
+
 
 }))
