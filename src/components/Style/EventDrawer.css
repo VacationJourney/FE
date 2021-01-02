@@ -12,8 +12,8 @@
   background: white;
   z-Index: 5;
 }
-.eventDrawer__open{
-  /* display: flex; */
+.eventDrawer__open {
+  /* z-index: 10; */
   transform: translate(0%);
 }
 .editModalButton {
@@ -36,14 +36,14 @@
   width: 70%;
   box-sizing: border-box;
 }
-.eventInput {
-
+.drawerButton {
+  font-size: 2rem;
 }
 .oneLine {
   display: flex;
   justify-content: space-between
 }
-.submit {
+.submitBtn {
   background: black;
   color: white;
   font-size: 1rem;
