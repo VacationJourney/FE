@@ -8,9 +8,12 @@ import { CREATE_EVENT } from '../../../../graphQl/mutations/eventM'
 import { DELETE_DAY } from '../../../../graphQl/mutations/vacationM'
 import { GET_ONE_TRIP } from '../../../../graphQl/queries'
 import CreateEventForm from './CreateEventForm'
-import { Paper, Typography, Card, Button, ListItemText } from '@material-ui/core'
-import { useStyles } from '../../../Style/OneDayStyle'
 import EventDrawer from './EventDrawer'
+import { Paper, Typography, Card, Button, ListItemText } from '@material-ui/core'
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
+import { useStyles } from '../../../Style/OneDayStyle'
+
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import AddBoxIcon from '@material-ui/icons/AddBox';
@@ -22,8 +25,14 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
   const classes = useStyles()
   const modal = useRef(null)
   const deleteDateModal = useRef(null)
-  const [isOpen, setIsOpen] = useState(false)
+  // const [isOpen, setIsOpen] = useState(false)
+  const [selectedEvent, setSelectedEvent] = useState('')
+  const [time, setTime] = useState('h:mma')
+  // const [ active, setActive] = useState(null)
 
+  const handleTime = (event, newTime) => {
+    setTime(newTime);
+  };
   // de-Structure from useDateHook
   const { firstDateOfMonth, lastDateOfMonth } = useDate(date)
 
@@ -98,22 +107,34 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
     deleteDateModal.current.close()
   }
 
-  const toggleDrawer = () => {
-    setIsOpen(!isOpen)
-  }
+  // const toggleDrawer = (index) => {
+  //   setActive(index)
+  //   setIsOpen(!isOpen)
+  // }
   // const day = []
   // const dayHours = [...Array(24).keys()]
   // const minutes = [...Array(60).keys()]
+
   // dayHours.forEach(hour => {
   //   minutes.forEach(min => {
   //     let minute = min
-  //     if(min < 10) {
+  //     if (min < 10) {
   //       minute = '0' + min
   //     }
   //     day.push(hour + ':' + minute)
   //   })
   // })
-  
+
+  // totalDays.map(day => {
+  //   tripCal[day] = null
+  //   trip.dates.map(trip => {
+  //     if (trip.date === day) {
+  //       return tripCal[day] = trip
+  //     }
+  //   })
+  // })
+
+
 
 
   return (
@@ -126,47 +147,36 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
         <ArrowRightIcon className={ classes.arrows }
           onClick={ nextDate }
         />
-      </div>
+      </div >
       <div className={ classes.eventsTopBox }>
-        <div className={ classes.dayCost }><span>Day Cost</span>
-          <span>${ tripCal[selected].cost }</span>
+        <div className={ classes.eventsTopBoxLeft }>
+          <div className={ classes.dayCost }><span>Day Cost</span>
+            <span>${ tripCal[selected].cost }</span>
+          </div>
+          <Button style={ selected === start || selected === end ? { display: 'flex' } : { display: 'none' } }
+            className={ classes.deleteButton } onClick={ () => deleteDateModal.current.open() }>
+            <DeleteIcon />
+            <ListItemText primary='Date' />
+          </Button>
         </div>
-        <AddBoxIcon fontSize="large" onClick={ () => modal.current.open() } />
+        <div className={ classes.eventsTopBoxRight }>
+          <ToggleButtonGroup
+            value={ time }
+            exclusive
+            onChange={ handleTime }
+            aria-label="text alignment"
+            
+          >
+            <ToggleButton value="h:mma" aria-label="left aligned" style={{padding: 8}}>
+              12
+      </ToggleButton>
+            <ToggleButton value="H:mm" aria-label="left aligned" style={{padding: 8}}>
+              24
+      </ToggleButton>
+          </ToggleButtonGroup>
+          <AddBoxIcon fontSize="large" onClick={ () => modal.current.open() } />
+        </div>
       </div>
-      <Modal ref={ modal }>
-        <CreateEventForm
-          onSubmit={ onSubmit }
-        />
-      </Modal>
-      <div className={ classes.eventsBox }>
-        {day.map((minute) => {
-
-        
-        { tripCal[selected] && tripCal[selected].events.map((e) => {
-          return (
-            <div key={ e.id }>
-              <Card className={ classes.event } >
-                <div>{ e.title } ${ e.cost }</div>
-                <ArrowLeftIcon className={ classes.drawerButton } onClick={ toggleDrawer } />
-              </Card>
-              <EventDrawer
-                isOpen={ isOpen }
-                toggleDrawer={ toggleDrawer }
-                event={ e }
-                tripCal={ tripCal }
-                vacationId={ vacationId }
-                selected={ selected }
-              />
-            </div >
-          )
-        }) }
-      })}
-      </div>
-      <Button style={ selected === start || selected === end ? { display: 'flex' } : { display: 'none' } }
-        className={ classes.deleteButton } onClick={ () => deleteDateModal.current.open() }>
-        <DeleteIcon />
-        <ListItemText primary='Date' />
-      </Button>
       <Modal ref={ deleteDateModal }>
         <Typography variant='h6'>
           { tripDates.length > 1 ? 'Confirm deleting date?' : 'Confirm deleting trip?' }
@@ -178,8 +188,52 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
           <ListItemText primary={ tripDates.length > 1 ? dayjs(selected).format('MMM D') : trip.title } />
         </Button>
       </Modal>
+      <Modal ref={ modal }>
+        <CreateEventForm
+          onSubmit={ onSubmit }
+        />
+      </Modal>
+      <div className={ classes.eventsBox }>
+        { tripCal[selected] && tripCal[selected].events.map((e, index) => {
+          // 12 - 24 hour time manipulation
+          const start = dayjs(selected + 'T' + e.startTime).format(`${time}`)
+          const end = e.endTime ? dayjs(selected + 'T' + e.endTime).format(`${time}`) : ''
+          return (
+            <div key={ e.id }>
+              <Card className={ classes.event } >
+                <div>{ start }-{ end }</div>
+                <div>{ e.title }</div>
+                <div> ${ e.cost }
+                <ArrowLeftIcon className='drawerButton' onClick={ () => setSelectedEvent(e.id) } /></div>
+              </Card>
+              <EventDrawer
+                selectedEvent={ selectedEvent }
+                setSelectedEvent={ setSelectedEvent }
+                time={ time }
+                event={ e }
+                tripCal={ tripCal }
+                vacationId={ vacationId }
+                selected={ selected }
+              />
+            </div >
+          )
+        }) }
+      </div>
+
+
     </Paper>
   )
 
 }
 export default OneDay
+
+ // 
+
+
+             // hour.test(minute)  ?
+            //   <div className={ classes.hour } >{ dayjs(selected + 'T' + minute).format(`${time}`) }</div> 
+            //   : <div></div>
+
+
+          //   const start = dayjs(selected + 'T' + e.startTime).format(`${time}`)
+          // const end = e.endTime ? dayjs(selected + 'T' + e.endTime).format(`${time}`) : ''

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import { useMutation } from '@apollo/react-hooks'
 import { DELETE_EVENT, UPDATE_EVENT } from '../../../../graphQl/mutations/eventM'
@@ -10,11 +10,14 @@ import '../../../Style/EventDrawer.css'
 import EditIcon from '@material-ui/icons/Edit';
 import { AiFillCloseCircle } from 'react-icons/ai'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+// import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 
-const EventDrawer = ({ isOpen, event, tripCal, vacationId, selected, toggleDrawer }) => {
+const EventDrawer = ({ event, selectedEvent, setSelectedEvent, time, tripCal, vacationId, selected }) => {
   const editModal = useRef(null)
-  const start = dayjs(selected + 'T' + event.startTime).format('H:mm a')
-  const end = event.endTime ? dayjs(selected + 'T' + event.endTime).format('H:mm a') : ''
+  
+  const start = dayjs(selected + 'T' + event.startTime).format(`${time}`)
+  const end = event.endTime ? dayjs(selected + 'T' + event.endTime).format(`${time}`) : ''
+  // console.log('event', event)
 
   // Update an event
   const [updateEvent] = useMutation(UPDATE_EVENT, {
@@ -34,19 +37,22 @@ const EventDrawer = ({ isOpen, event, tripCal, vacationId, selected, toggleDrawe
       ...data,
       cost: parseInt(data.cost),
       dateId: tripCal[selected].id,
-      tripId: vacationId
+      tripId: vacationId,
+      id: event.id
     }
+    console.log('data', data)
     updateEvent({ variables: data })
     editModal.current.close()
   }
 
   const deleteActivity = () => {
     deleteEvent({ variables: { id: event.id, dayId: tripCal[selected].id, tripId: vacationId } })
-    toggleDrawer()
+    setSelectedEvent('')
   }
   return (
     <>
-      <div className={ `eventDrawer ${isOpen ? 'eventDrawer__open' : ''}` } >
+    
+      <div className={ `eventDrawer ${selectedEvent === event.id  ? 'eventDrawer__open' : ''}` } >
         <EditIcon className='editModalButton' onClick={ () => editModal.current.open() } />
         <ul className='eventDetails'>
           <li className='detail'>{ event.title } <span /> ${ event.cost }</li>
@@ -54,12 +60,13 @@ const EventDrawer = ({ isOpen, event, tripCal, vacationId, selected, toggleDrawe
           <li className='detail'>{ event.location }</li>
           <li className='detail'>{ event.contact }</li>
           <li className='detail'>{ event.description }</li>
+          
         </ul>
         <DeleteForeverIcon
           className='deleteEvent'
           fontSize='large'
           onClick={ deleteActivity } />
-        <AiFillCloseCircle className='closeEventDetails' onClick={ toggleDrawer } />
+        <AiFillCloseCircle className='closeEventDetails' onClick={() => setSelectedEvent('') } />
         <Modal ref={ editModal }>
           <EditEventForm
             event={ event }
