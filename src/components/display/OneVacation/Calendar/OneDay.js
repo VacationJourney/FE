@@ -226,14 +226,3 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
 
 }
 export default OneDay
-
- // 
-
-
-             // hour.test(minute)  ?
-            //   <div className={ classes.hour } >{ dayjs(selected + 'T' + minute).format(`${time}`) }</div> 
-            //   : <div></div>
-
-
-          //   const start = dayjs(selected + 'T' + e.startTime).format(`${time}`)
-          // const end = e.endTime ? dayjs(selected + 'T' + e.endTime).format(`${time}`) : ''

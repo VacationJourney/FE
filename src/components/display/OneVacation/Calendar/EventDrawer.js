@@ -40,7 +40,6 @@ const EventDrawer = ({ event, selectedEvent, setSelectedEvent, time, tripCal, va
       tripId: vacationId,
       id: event.id
     }
-    console.log('data', data)
     updateEvent({ variables: data })
     editModal.current.close()
   }
