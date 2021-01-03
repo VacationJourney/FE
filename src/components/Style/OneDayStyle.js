@@ -32,7 +32,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   eventsTopBoxLeft: {
     display: 'flex',
-    width: '40%',
+    width: '60%',
 
   },
   eventsTopBoxRight: {
@@ -42,17 +42,13 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     background: 'red',
-    padding: ' 2%',
+    padding: ' 1% 3%',
     whiteSpace: 'nowrap'
   },
   deleteButton: {
-    // position: 'absolute',
-    // bottom: 0,
-    // left: 0,
     background: 'black',
     color: 'red',
     fontSize: '1rem',
-    // padding: '0 2%',
     width: '50%',
     borderRadius: '0 '
   },
@@ -67,13 +63,16 @@ export const useStyles = makeStyles((theme) => ({
   createEvent: {
     display: 'flex',
     flexDirection: 'column',
-    width: '70%',
+    width: '100%',
     boxSizing: 'border-box',
     zIndex: 6
   },
 
   eventInput: {
     width: '100%',
+  },
+  time: {
+    width: '45%'
   },
   oneLine: {
     display: 'flex',
@@ -92,7 +91,6 @@ export const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
     boxSizing: 'border-box',
     textAlign: 'left'
-    // zIndex: 3
   },
   hour: {
     padding: '1%'

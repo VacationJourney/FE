@@ -1,9 +1,19 @@
 import React from 'react'
 import { useForm } from 'react-hook-form';
-import { TextField, Button } from '@material-ui/core'
+import { TextField, Button, makeStyles } from '@material-ui/core'
 import '../../../Style/EventDrawer.css'
 
+const useStyles = makeStyles(() => ({
+  editButton: {
+    background: 'black',
+    color: 'white',
+    fontSize: '1rem',
+    marginTop: '5%',
+  }
+}))
+
 const EditEventForm = ({ editSubmit, event }) => {
+  const classes = useStyles()
   const { register, handleSubmit } = useForm();
   return (
     <form className='editEventForm' onSubmit={ handleSubmit(editSubmit) }>
@@ -17,15 +27,15 @@ const EditEventForm = ({ editSubmit, event }) => {
       />
       <div className='oneLine'>
         <TextField
-          className='eventInput'
+          className='time'
           type='time'
           name='startTime'
           defaultValue={ event.startTime }
           inputRef={ register() }
         />
-            to
-            <TextField
-          className='eventInput'
+
+        <TextField
+          className='time'
           type='time'
           name='endTime'
           defaultValue={ event.endTime }
@@ -67,7 +77,7 @@ const EditEventForm = ({ editSubmit, event }) => {
         defaultValue={ event.description }
         inputRef={ register() }
       />
-      <Button type='submit' className='submitBtn '>
+      <Button type='submit' className={ classes.editButton }>
         Update Event
           </Button>
     </form>

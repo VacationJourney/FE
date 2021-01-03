@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import dayjs from 'dayjs'
 import { useMutation } from '@apollo/react-hooks'
 import { DELETE_EVENT, UPDATE_EVENT } from '../../../../graphQl/mutations/eventM'
