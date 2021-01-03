@@ -25,10 +25,8 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
   const classes = useStyles()
   const modal = useRef(null)
   const deleteDateModal = useRef(null)
-  // const [isOpen, setIsOpen] = useState(false)
   const [selectedEvent, setSelectedEvent] = useState('')
   const [time, setTime] = useState('h:mma')
-  // const [ active, setActive] = useState(null)
 
   const handleTime = (event, newTime) => {
     setTime(newTime);
@@ -203,8 +201,8 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
               <Card className={ classes.event } >
                 <div>{ start }-{ end }</div>
                 <div>{ e.title }</div>
-                <div> ${ e.cost }
-                <ArrowLeftIcon className='drawerButton' onClick={ () => setSelectedEvent(e.id) } /></div>
+                <div> ${ e.cost }</div>
+                <ArrowLeftIcon className='drawerButton' onClick={ () => setSelectedEvent(e.id) } />
               </Card>
               <EventDrawer
                 selectedEvent={ selectedEvent }
