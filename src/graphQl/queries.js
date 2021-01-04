@@ -38,7 +38,7 @@ query Vacation($id: ID) {
 				id
 				date
 				cost
-				events {
+				events(orderBy: startTime_ASC){
 					id
 					title
           startTime
