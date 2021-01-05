@@ -88,7 +88,8 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     paddingBottom: '30%',
     height: '100%',
-    overflow: 'auto',
+    overflowX: 'hidden',
+    overflowY: 'auto',
     boxSizing: 'border-box',
     textAlign: 'left'
   },
@@ -96,6 +97,7 @@ export const useStyles = makeStyles((theme) => ({
     padding: '1%'
   },
   event: {
+    marginLeft:100,
     padding: '1%',
     display: 'flex',
     justifyContent: 'space-between',
@@ -104,9 +106,20 @@ export const useStyles = makeStyles((theme) => ({
     color: 'white',
     zIndex: 2
   },
-  eventTime: {
-    width: '45%'
+  eventLong: {
+    padding: '1%',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    background: 'rgb(5,100,155,0.6)',
+    color: 'white',
+    zIndex: 2
   },
-
-
+  eventRight: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  hour: {
+    padding: '2% 0'
+  }
 }))
