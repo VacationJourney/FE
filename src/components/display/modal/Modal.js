@@ -13,7 +13,7 @@ const Modal = ({ children, fade=false, defaultOpened = false }, ref) => {
     open: () => setIsOpen(true),
     close: () => setIsOpen(false)
   }),
-    [close],
+    [],
   )
 
   const handleEscape = useCallback((event) => {
