@@ -50,7 +50,9 @@ const EventDrawer = ({ event, selectedEvent, setSelectedEvent, time, tripCal, va
   }
   return (
     <>
-    
+    <div className={`${selectedEvent === event.id  ? 'eventDrawerOverlay' : ''}`} 
+    onClick={() => setSelectedEvent('')}
+    ></div>
       <div className={ `eventDrawer ${selectedEvent === event.id  ? 'eventDrawer__open' : ''}` } >
         <EditIcon className='editModalButton' onClick={ () => editModal.current.open() } />
         <ul className='eventDetails'>
