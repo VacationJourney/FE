@@ -1,11 +1,11 @@
 import { makeStyles } from '@material-ui/core'
-import Airy from '../../assets/Airy.jpg';
+import Whispy from '../../assets/Whispy.jpg';
 
 export const useStyles = makeStyles(() => ({
 	updateVacation: {
 		maxWidth: '100%',
 		minHeight: '100vh',
-		backgroundImage: `url(${Airy})`,
+		backgroundImage: `url(${Whispy})`,
 		backgroundSize: 'cover',
 		backgroundRepeat: 'no-repeat',
 		backgroundAttachment: 'fixed',
