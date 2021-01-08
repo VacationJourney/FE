@@ -10,7 +10,7 @@ export const CREATE_EVENT = gql`
 		$cost: Int
 		$description: String
 		$date: ID!
-		) {
+	) {
 		createEvent(
 			data: {
 				title: $title
