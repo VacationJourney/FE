@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-// dependencies
 import { useForm } from 'react-hook-form';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import dayjs from 'dayjs';
 // graphql 
-import {
-	CREATE_VACATION
-} from '../../graphQl/mutations/vacationM';
+import { CREATE_VACATION } from '../../graphQl/mutations/vacationM';
 import { GET_VACATIONS } from '../../graphQl/queries'
 // imported component
 import VacationCard from './VacationCard';
@@ -33,25 +30,24 @@ const Vacations = () => {
 		// establish Date variables
 		var from = new Date(value[0]);
 		var to = new Date(value[1]);
-
 		// // loop for every day
 		for (from; from <= to; from.setDate(from.getDate() + 1)) {
-			var date = dayjs(from).format('YYYY-M-D');
-			// var date = from.toISOString();
+			var date = dayjs(from).format('YYYY-M-DD');
 			range.push({ date });
 		}
+
 		range.forEach(d => d.cost = 0)
-		
+
 		data = {
 			...data,
 			budget: parseInt(data.budget),
 			dates: range,
 		};
-		// console.log('submit data', data);
+
 		createVacation({ variables: data });
 		reset();
 	};
-	// console.log('Get Vacations', data);
+
 	if (loading) return <span>Loading...</span>;
 	if (error) return <p>ERROR</p>;
 
