@@ -34,7 +34,7 @@ query Vacation($id: ID) {
 			budget
 			cost
 			dreams
-			dates {
+			dates(orderBy: date_ASC) {
 				id
 				date
 				cost

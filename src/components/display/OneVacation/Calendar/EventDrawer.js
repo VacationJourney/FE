@@ -5,19 +5,18 @@ import { DELETE_EVENT, UPDATE_EVENT } from '../../../../graphQl/mutations/eventM
 import { GET_ONE_TRIP } from '../../../../graphQl/queries'
 import Modal from '../../modal/Modal'
 import EditEventForm from './EditEventForm'
-
+// Style
 import '../../../Style/EventDrawer.css'
 import EditIcon from '@material-ui/icons/Edit';
 import { AiFillCloseCircle } from 'react-icons/ai'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-// import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
+
 
 const EventDrawer = ({ event, selectedEvent, setSelectedEvent, time, tripCal, vacationId, selected }) => {
   const editModal = useRef(null)
   
   const start = dayjs(selected + 'T' + event.startTime).format(`${time}`)
   const end = event.endTime ? dayjs(selected + 'T' + event.endTime).format(`${time}`) : ''
-  // console.log('event', event)
 
   // Update an event
   const [updateEvent] = useMutation(UPDATE_EVENT, {
@@ -61,7 +60,6 @@ const EventDrawer = ({ event, selectedEvent, setSelectedEvent, time, tripCal, va
           <li className='detail'>{ event.location }</li>
           <li className='detail'>{ event.contact }</li>
           <li className='detail'>{ event.description }</li>
-          
         </ul>
         <DeleteForeverIcon
           className='deleteEvent'

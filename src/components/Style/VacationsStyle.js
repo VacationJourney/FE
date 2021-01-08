@@ -11,7 +11,6 @@ export const useStyles = makeStyles(() => ({
 		backgroundPosition: 'center',
 		minHeight: '100vh',
 	},
-
 	page: {
 		width: '100%',
 	},
@@ -26,22 +25,38 @@ export const useStyles = makeStyles(() => ({
 		alignItems: 'center',
 		margin: '1%',
 	},
-
-	vLink: {
-		textDecoration: 'none',
-		color: 'black',
-	},
 	submit: {
 		background: 'black',
 		color: 'white',
 		fontSize: '1rem',
-		// width: '40%',
 		marginTop: '5%',
 	},
-
 	edit: {
 		textDecoration: 'none',
 		color: 'orange',
 		fontSize: '1.5rem',
+	},
+	// VacationCard
+	vLink: {
+		textDecoration: 'none',
+		color: 'black',
+		width: '100%',
+	},
+	vacationCard: {
+		display: 'flex',
+		textAlign: 'center'
+	},
+	deleteButton: {
+		position: 'absolute',
+		color: 'red',
+		left: '0%',
+		width: '10%'
+	},
+	deleteButtonRed: {
+		background: 'red',
+		color: 'white',
+		fontSize: '1rem',
+		padding: '2%',
+		borderRadius: 4
 	},
 }))

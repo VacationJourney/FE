@@ -5,7 +5,6 @@ export const useStyles = makeStyles(() => ({
 	oneVacay: {
 		maxWidth: '100%',
 		minHeight: '100vh',
-		// background: '#45a7bcba',
 		backgroundImage: `url(${Blue})`,
 		backgroundSize: 'cover',
 		backgroundRepeat: 'no-repeat',
@@ -19,66 +18,50 @@ export const useStyles = makeStyles(() => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		// border: '1px solid red'
 	},
 	top: {
 		display: 'flex',
 		justifyContent: 'center',
-		// padding: '1%',
-		// marginBottom: '2%',
-	},
-	titleLink: {
-		color: 'black',
-		textDecoration: 'none',
 	},
 	title: {
 		fontSize: '2rem',
 	},
-	// eventConnect: {
-	// 	textDecoration: 'none',
-	// 	color: 'black',
-	// },
-
+	editLink: {
+		color: 'black',
+		textDecoration: 'none',
+		fontSize: '1rem'
+	},
 	calculations: {
 		width: '80%',
 		display: 'flex',
 		background: 'white',
 		fontSize: '1rem',
 	},
-	
 	footer: {
 		position: 'fixed',
 		width: '100%',
 		display: 'flex',
 		justifyContent: 'space-between',
+		background: 'white',
+		borderBottom: '15px outset',
+		fontSize: '1rem',
 		bottom: 0,
 	},
-	xButton: {
-		color: 'red',
-		fontSize: '1rem',
-	},
-	deleteButton: {
-		background: 'red',
+	budget: {
+		display: 'flex',
+		background: 'green',
 		color: 'white',
-		fontSize: '1rem',
-		width: '20%',
-		borderRadius: 0
+		flexDirection: 'column',
+		padding: '1%',
+		width: '33%',
 	},
-	deleteButtonModal: {
-		background: 'red',
-		color: 'white',
-    fontSize: '1rem',
-    padding: '2%',
-		borderRadius: 4
-	},
-	money: {
+	balance: {
 		display: 'flex',
 		background: 'black',
 		color: 'white',
 		flexDirection: 'column',
 		padding: '1%',
 		width: '33%',
-
 	},
 	cost: {
 		display: 'flex',
@@ -86,16 +69,6 @@ export const useStyles = makeStyles(() => ({
 		width: '33%',
 		padding: '1%',
 		color: 'red',
-		
-	},
-
-	backButton: {
-		background: 'black',
-		color: 'white',
-		fontSize: '1rem',
-		width: '20%',
-		borderRadius: 0
-	},
-
+	}
 }));
 

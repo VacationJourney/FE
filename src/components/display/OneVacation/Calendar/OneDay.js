@@ -19,7 +19,6 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import ViewListIcon from '@material-ui/icons/ViewList';
 import { MdFormatListBulleted} from 'react-icons/md'
 
 
@@ -42,8 +41,8 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
   const { firstDateOfMonth, lastDateOfMonth } = useDate(date)
 
   // vars to navigate dates
-  const pastDate = dayjs(selected).subtract(1, 'Day').format('YYYY-M-D')
-  const futureDate = dayjs(selected).add(1, 'Day').format('YYYY-M-D')
+  const pastDate = dayjs(selected).subtract(1, 'Day').format('YYYY-M-DD')
+  const futureDate = dayjs(selected).add(1, 'Day').format('YYYY-M-DD')
   // TripDates Array
   const tripDates = []
   trip.dates.forEach(d => tripDates.push(d.date))
@@ -128,7 +127,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
   day.map(time => {
     activity[time] = null
 
-    tripCal[selected].events.map(e => {
+    tripCal[selected] && tripCal[selected].events.map(e => {
       if (e.startTime === time) {
         return activity[time] = e
       }
@@ -149,7 +148,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
       <div className={ classes.eventsTopBox }>
         <div className={ classes.eventsTopBoxLeft }>
           <div className={ classes.dayCost }><span>Day Cost</span>
-            <span>${ tripCal[selected].cost }</span>
+            <span>${ tripCal[selected] && tripCal[selected].cost }</span>
           </div>
           <Button style={ selected === start || selected === end ? { display: 'flex' } : { display: 'none' } }
             className={ classes.deleteButton } onClick={ () => deleteDateModal.current.open() }>
@@ -157,12 +156,13 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
             <ListItemText primary='Date' />
           </Button>
         </div>
+        
+        <div className={ classes.eventsTopBoxRight }>
         <ToggleButtonGroup
           value={ showHours }
           exclusive
           onChange={ handleHours }
           aria-label="text alignment"
-
         >
           <ToggleButton value="list" aria-label="left aligned" style={ { padding: 8 } }>
             <MdFormatListBulleted style={{fontSize: '1.4rem'}} />
@@ -171,7 +171,6 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
             <AccessTimeIcon />
           </ToggleButton>
         </ToggleButtonGroup>
-        <div className={ classes.eventsTopBoxRight }>
           <ToggleButtonGroup
             value={ time }
             exclusive
@@ -216,8 +215,8 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
               { showHours === 'hours' ?
                 regex.test(mm) ?
                   e !== null ?
-                    <div key={minute} >
-                      <div  className={ classes.hour }>{ minute }</div>
+                    <div key={minute} className={classes.onTheHour}>
+                      <div  >{ minute }</div>
                       <div key={ e.id }>
                         <Card className={ classes.event } >
                           { e.title }

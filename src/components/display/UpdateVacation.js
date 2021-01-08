@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useParams, useHistory } from 'react-router-dom';
-import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+// import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import dayjs from 'dayjs';
 // graphql 
 import { useQuery, useMutation } from '@apollo/react-hooks';
@@ -16,25 +16,11 @@ import {useStyles} from '../Style/UpdateStyle'
 const UpdateVacation = () => {
 	const history = useHistory();
 	const classes = useStyles();
-
 	const { register, handleSubmit } = useForm();
-	const [value, onChange] = useState([new Date(), new Date()]);
-	const range = [];
-
-	// establish Date variables
-	var from = new Date(value[0]);
-	var to = new Date(value[1]);
-
-	// loop for every day
-	for (from; from <= to; from.setDate(from.getDate() + 1)) {
-		var date = dayjs(from).format('YYYY-MM-DD');
-		// var date = from.toISOString();
-		range.push({ date });
-	}
-
 	let params = useParams();
 	let trip = params.id;
 
+	// GraphQL Logic
 	const { data, loading, error } = useQuery(GET_ONE_TRIP, {
 		variables: { id: trip },
 	});
@@ -42,30 +28,30 @@ const UpdateVacation = () => {
 		refetchQueries: mutationResult => [{query: GET_ONE_TRIP, variables: {id: trip}}]
 	});
 	
-
-	if (loading) return <span>Loading...</span>;
-	if (error) return <p>ERROR</p>;
-
-	var lastDate = (data.vacation.dates.length) - 1;
 	
+// Date Formatting
+	var lastDate = (data.vacation.dates.length) - 1;
 	var begins = dayjs(data.vacation.dates[0].date).format('MMM DD');
 	var end = dayjs(data.vacation.dates[lastDate].date).format('MMM DD')
 
+	// Functions
 	const onSubmit = data => {
 		data = {
 			...data,
-			id: trip,
-			dates: range,
+			budget: parseInt(data.budget),
+			id: trip
 		};
-		// console.log('updateInfo',data);
 		updateVacation({ variables: data });
 		history.push(`/vacation/${trip}`);
 	};
 
 	const goBack = () => {
-		const vacay = localStorage.getItem('vacay');
-		history.push(`/vacation/${vacay}`);
+		history.push(`/vacation/${trip}`);
 	};
+
+	// UI Error handling
+	if (loading) return <span>Loading...</span>;
+	if (error) return <p>ERROR</p>;
 
 	return (
 		<div className={classes.updateVacation}>
@@ -73,11 +59,7 @@ const UpdateVacation = () => {
 			<Typography variant='h3'>{data.vacation.title}</Typography>
 	<Typography variant='h6'>{begins+ ' - ' + end}</Typography>
 			<Container className={classes.edit} spacing={2}>
-			<DateRangePicker
-					onChange={onChange}
-					value={value}
-					className={classes.picker}
-				/>
+			
 			<form  className={classes.form} onSubmit={handleSubmit(onSubmit)}>
 				<TextField
 					
@@ -87,6 +69,16 @@ const UpdateVacation = () => {
 					name='title'
 					inputRef={register}
 				/>
+				<TextField
+						id="standard-number"
+						label="Budget"
+						type="number"
+						name="budget"
+						InputLabelProps={ {
+							shrink: true,
+						} }
+						inputRef={ register() }
+					/>
 
 				<Button className={classes.submit} type='submit' >Edit</Button>
 			</form>

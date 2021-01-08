@@ -5,9 +5,9 @@ export const useStyles = makeStyles((theme) => ({
   date: {
     position: 'relative',
     width: '100%',
-    height: '50vh',
+    height: '45vh',
     overflow: 'hidden',
-    marginTop: '3%',
+    marginTop: '2%',
     background: 'rgb(255,255,255,0.6)',
     boxSizing: 'border-box',
     objectFit: 'contain'
@@ -28,12 +28,11 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    background: 'rgb(5,100,155,0.3)',
+    background: 'white'
   },
   eventsTopBoxLeft: {
     display: 'flex',
     width: '60%',
-
   },
   eventsTopBoxRight: {
     display: 'flex'
@@ -67,7 +66,6 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     zIndex: 6
   },
-
   eventInput: {
     width: '100%',
   },
@@ -93,25 +91,25 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     textAlign: 'left'
   },
-  hour: {
-    padding: '1%'
-  },
+  
   event: {
     marginLeft:100,
     padding: '1%',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    background: 'rgb(5,100,155,0.6)',
+    background: 'rgb(5,100,155)',
     color: 'white',
     zIndex: 2
   },
   eventLong: {
     padding: '1%',
+    margin: '1px',
+    border: '0.8px solid white',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    background: 'rgb(5,100,155,0.6)',
+    background: 'rgb(5,100,155)',
     color: 'white',
     zIndex: 2
   },
@@ -120,6 +118,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center'
   },
   hour: {
-    padding: '2% 0'
-  }
+    padding: '3% 0'
+  },
+  
 }))
