@@ -43,7 +43,7 @@ export const useStyles = makeStyles(() => ({
 		display: 'flex',
 		justifyContent: 'space-between',
 		background: 'white',
-		borderBottom: '15px outset',
+		borderBottom: '5px solid',
 		fontSize: '1rem',
 		bottom: 0,
 	},

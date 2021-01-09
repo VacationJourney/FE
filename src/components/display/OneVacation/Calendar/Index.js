@@ -8,7 +8,7 @@ import { GET_ONE_TRIP } from '../../../../graphQl/queries';
 import { Paper, Grid, Box, Typography } from '@material-ui/core'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-import AddBoxIcon from '@material-ui/icons/AddBox';
+import { FaCalendarPlus } from 'react-icons/fa'
 import { useStyles } from '../../../Style/CalendarStyle';
 import OneDay from './OneDay'
 
@@ -108,8 +108,8 @@ const Index = ({ trip, deleteTrip }) => {
           <ArrowLeftIcon className={ classes.arrows } onClick={ lastMonth } />
           <div className={ classes.date }>
             <Typography variant='h5'>{ date.format('MMMM YYYY') }</Typography>
-            <AddBoxIcon onClick={ () => setAddDays(!addDays)}/>
-           </div>
+            <FaCalendarPlus style={ { fontSize: '1.5rem' } } onClick={ () => setAddDays(!addDays) } />
+          </div>
           <ArrowRightIcon className={ classes.arrows } onClick={ nextMonth } />
         </Box>
         <Grid container className={ classes.grid }>
