@@ -12,20 +12,26 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from 'apollo-link-http';
 import { setContext } from 'apollo-link-context';
 import { ApolloProvider } from '@apollo/react-hooks';
+import Auth0ProviderWithHistory from './auth/auth0-provider-with-history'
+import { useAuth0 } from "@auth0/auth0-react";
 
 const httpLink = new createHttpLink({
 	uri: process.env.REACT_APP_ENDPOINT || 'http://localhost:4000/',
 });
 
-const authLink = setContext((_, { headers }) => {
-	const token = localStorage.getItem('token');
-	return {
-		headers: {
-			...headers,
-			authorization: token ? `Bearer ${token}` : '',
-		},
-	};
-});
+
+
+// const authLink = setContext(async (_, { headers }) => {
+// 	const { getAccessTokenSilently } = useAuth0();
+// 	// const token = localStorage.getItem('token');
+// 	const token = await getAccessTokenSilently();
+// 	return {
+// 		headers: {
+// 			...headers,
+// 			authorization: token ? `Bearer ${token}` : '',
+// 		},
+// 	};
+// });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
 	if (graphQLErrors) {
@@ -44,7 +50,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const client = new ApolloClient({
-	link: errorLink.concat(authLink.concat(httpLink)),
+	link: errorLink.concat(httpLink),
+	// link: errorLink.concat(authLink.concat(httpLink)),
 	cache: new InMemoryCache(),
 });
 
@@ -60,9 +67,9 @@ const ApolloApp = () => (
 
 ReactDOM.render(
 	<Router>
-		<React.StrictMode>
+		<Auth0ProviderWithHistory>
 			<ApolloApp />
-		</React.StrictMode>
+		</Auth0ProviderWithHistory>
 	</Router>,
 	document.getElementById('root')
 );
