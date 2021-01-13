@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { clear } from '../../../index';
+// import { clear } from '../../../index';
 import { useHistory } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -50,7 +50,7 @@ const CustomizedMenus = () => {
 			returnTo: window.location.origin,
 		})
 		history.push('/');
-		clear();
+		// clear();
 	};
 
 	const handleClick = event => {
