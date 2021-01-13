@@ -1,16 +1,17 @@
 import React, { useRef, createRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { DELETE_VACATION } from '../../graphQl/mutations/vacationM';
 import { GET_VACATIONS } from '../../graphQl/queries'
 import { Grid, Card, Typography, Button } from '@material-ui/core';
 import ListItemText from '@material-ui/core/ListItemText';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Modal from '../display/modal/Modal'
+import Modal from '../modal/Modal'
 import { useStyles } from '../Style/VacationsStyle'
 
 const VacationCard = ({ data }) => {
 	const classes = useStyles();
+	let { url } = useRouteMatch();
 	const tripsLength = data.vacations.length
 	const deleteTripRef = useRef([])
 	// create array of refs 
@@ -34,7 +35,7 @@ const VacationCard = ({ data }) => {
 						<Grid item key={ trip.id } xs={ 12 } sm={ 6 } md={ 3 } lg={ 3 }>
 
 							<Card className={ classes.vacationCard }>
-								<Link className={ classes.vLink } to={ `/vacation/${trip.id}` }>
+								<Link className={ classes.vLink } to={ `${url}/${trip.id}` }>
 									<Typography variant='h5'>
 										{ trip.title }
 									</Typography>

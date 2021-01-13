@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useImperativeHandle, forwardRef, useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import '../../Style/ModalStyle.css'
+import '../Style/ModalStyle.css'
 
 const modalElement = document.getElementById('modal-root')
 

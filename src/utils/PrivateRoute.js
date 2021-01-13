@@ -1,26 +1,15 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { withAuthenticationRequired  } from "@auth0/auth0-react";
+import Loading from '../components/Loading'
 
-const isAuthenticated = () => {
-	return localStorage.getItem('token') ? true : false;
-};
+const PrivateRoute = ({ component, ...args }) => (
+  <Route
+    component={withAuthenticationRequired(component, {
+      onRedirecting: () => <Loading />,
+    })}
+    {...args}
+  />
+);
 
-export default function PrivateRoute({ children, ...rest }) {
-	return (
-		<Route
-			{...rest}
-			render={({ location }) =>
-				isAuthenticated() ? (
-					children
-				) : (
-					<Redirect
-						to={{
-							pathname: '/login',
-							state: { from: location },
-						}}
-					/>
-				)
-			}
-		/>
-	);
-}
+export default PrivateRoute;

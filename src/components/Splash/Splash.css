@@ -1,5 +1,5 @@
 #splash{
-  background-image: url(../../../assets/flight.jpg);
+  background-image: url(../../assets/flight.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -17,6 +17,10 @@
   padding: 0;
   font-size:1rem;
 }
+/* .logIn{
+  display: flex;
+  flex-direction: column;
+} */
 
 #AppName{
   position: absolute;

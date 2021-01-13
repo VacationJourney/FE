@@ -2,13 +2,13 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import { useParams, useHistory } from 'react-router-dom';
-// import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+
 import dayjs from 'dayjs';
 // graphql 
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import { UPDATE_VACATION } from '../../graphQl/mutations/vacationM';
 import {GET_ONE_TRIP} from '../../graphQl/queries'
-import NavBar from './Nav/Index'
+
 // styles
 import { Container, Button, TextField, Typography } from '@material-ui/core';
 import {useStyles} from '../Style/UpdateStyle'
@@ -42,11 +42,11 @@ const UpdateVacation = () => {
 			id: trip
 		};
 		updateVacation({ variables: data });
-		history.push(`/vacation/${trip}`);
+		history.push(`/vacations/${trip}`);
 	};
 
 	const goBack = () => {
-		history.push(`/vacation/${trip}`);
+		history.push(`/vacations/${trip}`);
 	};
 
 	// UI Error handling
@@ -55,7 +55,7 @@ const UpdateVacation = () => {
 
 	return (
 		<div className={classes.updateVacation}>
-			<NavBar />
+			{/* <NavBar /> */}
 			<Typography variant='h3'>{data.vacation.title}</Typography>
 	<Typography variant='h6'>{begins+ ' - ' + end}</Typography>
 			<Container className={classes.edit} spacing={2}>
@@ -74,6 +74,7 @@ const UpdateVacation = () => {
 						label="Budget"
 						type="number"
 						name="budget"
+						defaultValue={data.vacation.budget}
 						InputLabelProps={ {
 							shrink: true,
 						} }

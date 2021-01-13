@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useQuery, useMutation } from '@apollo/react-hooks';
+
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import dayjs from 'dayjs';
 // graphql 
@@ -8,22 +9,23 @@ import { CREATE_VACATION } from '../../graphQl/mutations/vacationM';
 import { GET_VACATIONS } from '../../graphQl/queries'
 // imported component
 import VacationCard from './VacationCard';
+
 // styles
 import { Container, TextField, Button } from '@material-ui/core';
 import { useStyles } from '../Style/VacationsStyle'
 
-const Vacations = () => {
+const Vacations = ({userId}) => {
 	const classes = useStyles();
 	const { register, handleSubmit, reset } = useForm();
 	const [value, onChange] = useState([new Date(), new Date()]);
-
+	
 	// Queries & Mutations
 	// Create Vacation
 	const [createVacation] = useMutation(CREATE_VACATION, {
-		refetchQueries: mutationResult => [{ query: GET_VACATIONS }],
+		refetchQueries: mutationResult => [{ query: GET_VACATIONS, variables: { id: userId } }],
 	});
 	// Read Vacation
-	const { data, loading, error } = useQuery(GET_VACATIONS);
+	const { data, loading, error } = useQuery(GET_VACATIONS, { variables: { id: userId } });
 
 	const onSubmit = data => {
 		const range = [];
@@ -40,10 +42,10 @@ const Vacations = () => {
 
 		data = {
 			...data,
+			id: userId,
 			budget: parseInt(data.budget),
 			dates: range,
 		};
-
 		createVacation({ variables: data });
 		reset();
 	};
@@ -81,10 +83,11 @@ const Vacations = () => {
 						Create
 					</Button>
 				</form>
-				<VacationCard data={ data } />
+				{ data && <VacationCard data={ data } /> }
 			</Container>
 		</div>
 	);
 };
+
 
 export default Vacations;

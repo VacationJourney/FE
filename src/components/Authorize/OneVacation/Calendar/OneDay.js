@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import dayjs from 'dayjs'
 import useDate from '../../../../hooks/useDate'
-import Modal from '../../modal/Modal'
+import Modal from '../../../modal/Modal'
 import { useMutation } from '@apollo/react-hooks'
 
 import { CREATE_EVENT } from '../../../../graphQl/mutations/eventM'

@@ -5,64 +5,20 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import ApolloWrapper from './ApolloWrapper'
+import Auth0ProviderWithHistory from './auth/auth0-provider-with-history'
 
-import { ApolloClient } from 'apollo-client';
-import {onError} from 'apollo-link-error'
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { createHttpLink } from 'apollo-link-http';
-import { setContext } from 'apollo-link-context';
-import { ApolloProvider } from '@apollo/react-hooks';
-
-const httpLink = new createHttpLink({
-	uri: process.env.REACT_APP_ENDPOINT || 'http://localhost:4000/',
-});
-
-const authLink = setContext((_, { headers }) => {
-	const token = localStorage.getItem('token');
-	return {
-		headers: {
-			...headers,
-			authorization: token ? `Bearer ${token}` : '',
-		},
-	};
-});
-
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-	if (graphQLErrors) {
-		graphQLErrors.map(({ message, locations, path }) => {
-			console.log(
-				`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-			);
-			if (message.includes('not authenticated')) {
-				Router.replace('/');
-			}
-		});
-	}
-	if (networkError) {
-		console.log(`[Network error]: ${networkError}`);
-	}
-});
-
-const client = new ApolloClient({
-	link: errorLink.concat(authLink.concat(httpLink)),
-	cache: new InMemoryCache(),
-});
-
-export const clear = () => {
-	client.cache.reset();
-};
-
-const ApolloApp = () => (
-	<ApolloProvider client={client}>
-		<App />
-	</ApolloProvider>
-);
+// export const clear = () => {
+// 	client.cache.reset();
+// };
 
 ReactDOM.render(
 	<Router>
-		<React.StrictMode>
-			<ApolloApp />
-		</React.StrictMode>
+		<Auth0ProviderWithHistory>
+			<ApolloWrapper>
+				<App />
+			</ApolloWrapper>
+		</Auth0ProviderWithHistory>
 	</Router>,
 	document.getElementById('root')
 );
