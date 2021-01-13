@@ -43,7 +43,7 @@ const Index = () => {
     }).then(res => {
       setUserId(res.data.authorizeUser.id)
     })
-  })
+  },[authorizeUser, email, nickname])
  
   return (
     <div className={ classes.vacations }>
