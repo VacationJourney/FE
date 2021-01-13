@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { clear } from '../../../index';
 import { useHistory } from 'react-router-dom';
+import { useAuth0 } from "@auth0/auth0-react";
 
 import { withStyles, Menu, MenuItem, ListItemIcon } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
-import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const StyledMenu = withStyles({
@@ -40,11 +40,15 @@ const StyledMenuItem = withStyles(theme => ({
 }))(MenuItem);
 
 const CustomizedMenus = () => {
+	const { logout } = useAuth0();
 	const history = useHistory();
 	const [anchorEl, setAnchorEl] = useState(null);
 
 	const exit = () => {
 		localStorage.clear();
+		logout({
+			returnTo: window.location.origin,
+		})
 		history.push('/');
 		clear();
 	};
@@ -76,12 +80,7 @@ const CustomizedMenus = () => {
 			>
 				<StyledMenuItem>
 					<ListItemIcon>
-						<HomeIcon onClick={() => history.push('/dashboard')}fontSize='large'></HomeIcon>
-					</ListItemIcon>
-				</StyledMenuItem>
-				<StyledMenuItem>
-					<ListItemIcon>
-						<PersonIcon onClick={() => history.push('/profile')}fontSize='large'></PersonIcon>
+						<HomeIcon onClick={() => history.push('/vacations')}fontSize='large'></HomeIcon>
 					</ListItemIcon>
 				</StyledMenuItem>
 				<StyledMenuItem>

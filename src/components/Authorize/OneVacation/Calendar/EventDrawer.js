@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import { useMutation } from '@apollo/react-hooks'
 import { DELETE_EVENT, UPDATE_EVENT } from '../../../../graphQl/mutations/eventM'
 import { GET_ONE_TRIP } from '../../../../graphQl/queries'
-import Modal from '../../modal/Modal'
+import Modal from '../../../modal/Modal'
 import EditEventForm from './EditEventForm'
 // Style
 import '../../../Style/EventDrawer.css'
