@@ -2,28 +2,24 @@ import gql from 'graphql-tag';
 
 export const CREATE_VACATION = gql`
 	mutation createVacation(
-  $title: String!
-  $budget: Int
-  $dates: [DayCreateWithoutTripInput!]
-) {
-  createVacation(
-    data: { title: $title, budget: $budget dates: { create: $dates } }
-  ) {
-    id
-    title
-    budget
-    dates {
-      id
-      date
-      cost
-      events{
-        id
-        title
-        cost
-      }
-    }
-  }
-}
+		$title: String!
+		$budget: Int
+		$dates: [DayCreateWithoutTripInput!]
+		$id: ID
+	) {
+		createVacation(
+			data: {
+				title: $title
+				budget: $budget
+				dates: { create: $dates }
+				traveler: { connect: { id: $id } }
+			}
+		) {
+			id
+			title
+			budget
+		}
+	}
 `;
 
 export const UPDATE_VACATION = gql`
