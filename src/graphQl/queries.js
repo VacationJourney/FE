@@ -10,21 +10,26 @@ export const USER = gql`
 		}
 	}
 `;
-
 export const GET_VACATIONS = gql`
-	{
-		vacations {
+	query vacations($id: ID) {
+		vacations(where: { id: $id }) {
 			id
 			title
-			budget
 			cost
 			dates {
+				id
 				date
 				cost
+				events {
+					id
+					title
+					cost
+				}
 			}
 		}
 	}
-`;
+`
+
 
 export const GET_ONE_TRIP = gql`
 query Vacation($id: ID) {
