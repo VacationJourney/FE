@@ -1,15 +1,7 @@
 import { makeStyles } from '@material-ui/core'
-import Whispy from '../../assets/Whispy.jpg';
 
 export const useStyles = makeStyles(() => ({
-	updateVacation: {
-		maxWidth: '100%',
-		minHeight: '100vh',
-		backgroundImage: `url(${Whispy})`,
-		backgroundSize: 'cover',
-		backgroundRepeat: 'no-repeat',
-		backgroundAttachment: 'fixed',
-	},
+
 	title2: {
 		paddingTop: '10%',
 		color: 'black',

@@ -1,15 +1,8 @@
 import { makeStyles } from '@material-ui/core'
-import Blue from '../../assets/Blue.jpg'
+
 
 export const useStyles = makeStyles(() => ({
-	oneVacay: {
-		maxWidth: '100%',
-		minHeight: '100vh',
-		backgroundImage: `url(${Blue})`,
-		backgroundSize: 'cover',
-		backgroundRepeat: 'no-repeat',
-		backgroundAttachment: 'fixed',
-	},
+
 	OneVacation: {
 		width: '100%',
 		padding: '0 2%',
