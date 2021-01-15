@@ -9,18 +9,22 @@ export const CREATE_EVENT = gql`
 		$contact: String
 		$cost: Int
 		$description: String
-		$date: ID!
+		$dateId: ID!
+		$tripId: ID
+		$vacation: ID
 	) {
 		createEvent(
 			data: {
 				title: $title
-				date: { connect: { id: $date } }
+				date: {connect: {id: $dateId}}
 				startTime: $startTime
 				endTime: $endTime
 				location: $location
 				contact: $contact
 				cost: $cost
 				description: $description
+				tripId: $tripId
+				trip: {connect: {id: $vacation}}
 			}
 		) {
 			id

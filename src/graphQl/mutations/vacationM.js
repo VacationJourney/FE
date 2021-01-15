@@ -5,50 +5,53 @@ export const CREATE_VACATION = gql`
 		$title: String!
 		$budget: Int
 		$dates: [DayCreateWithoutTripInput!]
-		$id: ID
+		$userId: ID
 	) {
 		createVacation(
 			data: {
 				title: $title
 				budget: $budget
 				dates: { create: $dates }
-				traveler: { connect: { id: $id } }
+				traveler: {connect: {id: $userId}}
 			}
 		) {
 			id
 			title
 			budget
+			dates{
+				id
+				date
+			}
 		}
 	}
 `;
 
 export const UPDATE_VACATION = gql`
-mutation updateVacation(
-  $id: ID
-  $title: String
-  $budget: Int
-  $dreams: String
-) {
-  updateVacation(
-    data: { title: $title, budget: $budget, dreams: $dreams }
-    where: { id: $id }
-  ) {
-    id
-    title
-    budget
-    cost
-    dates(orderBy:date_DESC ) {
-      id
-      date
-      cost
-      events {
-        id
-        title
-        cost
-      }
-    }
-  }
-}
+	mutation updateVacation(
+		$id: ID
+		$title: String
+		$budget: Int
+	) {
+		updateVacation(
+			data: { title: $title, budget: $budget }
+			where: { id:  $id }
+		) {
+			id
+			title
+			budget
+			cost
+			dates {
+				id
+				date
+				cost
+				events {
+					id
+					title
+					cost
+				}
+			}
+		}
+	}
 `;
 
 export const DELETE_VACATION = gql`
@@ -60,39 +63,11 @@ export const DELETE_VACATION = gql`
 	}
 `;
 
-export const UPDATE_DAY_COST = gql`
-	mutation updateDayCost( $id: ID!) {
-		updateDayCost( where: { id: $id }) {
-			id
-			date
-			cost
-			events {
-				id
-				title
-				cost
-			}
-		}
-	}
-`;
-
-export const UPDATE_VACATION_COST = gql`
-	mutation updateVacationCost( $id: ID!){
-		updateVacationCost( where: {id: $id}){
-			id
-			title
-			cost
-			dates{
-				date
-				cost
-			}
-		}
-	}
-`
 
 export const CREATE_DAY = gql`
 	mutation createDay($tripId: ID, $date: String!, $cost: Int) {
 		createDay(
-			data: { date: $date, cost: $cost, trip: { connect: { id: $tripId } } }
+			data: { trip: { connect: { id: $tripId } }, date: $date, cost: $cost }
 		) {
 			id
 			date
