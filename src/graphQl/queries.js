@@ -1,15 +1,5 @@
 import gql from 'graphql-tag';
 
-export const USER = gql`
-	{
-		currentUser {
-			id
-			username
-			email
-			password
-		}
-	}
-`;
 export const GET_VACATIONS = gql`
 	query vacations($id: ID) {
 		vacations(where: { id: $id }) {
@@ -24,6 +14,7 @@ export const GET_VACATIONS = gql`
 					id
 					title
 					cost
+					tripId
 				}
 			}
 		}
@@ -39,11 +30,11 @@ query Vacation($id: ID) {
 			budget
 			cost
 			dreams
-			dates(orderBy: date_ASC) {
+			dates {
 				id
 				date
 				cost
-				events(orderBy: startTime_ASC){
+				events{
 					id
 					title
           startTime
