@@ -9,21 +9,22 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Modal from '../modal/Modal'
 import { useStyles } from '../Style/VacationsStyle'
 
-const VacationCard = ({ data }) => {
+const VacationCard = ({ data, userId }) => {
 	const classes = useStyles();
 	let { url } = useRouteMatch();
 	const tripsLength = data.vacations.length
 	const deleteTripRef = useRef([])
+	
 	// create array of refs 
 	if (deleteTripRef.current.length !== tripsLength) {
 		deleteTripRef.current = Array(tripsLength).fill().map((_, i) => deleteTripRef.current[i] || createRef())
 	}
 	// GraphQL
 	const [deleteVacation] = useMutation(DELETE_VACATION, {
-		refetchQueries: mutationResult => [{ query: GET_VACATIONS }],
+		refetchQueries: mutationResult => [{ query: GET_VACATIONS, variables: { id: userId } }],
 	});
 	const deleteTrip = (trip, i) => {
-		console.log('trip', trip)
+		
 		deleteVacation({ variables: { id: trip.id } })
 		deleteTripRef.current[i].current.close()
 	}
