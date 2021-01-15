@@ -94,7 +94,9 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
     data = {
       ...data,
       cost: parseInt(data.cost),
-      date: tripCal[selected].id
+      dateId: tripCal[selected].id,
+      tripId: trip.id,
+      vacation: trip.id,
     }
     createEvent({ variables: data });
     modal.current.close()
