@@ -42,7 +42,7 @@ const Vacations = ({userId}) => {
 
 		data = {
 			...data,
-			id: userId,
+			userId: userId,
 			budget: parseInt(data.budget),
 			dates: range,
 		};
@@ -83,7 +83,7 @@ const Vacations = ({userId}) => {
 						Create
 					</Button>
 				</form>
-				{ data && <VacationCard data={ data } /> }
+				{ data && <VacationCard userId={userId} data={ data } /> }
 			</Container>
 		</div>
 	);
