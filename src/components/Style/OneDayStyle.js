@@ -32,7 +32,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   eventsTopBoxLeft: {
     display: 'flex',
-    width: '60%',
+    width: '40%',
   },
   eventsTopBoxRight: {
     display: 'flex'
@@ -48,7 +48,7 @@ export const useStyles = makeStyles((theme) => ({
     background: 'black',
     color: 'red',
     fontSize: '1rem',
-    width: '50%',
+    width: '30%',
     borderRadius: '0 '
   },
   deleteButtonRed: {
