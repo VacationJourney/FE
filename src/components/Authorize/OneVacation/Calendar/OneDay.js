@@ -155,7 +155,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
           <Button style={ selected === start || selected === end ? { display: 'flex' } : { display: 'none' } }
             className={ classes.deleteButton } onClick={ () => deleteDateModal.current.open() }>
             <DeleteIcon />
-            <ListItemText primary='Date' />
+            {/* <ListItemText primary='Date' /> */}
           </Button>
         </div>
         
