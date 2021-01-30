@@ -11,9 +11,13 @@ import OneVacation from './OneVacation/Index';
 import PrivateRoute from '../../utils/PrivateRoute';
 import Loading from '../Loading'
 import { makeStyles } from '@material-ui/core';
+import { createMuiTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 import Blue from '../../assets/Blue.jpg';
 
-const useStyles = makeStyles(() => ({
+let theme = createMuiTheme();
+theme = responsiveFontSizes(theme);
+
+const useStyles = makeStyles((theme) => ({
   vacations: {
     backgroundImage: `url(${Blue})`,
     backgroundSize: 'cover',
@@ -46,6 +50,7 @@ const Index = () => {
   },[authorizeUser, email, nickname])
  
   return (
+    <ThemeProvider theme={theme}>
     <div className={ classes.vacations }>
       <NavBar picture={ picture } />
       <Switch>
@@ -53,10 +58,11 @@ const Index = () => {
           <Vacations userId={ userId } />
         </PrivateRoute>
         <PrivateRoute path={`${path}/:id`}>
-          <OneVacation />
+          <OneVacation userId={ userId }/>
         </PrivateRoute>
       </Switch>
     </div>
+    </ThemeProvider>
   )
 }
 
