@@ -48,8 +48,8 @@ export const useStyles = makeStyles((theme) => ({
     background: 'black',
     color: 'red',
     fontSize: '1rem',
-    width: '30%',
-    borderRadius: '0 '
+    // width: '30%',
+    borderRadius: 0
   },
   deleteButtonRed: {
     background: 'red',

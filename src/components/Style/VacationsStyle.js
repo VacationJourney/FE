@@ -43,6 +43,7 @@ export const useStyles = makeStyles(() => ({
 		width: '100%',
 	},
 	vacationCard: {
+		position: 'relative',
 		display: 'flex',
 		textAlign: 'center'
 	},
@@ -50,7 +51,7 @@ export const useStyles = makeStyles(() => ({
 		position: 'absolute',
 		color: 'red',
 		left: '0%',
-		width: '10%'
+	
 	},
 	deleteButtonRed: {
 		background: 'red',
