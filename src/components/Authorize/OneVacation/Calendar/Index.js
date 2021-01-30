@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { CalendarContext } from '../../../../context/CalendarContext'
 import dayjs from 'dayjs'
 import clsx from 'clsx'
 import useDate from '../../../../hooks/useDate'
@@ -10,20 +11,22 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { FaCalendarPlus } from 'react-icons/fa'
 import { useStyles } from '../../../Style/CalendarStyle';
+
 import OneDay from './OneDay'
 
 
-const Index = ({ trip, deleteTrip }) => {
+const Index = ({trip}) => {
   const classes = useStyles()
+  const { selected, setSelected } = useContext(CalendarContext)
   const datesLength = trip.dates.length
   const tripStart = trip.dates[0].date
   const tripEnd = trip.dates[datesLength - 1].date
   const start = dayjs(tripStart).format('YYYY-M-DD')
   const end = dayjs(tripEnd).format('YYYY-M-DD')
   const [date, setDate] = useState(dayjs(tripStart))
-  const [selected, setSelected] = useState(start)
   const [addDays, setAddDays] = useState(false)
 
+  console.log('selected', selected)
   // de-Structure from useDateHook
   const {
     tripMonth,
@@ -177,7 +180,7 @@ const Index = ({ trip, deleteTrip }) => {
       </Paper>
 
       <OneDay
-        deleteTrip={ deleteTrip }
+
         selected={ selected }
         setSelected={ setSelected }
         trip={ trip }
