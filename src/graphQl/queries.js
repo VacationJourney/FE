@@ -44,6 +44,11 @@ query Vacation($id: ID) {
           description
 					cost
 				}
+				notes{
+        id
+        title
+        idea
+      }
 			}
 		}
 	}
