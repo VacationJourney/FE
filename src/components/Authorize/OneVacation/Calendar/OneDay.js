@@ -11,7 +11,7 @@ import { DELETE_DAY, DELETE_VACATION } from '../../../../graphQl/mutations/vacat
 import { GET_ONE_TRIP, GET_VACATIONS } from '../../../../graphQl/queries'
 import CreateEventForm from './CreateEventForm'
 import EventDrawer from './EventDrawer'
-import { Paper, Typography, Card, Button, ListItemText, Hidden } from '@material-ui/core'
+import { Paper, Typography, Card, Button, ListItemText } from '@material-ui/core'
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { useStyles } from '../../../Style/OneDayStyle'
@@ -33,7 +33,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
   const [selectedEvent, setSelectedEvent] = useState('')
   const [showHours, setShowHours] = useState('list')
   const [time, setTime] = useState('h:mma')
-  console.log('OneDay -> userId', userId)
+  
   const handleTime = (event, newTime) => {
     setTime(newTime);
   };
@@ -138,11 +138,9 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
   }
 
   const activity = {}
-
-  day.map(time => {
-    activity[time] = null
-
-    tripCal[selected] && tripCal[selected].events.map(e => {
+  day.forEach(time => activity[time] = null)
+  day.forEach(time => {
+    tripCal[selected] && tripCal[selected].events.forEach(e => {
       if (e.startTime === time) {
         return activity[time] = e
       }
@@ -165,13 +163,13 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
           <div className={ classes.dayCost }><span>Day Cost</span>
             <span>${ tripCal[selected] && tripCal[selected].cost }</span>
           </div>
-          <Button style={ selected === start || selected === end ? { display: 'flex' } : { display: 'none' } }
-            className={ classes.deleteButton } onClick={ () => deleteDateModal.current.open() }>
-            <DeleteIcon />
-            <Hidden smDown> 
-             <ListItemText primary='Date' /> 
-             </Hidden>
-          </Button>
+          {/* <Button > */}
+            <DeleteIcon 
+            style={ selected === start || selected === end ? { display: 'flex' } : { display: 'none' } }
+            className={ classes.deleteButton } onClick={ () => deleteDateModal.current.open() }
+            />
+           
+          {/* </Button> */}
         </div>
 
         <div className={ classes.eventsTopBoxRight }>
