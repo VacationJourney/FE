@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams, Link, useRouteMatch } from 'react-router-dom';
 import { CalendarContext } from '../../../context/CalendarContext'
 import { useQuery } from '@apollo/react-hooks';
-import dayjs from 'dayjs'
+// import dayjs from 'dayjs'
 import Calendar from './Calendar/Index'
 import Notes from './Notes'
 
@@ -10,7 +10,7 @@ import Notes from './Notes'
 // GraphQL
 import { GET_ONE_TRIP } from '../../../graphQl/queries';
 
-import { Typography, Grid, Paper, Hidden, Box } from '@material-ui/core';
+import { Typography, Grid, Hidden } from '@material-ui/core';
 import { useStyles } from '../../Style/OneVacayStyle'
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -23,7 +23,7 @@ const OneVacation = ({ userId }) => {
 	localStorage.setItem('vacationId', vacationId);
 	const [balance, setBalance] = useState(0)
 	const [selected, setSelected] = useState('')
-
+	
 	// GraphQL Hooks
 	const { data, loading, error } = useQuery(GET_ONE_TRIP, {
 		variables: { id: vacationId },
@@ -68,7 +68,7 @@ const OneVacation = ({ userId }) => {
 					</footer>
 				</Grid>
 				<Hidden smDown>
-					<Notes />
+					<Notes trip={ data.vacation } selected={selected}/>
 				</Hidden>
 			</Grid>
 		</CalendarContext.Provider>
