@@ -1,12 +1,14 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useContext } from 'react'
+import { useHistory } from 'react-router-dom'
 import dayjs from 'dayjs'
 import useDate from '../../../../hooks/useDate'
 import Modal from '../../../modal/Modal'
 import { useMutation } from '@apollo/react-hooks'
+import { CalendarContext } from '../../../../context/CalendarContext'
 
 import { CREATE_EVENT } from '../../../../graphQl/mutations/eventM'
-import { DELETE_DAY } from '../../../../graphQl/mutations/vacationM'
-import { GET_ONE_TRIP } from '../../../../graphQl/queries'
+import { DELETE_DAY, DELETE_VACATION } from '../../../../graphQl/mutations/vacationM'
+import { GET_ONE_TRIP, GET_VACATIONS } from '../../../../graphQl/queries'
 import CreateEventForm from './CreateEventForm'
 import EventDrawer from './EventDrawer'
 import { Paper, Typography, Card, Button, ListItemText } from '@material-ui/core'
@@ -19,17 +21,19 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import { MdFormatListBulleted} from 'react-icons/md'
+import { MdFormatListBulleted } from 'react-icons/md'
 
 
-const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, nextMonth, tripCal, deleteTrip }) => {
+const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, nextMonth, tripCal }) => {
   const classes = useStyles()
+  const { userId } = useContext(CalendarContext)
+  const history = useHistory()
   const modal = useRef(null)
   const deleteDateModal = useRef(null)
   const [selectedEvent, setSelectedEvent] = useState('')
   const [showHours, setShowHours] = useState('list')
   const [time, setTime] = useState('h:mma')
-
+  
   const handleTime = (event, newTime) => {
     setTime(newTime);
   };
@@ -89,6 +93,15 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
     ],
   });
 
+  const [deleteVacation] = useMutation(DELETE_VACATION, {
+		refetchQueries: mutationResult => [{ query: GET_VACATIONS, variables: { id: userId } }],
+	});
+	const deleteTrip = () => {
+		
+		deleteVacation({ variables: { id: trip.id } })
+		history.push('/vacations')
+	}
+
   // Create event form function
   const onSubmit = data => {
     data = {
@@ -125,11 +138,9 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
   }
 
   const activity = {}
-
-  day.map(time => {
-    activity[time] = null
-
-    tripCal[selected] && tripCal[selected].events.map(e => {
+  day.forEach(time => activity[time] = null)
+  day.forEach(time => {
+    tripCal[selected] && tripCal[selected].events.forEach(e => {
       if (e.startTime === time) {
         return activity[time] = e
       }
@@ -152,27 +163,29 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
           <div className={ classes.dayCost }><span>Day Cost</span>
             <span>${ tripCal[selected] && tripCal[selected].cost }</span>
           </div>
-          <Button style={ selected === start || selected === end ? { display: 'flex' } : { display: 'none' } }
-            className={ classes.deleteButton } onClick={ () => deleteDateModal.current.open() }>
-            <DeleteIcon />
-            {/* <ListItemText primary='Date' /> */}
-          </Button>
+          {/* <Button > */}
+            <DeleteIcon 
+            style={ selected === start || selected === end ? { display: 'flex' } : { display: 'none' } }
+            className={ classes.deleteButton } onClick={ () => deleteDateModal.current.open() }
+            />
+           
+          {/* </Button> */}
         </div>
-        
+
         <div className={ classes.eventsTopBoxRight }>
-        <ToggleButtonGroup
-          value={ showHours }
-          exclusive
-          onChange={ handleHours }
-          aria-label="text alignment"
-        >
-          <ToggleButton value="list" aria-label="left aligned" style={ { padding: 8 } }>
-            <MdFormatListBulleted style={{fontSize: '1.4rem'}} />
-          </ToggleButton>
-          <ToggleButton value="hours" aria-label="left aligned" style={ { padding: 8 } }>
-            <AccessTimeIcon />
-          </ToggleButton>
-        </ToggleButtonGroup>
+          <ToggleButtonGroup
+            value={ showHours }
+            exclusive
+            onChange={ handleHours }
+            aria-label="text alignment"
+          >
+            <ToggleButton value="list" aria-label="left aligned" style={ { padding: 8 } }>
+              <MdFormatListBulleted style={ { fontSize: '1.4rem' } } />
+            </ToggleButton>
+            <ToggleButton value="hours" aria-label="left aligned" style={ { padding: 8 } }>
+              <AccessTimeIcon />
+            </ToggleButton>
+          </ToggleButtonGroup>
           <ToggleButtonGroup
             value={ time }
             exclusive
@@ -217,7 +230,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
               { showHours === 'hours' ?
                 regex.test(mm) ?
                   e !== null ?
-                    <div key={minute} className={classes.onTheHour}>
+                    <div key={ minute } className={ classes.onTheHour }>
                       <div  >{ minute }</div>
                       <div key={ e.id }>
                         <Card className={ classes.event } >
@@ -236,7 +249,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
                       </div >
                     </div>
                     :
-                    <div key={minute} className={ classes.hour }>{ minute }</div>
+                    <div key={ minute } className={ classes.hour }>{ minute }</div>
                   :
                   e !== null ?
                     <div key={ e.id }>
@@ -255,8 +268,8 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
                       />
                     </div >
                     :
-                    <div key={minute}></div> 
-                    :
+                    <div key={ minute }></div>
+                :
                 e !== null ?
                   <div key={ e.id }>
                     <Card className={ classes.eventLong } >
@@ -277,7 +290,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
                     />
                   </div >
                   :
-                  <div key={minute}></div>
+                  <div key={ minute }></div>
               }
             </>
           )

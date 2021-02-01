@@ -2,27 +2,28 @@ import { makeStyles } from '@material-ui/core'
 
 
 export const useStyles = makeStyles(() => ({
-
-	OneVacation: {
-		width: '100%',
-		padding: '0 2%',
-		marginTop: '-9%',
-		boxSizing: 'border-box',
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-	},
 	top: {
+		position: 'absolute',
+		top: '1%',
+		left: '50%',
+		transform: 'translate(-50%, -1%)',
 		display: 'flex',
-		justifyContent: 'center',
-	},
-	title: {
-		fontSize: '2rem',
 	},
 	editLink: {
 		color: 'black',
 		textDecoration: 'none',
 		fontSize: '1rem'
+	},
+	oneVacation: {
+		display: 'flex',
+	},
+	vacationCalendar: {
+		padding: '0 2%',
+		boxSizing: 'border-box',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		height: '80vh'
 	},
 	calculations: {
 		width: '80%',
@@ -62,6 +63,6 @@ export const useStyles = makeStyles(() => ({
 		width: '33%',
 		padding: '1%',
 		color: 'red',
-	}
+	},
 }));
 

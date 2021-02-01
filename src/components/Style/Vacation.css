@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: center;
   /* border: 1px solid; */
+  margin-bottom: 1%;
 }
 .logoAnchor{
   width: 10%;
@@ -25,4 +26,27 @@
  background: black;
  color: white;
 text-align: center;
+}
+.hamburger{
+  /* font-size: 5rem; */
+  width: 5%;
+  color: black;
+}
+
+.userImage{
+  width: 40px;
+  border-radius: 50%;
+  margin-top: 3px;
+}
+
+@media only screen and (min-width: 600px) {
+  .logoAnchor{
+    width: 4%;
+  }
+  .userImage{
+    width: 50px
+  }
+  .hamburger{
+    width: 10%;
+  }
 }

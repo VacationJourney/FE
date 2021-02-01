@@ -3,20 +3,21 @@
   /* top: 50%; */
   bottom: 20%;
   right: 0%;
-  width: 80%;
+  width: 90%;
   margin-bottom: 2%;
-  display: flex;
+  display: 'flex';
   flex-direction: column;
   align-items: center;
   transition: all 0.3s ease-in-out;
-  transform: translate(100%);
+  transform: translate(-115%);
   overflow: hidden;
   background: white;
   z-Index: 5;
   border-radius: 4px;
 }
 .eventDrawer__open {
-  transform: translate(0%);
+  transform: translate(-5%);
+  display: flex;
 }
 .editModalButton {
   position: absolute;
@@ -64,10 +65,21 @@
   font-size: 2rem;
 }
 .eventDrawerOverlay{
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgb(4,54,103, 0.5)
+}
+
+@media only screen and (min-width: 600px){
+  .eventDrawer {
+    width: 40%;
+    transform: translate(-280%);
+  }
+  .eventDrawer__open {
+    transform: translate(-140%);
+    display: flex;
+  }
 }

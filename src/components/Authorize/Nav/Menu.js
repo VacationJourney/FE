@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 // import { clear } from '../../../index';
 import { useHistory } from 'react-router-dom';
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 
 import { withStyles, Menu, MenuItem, ListItemIcon } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import '../../Style/Vacation.css'
 
 const StyledMenu = withStyles({
 	paper: {
@@ -39,19 +40,10 @@ const StyledMenuItem = withStyles(theme => ({
 	},
 }))(MenuItem);
 
-const CustomizedMenus = () => {
-	const { logout } = useAuth0();
+const CustomizedMenus = ({exit}) => {
+	
 	const history = useHistory();
 	const [anchorEl, setAnchorEl] = useState(null);
-
-	const exit = () => {
-		localStorage.clear();
-		logout({
-			returnTo: window.location.origin,
-		})
-		history.push('/');
-		// clear();
-	};
 
 	const handleClick = event => {
 		setAnchorEl(event.currentTarget);

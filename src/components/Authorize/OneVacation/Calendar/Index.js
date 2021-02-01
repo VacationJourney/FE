@@ -1,27 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { CalendarContext } from '../../../../context/CalendarContext'
 import dayjs from 'dayjs'
 import clsx from 'clsx'
 import useDate from '../../../../hooks/useDate'
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_DAY } from '../../../../graphQl/mutations/vacationM';
-import { GET_ONE_TRIP } from '../../../../graphQl/queries';
 import { Paper, Grid, Box, Typography } from '@material-ui/core'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import { FaCalendarPlus } from 'react-icons/fa'
 import { useStyles } from '../../../Style/CalendarStyle';
+
 import OneDay from './OneDay'
 
 
-const Index = ({ trip, deleteTrip }) => {
+const Index = ({trip}) => {
   const classes = useStyles()
+  const { selected, setSelected } = useContext(CalendarContext)
   const datesLength = trip.dates.length
   const tripStart = trip.dates[0].date
   const tripEnd = trip.dates[datesLength - 1].date
   const start = dayjs(tripStart).format('YYYY-M-DD')
   const end = dayjs(tripEnd).format('YYYY-M-DD')
   const [date, setDate] = useState(dayjs(tripStart))
-  const [selected, setSelected] = useState(start)
   const [addDays, setAddDays] = useState(false)
 
   // de-Structure from useDateHook
@@ -59,17 +60,18 @@ const Index = ({ trip, deleteTrip }) => {
   const nextYear = postMonth.$y.toString()
   const nextMth = (postMonth.$M + 1).toString()
   const nextDays = []
-  for (let i = 1; i < 7 - lastWeekday; i++) {
+  for (let i = 0; i < 6 - lastWeekday; i++) {
     let day = i < 9 ? "0" + (i + 1) : (i + 1)
     nextDays.push(nextYear + '-' + nextMth + '-' + day)
   }
+  
   const totalDays = [].concat(prevDays, monthArray, nextDays)
   const tripCal = {}
 
   // React arrow without Returns!!!!
-  totalDays.map(day => {
-    tripCal[day] = null
-    trip.dates.map(trip => {
+  totalDays.forEach(day => tripCal[day] = null)
+  totalDays.forEach(day => {
+    trip.dates.forEach(trip => {
       if (trip.date === day) {
         return tripCal[day] = trip
       }
@@ -86,11 +88,7 @@ const Index = ({ trip, deleteTrip }) => {
 
   // Queries & Mutations
   // Create Vacation
-  const [createDay] = useMutation(CREATE_DAY, {
-    refetchQueries: mutationResult => [
-      { query: GET_ONE_TRIP, variables: { id: trip.id } },
-    ],
-  });
+  const [createDay] = useMutation(CREATE_DAY);
   // Variables to add dates to trip
   const yesterday = dayjs(tripStart).subtract(1, 'Day').format('YYYY-M-DD')
   const tomorrow = dayjs(tripEnd).add(1, 'Day').format('YYYY-M-DD')
@@ -177,7 +175,7 @@ const Index = ({ trip, deleteTrip }) => {
       </Paper>
 
       <OneDay
-        deleteTrip={ deleteTrip }
+
         selected={ selected }
         setSelected={ setSelected }
         trip={ trip }

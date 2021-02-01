@@ -10,7 +10,10 @@ export const useStyles = makeStyles(() => ({
   calTop: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    background: 'rgb(4,54,103)',
+    color: 'white',
+    borderRadius: '4px 4px 0 0'
   },
   date: {
     display: 'flex',
@@ -27,7 +30,7 @@ export const useStyles = makeStyles(() => ({
     fontSize: '0.8rem'
   },
   arrows: {
-    fontSize: '2rem'
+    fontSize: '3rem'
   },
   grid: {
     display: 'grid',
