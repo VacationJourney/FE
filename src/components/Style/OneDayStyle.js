@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
   date: {
     position: 'relative',
     width: '100%',
-    height: '45vh',
+    height: '60vh',
     overflow: 'hidden',
     marginTop: '2%',
     background: 'rgb(255,255,255,0.6)',
@@ -32,10 +32,12 @@ export const useStyles = makeStyles((theme) => ({
   },
   eventsTopBoxLeft: {
     display: 'flex',
-    width: '40%',
+    // width: '40%',
   },
   eventsTopBoxRight: {
-    display: 'flex'
+    display: 'flex',
+    alignItems: 'center'
+    // margin: '0 .5%'
   },
   dayCost: {
     display: 'flex',
@@ -45,12 +47,14 @@ export const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap'
   },
   deleteButton: {
-    background: 'black',
+    // background: 'black',
     color: 'red',
-    fontSize: '1rem',
+    // fontSize: '1rem',
     // width: '30%',
+    padding: 10,
     borderRadius: 0
   },
+  
   deleteButtonRed: {
     background: 'red',
     color: 'white',

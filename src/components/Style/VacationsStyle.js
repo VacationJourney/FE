@@ -45,6 +45,7 @@ export const useStyles = makeStyles(() => ({
 	vacationCard: {
 		position: 'relative',
 		display: 'flex',
+		alignItems: 'center',
 		textAlign: 'center'
 	},
 	deleteButton: {

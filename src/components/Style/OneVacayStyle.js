@@ -23,8 +23,8 @@ export const useStyles = makeStyles(() => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
+		height: '80vh'
 	},
-
 	calculations: {
 		width: '80%',
 		display: 'flex',
@@ -64,22 +64,5 @@ export const useStyles = makeStyles(() => ({
 		padding: '1%',
 		color: 'red',
 	},
-	notes: {
-		padding: '0 2%'
-
-	},
-	topNotesBox: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-		position: 'relative'
-	},
-	addNote: {
-		position: 'absolute',
-		top: 0,
-		right: 0,
-		fontSize: '3rem'
-
-	}
 }));
 
