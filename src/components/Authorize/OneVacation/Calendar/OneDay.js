@@ -236,7 +236,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
                           time={ time }
                           event={ e }
                           tripCal={ tripCal }
-                          vacationId={ trip.Id }
+                          vacationId={ trip.id }
                           selected={ selected }
                         />
                       </div >
@@ -256,7 +256,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
                         time={ time }
                         event={ e }
                         tripCal={ tripCal }
-                        vacationId={ trip.Id }
+                        vacationId={ trip.id }
                         selected={ selected }
                       />
                     </div >
@@ -278,7 +278,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
                       time={ time }
                       event={ e }
                       tripCal={ tripCal }
-                      vacationId={ trip.Id }
+                      vacationId={ trip.id }
                       selected={ selected }
                     />
                   </div >
