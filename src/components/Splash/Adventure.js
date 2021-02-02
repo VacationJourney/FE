@@ -25,7 +25,7 @@ const Adventure = () => {
         vacation budget planner
       </div>
   
-      <div className="register"onClick={() => loginWithRedirect()}>
+      <div className="register"onClick={() => loginWithRedirect({screen_hint: "signup",})}>
         Sign Up
       </div>
     

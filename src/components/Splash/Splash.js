@@ -1,9 +1,19 @@
 import React from 'react';
 // import gsap from 'gsap'
 import { useAuth0 } from "@auth0/auth0-react";
+import { Button, Typography, makeStyles } from '@material-ui/core'
+import './Splash.css'
 
+const useStyles = makeStyles((theme) =>({
+  login: {
+background: 'black',
+color: 'white',
+padding: '.5% 1%',
+marginTop: 10
+  }
+}))
 const Index = () => {
-  
+const classes = useStyles()
   const { loginWithRedirect } = useAuth0();
 
   // const tag = () => {
@@ -45,9 +55,9 @@ const Index = () => {
 
   return (
     <div id='splash'>
-      <div className="logIn" onClick={ () => loginWithRedirect() }>
-        Log In
-      </div>
+      <Button className={classes.login} onClick={ () => loginWithRedirect() }>
+        <Typography variant="h6">Login</Typography>
+      </Button>
 
       <div className="appName" >
         <svg id="AppName" viewBox="0 0 291 154" fill="none" xmlns="http://www.w3.org/2000/svg">

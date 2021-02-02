@@ -17,10 +17,12 @@
   padding: 0;
   font-size:1rem;
 }
-/* .logIn{
+.logIn{
   display: flex;
   flex-direction: column;
-} */
+  /* font-size: 1.5rem; */
+ 
+}
 
 #AppName{
   position: absolute;
