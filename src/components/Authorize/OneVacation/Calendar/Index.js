@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import useDate from '../../../../hooks/useDate'
 import { useMutation } from '@apollo/react-hooks';
 import { CREATE_DAY } from '../../../../graphQl/mutations/vacationM';
+import {GET_ONE_TRIP} from '../../../../graphQl/queries'
 import { Paper, Grid, Box, Typography } from '@material-ui/core'
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
@@ -25,6 +26,7 @@ const Index = ({trip}) => {
   const [date, setDate] = useState(dayjs(tripStart))
   const [addDays, setAddDays] = useState(false)
 
+  
   // de-Structure from useDateHook
   const {
     tripMonth,
@@ -88,14 +90,17 @@ const Index = ({trip}) => {
 
   // Queries & Mutations
   // Create Vacation
-  const [createDay] = useMutation(CREATE_DAY);
+  const [createDay] = useMutation(CREATE_DAY, {
+    refetchQueries: mutationResult => [
+      { query: GET_ONE_TRIP, variables: { id: trip.id } },
+    ],
+  });
   // Variables to add dates to trip
   const yesterday = dayjs(tripStart).subtract(1, 'Day').format('YYYY-M-DD')
   const tomorrow = dayjs(tripEnd).add(1, 'Day').format('YYYY-M-DD')
 
   const addDateToTrip = (date) => {
-
-
+    
     createDay({ variables: { tripId: trip.id, cost: 0, date: date } });
   }
 
