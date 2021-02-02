@@ -14,7 +14,7 @@ const NavBar = ({ picture }) => {
     const { logout } = useAuth0();
 
     const exit = () => {
-        localStorage.clear();
+        
         logout({
             returnTo: window.location.origin,
         })

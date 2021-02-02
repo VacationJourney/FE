@@ -1,13 +1,16 @@
 import { makeStyles } from '@material-ui/core'
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   notesEdge: {
 		padding: '0 2%',
 	},
 	notesBox: {
 		position: 'relative',
 		background: 'rgb(255,255,255, 0.6)',
-		height: '80vh'
+		height: '80vh',
+		[theme.breakpoints.up("md")]: {
+			height: '75vh',
+		},
 	},
 	topNotesBox: {
 		display: 'flex',

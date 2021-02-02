@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core'
 
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
 	top: {
 		position: 'absolute',
 		top: '1%',
@@ -23,7 +23,10 @@ export const useStyles = makeStyles(() => ({
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
-		height: '80vh'
+		height: '80vh',
+		[theme.breakpoints.up("md")]: {
+			height: '75vh',
+		}
 	},
 	calculations: {
 		width: '80%',
@@ -40,6 +43,9 @@ export const useStyles = makeStyles(() => ({
 		borderBottom: '5px solid',
 		fontSize: '1rem',
 		bottom: 0,
+		[theme.breakpoints.up("md")]: {
+			fontSize: '2rem',
+		}
 	},
 	budget: {
 		display: 'flex',
@@ -48,6 +54,10 @@ export const useStyles = makeStyles(() => ({
 		flexDirection: 'column',
 		padding: '1%',
 		width: '33%',
+		[theme.breakpoints.up("md")]: {
+			padding: '0.5%',
+		}
+		
 	},
 	balance: {
 		display: 'flex',
@@ -56,6 +66,10 @@ export const useStyles = makeStyles(() => ({
 		flexDirection: 'column',
 		padding: '1%',
 		width: '33%',
+		[theme.breakpoints.up("md")]: {
+			padding: '0.5%',
+		}
+		
 	},
 	cost: {
 		display: 'flex',
@@ -63,6 +77,10 @@ export const useStyles = makeStyles(() => ({
 		width: '33%',
 		padding: '1%',
 		color: 'red',
+		[theme.breakpoints.up("md")]: {
+			padding: '0.5%',
+		}
 	},
+	
 }));
 
