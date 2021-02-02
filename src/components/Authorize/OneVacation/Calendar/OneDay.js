@@ -3,8 +3,8 @@ import { useHistory } from 'react-router-dom'
 import dayjs from 'dayjs'
 import useDate from '../../../../hooks/useDate'
 import Modal from '../../../modal/Modal'
-import { useMutation } from '@apollo/react-hooks'
-import { CalendarContext } from '../../../../context/CalendarContext'
+import { useMutation} from '@apollo/react-hooks'
+import { UserContext } from '../../../../context/UserContext'
 
 import { CREATE_EVENT } from '../../../../graphQl/mutations/eventM'
 import { DELETE_DAY, DELETE_VACATION } from '../../../../graphQl/mutations/vacationM'
@@ -26,14 +26,14 @@ import { MdFormatListBulleted } from 'react-icons/md'
 
 const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, nextMonth, tripCal }) => {
   const classes = useStyles()
-  const { userId } = useContext(CalendarContext)
+  const { userId } = useContext(UserContext)
   const history = useHistory()
   const modal = useRef(null)
   const deleteDateModal = useRef(null)
   const [selectedEvent, setSelectedEvent] = useState('')
   const [showHours, setShowHours] = useState('list')
   const [time, setTime] = useState('h:mma')
-  
+
   const handleTime = (event, newTime) => {
     setTime(newTime);
   };
@@ -79,28 +79,26 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
 
   // GraphQL 
   // Create an event
-  const vacationId = localStorage.getItem('vacationId')
   const [createEvent] = useMutation(CREATE_EVENT, {
     refetchQueries: mutationResult => [
-      { query: GET_ONE_TRIP, variables: { id: vacationId } },
+      { query: GET_ONE_TRIP, variables: { id: trip.id } },
     ],
   });
 
   // Delete a day
   const [deleteDay] = useMutation(DELETE_DAY, {
     refetchQueries: mutationResult => [
-      { query: GET_ONE_TRIP, variables: { id: vacationId } },
+      { query: GET_ONE_TRIP, variables: { id: trip.id } },
     ],
   });
 
   const [deleteVacation] = useMutation(DELETE_VACATION, {
-		refetchQueries: mutationResult => [{ query: GET_VACATIONS, variables: { id: userId } }],
-	});
-	const deleteTrip = () => {
-		
-		deleteVacation({ variables: { id: trip.id } })
-		history.push('/vacations')
-	}
+    refetchQueries: mutationResult => [{ query: GET_VACATIONS, variables: { id: userId } }],
+  });
+  const deleteTrip = () => {
+    deleteVacation({ variables: { id: trip.id } })
+    history.push('/vacations')
+  }
 
   // Create event form function
   const onSubmit = data => {
@@ -111,13 +109,14 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
       tripId: trip.id,
       vacation: trip.id,
     }
+  
     createEvent({ variables: data });
     modal.current.close()
   }
 
   // Delete day function
   const deleteDate = () => {
-    deleteDay({ variables: { id: tripCal[selected].id, tripId: vacationId } })
+    deleteDay({ variables: { id: tripCal[selected].id, tripId: trip.id } })
     if (selected === start) {
       setSelected(futureDate)
     } else if (selected === end) {
@@ -125,7 +124,6 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
     }
     deleteDateModal.current.close()
   }
-
 
   var day = []; // time array
   var counter = 0; // start time
@@ -163,13 +161,10 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
           <div className={ classes.dayCost }><span>Day Cost</span>
             <span>${ tripCal[selected] && tripCal[selected].cost }</span>
           </div>
-          {/* <Button > */}
-            <DeleteIcon 
+          <DeleteIcon
             style={ selected === start || selected === end ? { display: 'flex' } : { display: 'none' } }
             className={ classes.deleteButton } onClick={ () => deleteDateModal.current.open() }
-            />
-           
-          {/* </Button> */}
+          />
         </div>
 
         <div className={ classes.eventsTopBoxRight }>
@@ -218,9 +213,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
           onSubmit={ onSubmit }
         />
       </Modal>
-
       <div className={ classes.eventsBox }>
-
         { day.map(mm => {
           let e = activity[mm]
           let minute = dayjs(selected + 'T' + mm).format(`${time}`)
@@ -243,7 +236,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
                           time={ time }
                           event={ e }
                           tripCal={ tripCal }
-                          vacationId={ vacationId }
+                          vacationId={ trip.Id }
                           selected={ selected }
                         />
                       </div >
@@ -263,7 +256,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
                         time={ time }
                         event={ e }
                         tripCal={ tripCal }
-                        vacationId={ vacationId }
+                        vacationId={ trip.Id }
                         selected={ selected }
                       />
                     </div >
@@ -285,7 +278,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
                       time={ time }
                       event={ e }
                       tripCal={ tripCal }
-                      vacationId={ vacationId }
+                      vacationId={ trip.Id }
                       selected={ selected }
                     />
                   </div >
