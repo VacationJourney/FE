@@ -22,7 +22,13 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: '4px 4px 0 0'
   },
   arrows: {
-    fontSize: '3rem'
+    fontSize: '3rem',
+    transition: '.3s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.5)',
+      color: '#ff66c3',
+    }
+
   },
   eventsTopBox: {
     display: 'flex',
@@ -32,12 +38,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   eventsTopBoxLeft: {
     display: 'flex',
-    // width: '40%',
   },
   eventsTopBoxRight: {
     display: 'flex',
     alignItems: 'center'
-    // margin: '0 .5%'
   },
   dayCost: {
     display: 'flex',
@@ -47,20 +51,35 @@ export const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap'
   },
   deleteButton: {
-    // background: 'black',
-    color: 'red',
-    // fontSize: '1rem',
-    // width: '30%',
+    color: 'black',
     padding: 10,
-    borderRadius: 0
+    borderRadius: 0,
+    transition: '.3s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.4)',
+      color: 'red',
+    }
   },
-  
+
   deleteButtonRed: {
-    background: 'red',
+    background: 'black',
     color: 'white',
     fontSize: '1rem',
-    padding: '2%',
-    borderRadius: 4
+    padding: '3%',
+    borderRadius: 4,
+    transition: '.3s ease-in-out',
+    '&:hover': {
+      background: 'red',
+      transform: 'scale(1.1)'
+    }
+  },
+  addEventButton: {
+    margin: '0 5px',
+    transition: '.3s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.2)',
+      color: 'rgb(5,100,155)'
+    }
   },
   // Create Event Form
   createEvent: {
@@ -85,6 +104,11 @@ export const useStyles = makeStyles((theme) => ({
     color: 'white',
     fontSize: '1rem',
     marginTop: '5%',
+    transition: '.3s ease-in-out',
+    '&:hover':{
+      transform: 'scale(1.05)',
+      background: 'black',
+    }
   },
   eventsBox: {
     position: 'relative',
@@ -95,9 +119,9 @@ export const useStyles = makeStyles((theme) => ({
     boxSizing: 'border-box',
     textAlign: 'left'
   },
-  
+
   event: {
-    marginLeft:100,
+    marginLeft: 100,
     padding: '1%',
     display: 'flex',
     justifyContent: 'space-between',
@@ -124,5 +148,5 @@ export const useStyles = makeStyles((theme) => ({
   hour: {
     padding: '3% 0'
   },
-  
+
 }))

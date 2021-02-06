@@ -50,7 +50,7 @@ const NoteCard = ({ trip, date }) => {
             <Box className={ classes.noteTop }>
               <DeleteIcon className={ classes.deleteNote } onClick={ () => deleteNoteRef.current[i].current.open() } />
               <Typography variant='h4'>{ note.title }</Typography>
-              <EditIcon onClick={ () => updateNoteRef.current[i].current.open() } />
+              <EditIcon className={classes.editNoteBtn} onClick={ () => updateNoteRef.current[i].current.open() } />
             </Box>
             <Box className={ classes.noteIdea }>{ note.idea }</Box>
           </Box>

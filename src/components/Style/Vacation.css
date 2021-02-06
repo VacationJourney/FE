@@ -11,10 +11,24 @@
 }
 .journeyCostLogo{
   width: 100%;
+  transition: .3s ease-in-out;
 }
+
+.journeyCostLogo:hover{
+  transform: scale(1.1);
+}
+
 .menu{
   display: flex;
   align-items: center;
+}
+.menuItem{
+  transition: .3s ease-in-out;
+  margin: 0 5px;
+}
+.menuItem:hover{
+  transform: scale(1.1);
+  color: #ff66c3;
 }
 .user{
   width: 20px;

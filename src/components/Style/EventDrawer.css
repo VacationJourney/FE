@@ -25,7 +25,14 @@
   right: 0;
   margin: 1%;
   z-Index: 6;
+  transition: .3s ease-in-out;
 }
+.editModalButton:hover{
+  transform: scale(1.3);
+  color: rgb(5,100,155);
+}
+
+
 .eventDetails {
   font-size: 1.3rem;
   list-style: none;
@@ -54,9 +61,14 @@
   bottom: 0;
   left: 0;
   margin: 1%;
-  color: red;
-
+  color: black;
+  transition: .3s ease-in-out;
 }
+.deleteEvent:hover{
+  transform: scale(1.3);
+  color: red;
+}
+
 .closeEventDetails {
   position: absolute;
   bottom: 0;

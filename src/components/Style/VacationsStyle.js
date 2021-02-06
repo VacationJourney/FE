@@ -41,12 +41,21 @@ export const useStyles = makeStyles(() => ({
 		textDecoration: 'none',
 		color: 'black',
 		width: '100%',
+		'&:hover': {
+			color: 'pink',
+		}
 	},
 	vacationCard: {
 		position: 'relative',
 		display: 'flex',
 		alignItems: 'center',
-		textAlign: 'center'
+		textAlign: 'center',
+		transition: '0.3s ease-in-out',
+		'&:hover': {
+			transform: 'scale(1.1)',
+			background: 'black',
+			boxShadow: '0 3px 3px'
+		}
 	},
 	deleteButton: {
 		position: 'absolute',
@@ -55,10 +64,15 @@ export const useStyles = makeStyles(() => ({
 	
 	},
 	deleteButtonRed: {
-		background: 'red',
-		color: 'white',
-		fontSize: '1rem',
-		padding: '2%',
-		borderRadius: 4
-	},
+    background: 'black',
+    color: 'white',
+    fontSize: '1rem',
+    padding: '3%',
+    borderRadius: 4,
+    transition: '.3s ease-in-out',
+    '&:hover': {
+      background: 'red',
+      transform: 'scale(1.1)'
+    }
+  },
 }))
