@@ -71,7 +71,7 @@ const Vacations = ({userId}) => {
 					/>
 					<TextField
 						id="standard-number"
-						label="Budget"
+						// label="Budget"
 						type="number"
 						name="budget"
 						InputLabelProps={ {

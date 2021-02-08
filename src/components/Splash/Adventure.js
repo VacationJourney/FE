@@ -6,17 +6,16 @@ import { Button, Typography, makeStyles } from '@material-ui/core'
 const useStyles = makeStyles((theme) => ({
   register: {
     position: 'absolute',
-    bottom: 0,
-    left: '45%',
+    bottom: '20%',
+    left: '50%',
+    transform: 'translate(-50%, -20%)',
     background: 'white',
     color: 'black',
     padding: '.5% 1%',
-    marginBottom: 30,
     transition: '.3s ease-in-out',
     '&:hover': {
       border: '2px solid dodgerblue',
       color: 'pink',
-      transform: 'scale(1.2)'
     }
   }
 }))

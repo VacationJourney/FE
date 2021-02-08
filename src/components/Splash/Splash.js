@@ -1,10 +1,10 @@
 import React from 'react';
-// import gsap from 'gsap'
+
 import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Typography, makeStyles } from '@material-ui/core'
 import './Splash.css'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   login: {
     background: 'black',
     color: 'white',
@@ -13,52 +13,13 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
     '&:hover': {
       border: '2px solid black',
-      background: 'dodgerblue',
-      color: 'pink',
-      transform: 'scale(1.2)'
+      color: 'black',
     }
   }
 }))
 const Index = () => {
   const classes = useStyles()
   const { loginWithRedirect } = useAuth0();
-
-  // const tag = () => {
-  //   var t1 = gsap.timeline().from('.afford', {
-  //     duration: 1.1,
-  //     opacity: 0,
-  //     ease: 'bounce',
-  //     y: -200,
-  //   }).from(
-  //     '.the',
-  //     {
-  //       duration: 1.5,
-  //       opacity: 0,
-  //       ease: 'bounce',
-  //       y: -400,
-  //     },
-  //     '-=1'
-  //   )
-  //     .from(
-  //       '.adventure',
-  //       {
-  //         duration: 1.25,
-  //         opacity: 0,
-  //         ease: 'bounce',
-  //         y: -400,
-  //       },
-  //       '-=1.25'
-  //     );
-  //   return t1
-  // }
-
-
-  // useEffect(() => {
-  //   var master = gsap.timeline()
-  //   master.add(tag());
-
-  // })
-
 
   return (
     <div id='splash'>
