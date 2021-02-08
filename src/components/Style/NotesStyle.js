@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core'
 
 export const useStyles = makeStyles((theme) => ({
-  notesEdge: {
+	notesEdge: {
 		padding: '0 2%',
 	},
 	notesBox: {
@@ -25,10 +25,13 @@ export const useStyles = makeStyles((theme) => ({
 		position: 'absolute',
 		top: 0,
 		right: 0,
-		fontSize: '2.5rem'
-	},
-	notes: {
-
+		margin: '.5%',
+		fontSize: '2rem',
+		transition: '.3s ease-in-out',
+		'&:hover': {
+			transform: 'scale(1.2)',
+			color: '#ff66c3'
+		}
 	},
 	noteForm: {
 		position: 'absolute',
@@ -51,13 +54,25 @@ export const useStyles = makeStyles((theme) => ({
 		fontSize: '2rem',
 		borderRadius: '0 0 4px 4px ',
 		margin: '1%',
+		transition: '.3s ease-in-out',
+		'&:hover': {
+			transform: 'scale(1.2)',
+			background: 'rgb(4,54,103)',
+		}
+	},
+	notes: {
+		padding: '1.2% '
 	},
 	noteBox: {
 		margin: '1% ',
 		borderRadius: '4px ',
 		color: 'rgb(5,100,155)',
 		background: 'white',
-		border: '1px solid rgb(5,100,155)'
+		border: '1px solid rgb(5,100,155)',
+		transition: '.3s ease-in-out',
+		'&:hover': {
+			transform: 'scale(1.05)',
+		}
 	},
 	noteTop: {
 		background: 'rgb(5,100,155)',
@@ -73,18 +88,35 @@ export const useStyles = makeStyles((theme) => ({
 		color: 'rgb(5,100,155)'
 	},
 	deleteNote: {
-		color: 'white'
+		color: 'white',
+		transition: '.3s ease-in-out',
+		'&:hover': {
+			transform: 'scale(1.3)',
+			color: 'red',
+		}
 	},
 	deleteButtonRed: {
-		background: 'red',
+		background: 'black',
 		color: 'white',
 		fontSize: '1rem',
 		padding: '2%',
+		transition: '.3s ease-in-out',
+		'&:hover': {
+			transform: 'scale(1.1)',
+			background: 'red',
+		}
+	},
+	editNoteBtn: {
+		transition: '.3s ease-in-out',
+		'&:hover': {
+			transform: 'scale(1.1)',
+			color: '#ff66c3',
+		}
 	},
 	updateForm: {
-	display: 'flex',
-	flexDirection: 'column',
-	alignItems: 'center',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
 	},
 	updateInput: {
 		margin: '1% 0',
@@ -100,5 +132,10 @@ export const useStyles = makeStyles((theme) => ({
 		fontSize: '2rem',
 		borderRadius: 4,
 		margin: '1%',
+		transition: '.3s ease-in-out',
+		'&:hover': {
+			transform: 'scale(1.1)',
+			
+		}
 	},
 }))

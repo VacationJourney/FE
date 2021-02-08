@@ -4,16 +4,23 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Button, Typography, makeStyles } from '@material-ui/core'
 import './Splash.css'
 
-const useStyles = makeStyles((theme) =>({
+const useStyles = makeStyles((theme) => ({
   login: {
-background: 'black',
-color: 'white',
-padding: '.5% 1%',
-marginTop: 10
+    background: 'black',
+    color: 'white',
+    padding: '.5% 1%',
+    transition: '.3s ease-in-out',
+    marginTop: 10,
+    '&:hover': {
+      border: '2px solid black',
+      background: 'dodgerblue',
+      color: 'pink',
+      transform: 'scale(1.2)'
+    }
   }
 }))
 const Index = () => {
-const classes = useStyles()
+  const classes = useStyles()
   const { loginWithRedirect } = useAuth0();
 
   // const tag = () => {
@@ -55,7 +62,7 @@ const classes = useStyles()
 
   return (
     <div id='splash'>
-      <Button className={classes.login} onClick={ () => loginWithRedirect() }>
+      <Button className={ classes.login } onClick={ () => loginWithRedirect() }>
         <Typography variant="h6">Login</Typography>
       </Button>
 

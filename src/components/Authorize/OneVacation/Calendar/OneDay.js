@@ -194,7 +194,7 @@ const OneDay = ({ selected, setSelected, trip, date, start, end, lastMonth, next
               24
             </ToggleButton>
           </ToggleButtonGroup>
-          <AddBoxIcon fontSize="large" onClick={ () => modal.current.open() } />
+          <AddBoxIcon className={classes.addEventButton} fontSize="large" onClick={ () => modal.current.open() } />
         </div>
       </div>
       <Modal ref={ deleteDateModal }>

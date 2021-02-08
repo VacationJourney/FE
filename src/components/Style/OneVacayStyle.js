@@ -12,7 +12,13 @@ export const useStyles = makeStyles((theme) => ({
 	editLink: {
 		color: 'black',
 		textDecoration: 'none',
-		fontSize: '1rem'
+		fontSize: '1rem',
+		transition: '.3s ease-in-out',
+		'&:hover': {
+			transform: 'scale(1.2)',
+			color: '#ff66c3'
+		}
+
 	},
 	oneVacation: {
 		display: 'flex',

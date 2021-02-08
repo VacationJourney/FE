@@ -30,7 +30,13 @@ export const useStyles = makeStyles(() => ({
     fontSize: '0.8rem'
   },
   arrows: {
-    fontSize: '3rem'
+    fontSize: '3rem',
+    transition: '.3s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.5)',
+      color: '#ff66c3',
+    }
+
   },
   grid: {
     display: 'grid',
@@ -68,11 +74,21 @@ export const useStyles = makeStyles(() => ({
     fontSize: '1.2rem',
     color: 'white',
     padding: '2px',
+    transition: '.3s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.1)',
+      background: '#056099'
+    }
   },
   tripDate: {
     background: 'white',
     color: '#056099',
-    border: '2px solid #056099'
+    border: '2px solid #056099',
+    transition: '.3s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.1)',
+      background: 'white',
+    }
   },
   beyondDate: {
     background: 'rgb(5,100,155,0.6)',

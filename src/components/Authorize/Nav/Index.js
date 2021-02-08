@@ -34,8 +34,8 @@ const NavBar = ({ picture }) => {
 
                 />
                 <Hidden style={{margin: '3%'}} smDown>
-                    <HomeIcon  onClick={ () => history.push('/vacations') } fontSize='large'></HomeIcon>
-                    <ExitToAppIcon  onClick={ exit } fontSize='large' />
+                    <HomeIcon  className="menuItem"  onClick={ () => history.push('/vacations') } fontSize='large'></HomeIcon>
+                    <ExitToAppIcon className="menuItem"  onClick={ exit } fontSize='large' />
                 </Hidden>
                 <Hidden mdUp>
                     <Menu exit={ exit } />

@@ -9,6 +9,11 @@ const useStyles = makeStyles(() => ({
     color: 'white',
     fontSize: '1rem',
     marginTop: '5%',
+    transition: '.3s ease-in-out',
+		'&:hover': {
+			transform: 'scale(1.05)',
+      background: 'black',
+		}
   }
 }))
 
