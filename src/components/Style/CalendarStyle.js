@@ -22,6 +22,14 @@ export const useStyles = makeStyles(() => ({
     textAlign: 'center',
     width: '80%'
   },
+  addDateIcon: {
+    fontSize: '1.5rem',
+    transition: '.3s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.1)',
+      color: '#ff66c3',
+    }
+  },
   addDateButton: {
     color: 'grey',
     padding: 0
@@ -86,7 +94,7 @@ export const useStyles = makeStyles(() => ({
     border: '2px solid #056099',
     transition: '.3s ease-in-out',
     '&:hover': {
-      transform: 'scale(1.1)',
+      transform: 'scale(1.05)',
       background: 'white',
     }
   },
@@ -96,8 +104,13 @@ export const useStyles = makeStyles(() => ({
     fontSize: '1.2rem',
   },
   addDates: {
-    background: '#056099',
-    color: 'white'
+    background: '#ff66c3',
+    color: 'black',
+    border: '1px solid black',
+    transition: '.3s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.1)',
+    }
   },
   add: {
     fontSize: '10px'

@@ -38,7 +38,7 @@ const Index = ({ trip, tripStart, tripEnd, lastMonth, nextMonth, selected, setSe
           <ArrowLeftIcon className={ classes.arrows } onClick={ lastMonth } />
           <div className={ classes.date }>
             <Typography variant='h5'>{ date.format('MMMM YYYY') }</Typography>
-            <FaCalendarPlus style={ { fontSize: '1.5rem' } } onClick={ () => setAddDays(!addDays) } />
+            <FaCalendarPlus className={classes.addDateIcon}  onClick={ () => setAddDays(!addDays) } />
           </div>
           <ArrowRightIcon className={ classes.arrows } onClick={ nextMonth } />
         </Box>

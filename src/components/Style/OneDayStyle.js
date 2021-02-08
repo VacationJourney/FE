@@ -78,7 +78,7 @@ export const useStyles = makeStyles((theme) => ({
     transition: '.3s ease-in-out',
     '&:hover': {
       transform: 'scale(1.2)',
-      color: 'rgb(5,100,155)'
+      color: '#ff66c3'
     }
   },
   // Create Event Form

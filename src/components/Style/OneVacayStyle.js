@@ -55,7 +55,7 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	budget: {
 		display: 'flex',
-		background: 'green',
+		background: '#ff66c3',
 		color: 'white',
 		flexDirection: 'column',
 		padding: '1%',
