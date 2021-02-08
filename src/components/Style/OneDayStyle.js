@@ -60,7 +60,6 @@ export const useStyles = makeStyles((theme) => ({
       color: 'red',
     }
   },
-
   deleteButtonRed: {
     background: 'black',
     color: 'white',
